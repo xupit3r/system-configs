@@ -96,3 +96,5 @@ if [[ -n $SSH_CONNECTION ]]; then
 export ARCHFLAGS="-arch x86_64"
 
 alias emacs="emacs -nw"
+
+eval "$(op completion zsh)"; compdef _op op
