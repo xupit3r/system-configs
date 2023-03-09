@@ -95,4 +95,4 @@ if [[ -n $SSH_CONNECTION ]]; then
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-
+alias emacs="emacs -nw"
