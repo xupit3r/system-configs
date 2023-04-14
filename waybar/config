@@ -1,0 +1,46 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "width": 2256,
+  "modules-left": [
+    "custom/media"
+  ],
+  "modules-center": [
+    "custom/clock"
+  ],
+  "modules-right": [
+    "tray",
+    "network",
+    "battery"
+  ],
+  "custom/clock": {
+    "exec": "date +'%A %b %e %l:%M %P'",
+    "interval": 10
+  },
+  "tray": {
+    "icon-size": 28,
+    "spacing": 10
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "network": {
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "format-disconnected": "Disconnected ⚠",
+    "interval": 7
+  }
+}
