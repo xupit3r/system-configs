@@ -115,3 +115,5 @@ eval "$(op completion zsh)"; compdef _op op
 source /usr/share/nvm/init-nvm.sh
 
 alias remove-orphans="sudo pacman -Qtdq | sudo pacman -Rns -"
+
+alias open="xdg-open"
