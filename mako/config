@@ -1,0 +1,9 @@
+font=Satoshi Medium 16
+width=450
+background-color=#1A1B26F2
+text-color=#A9B1D6
+padding=32,24
+outer-margin=8
+border-size=1
+border-color=#1A1B26FF
+border-radius=4
