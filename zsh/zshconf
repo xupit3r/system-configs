@@ -95,6 +95,9 @@ if [[ -n $SSH_CONNECTION ]]; then
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
+# use most as our pager
+export PAGER="most"
+
 alias emacs="emacs -nw"
 
 function termcolors () {
