@@ -3,7 +3,7 @@
 ;; Maintaned by https://github.com/rxyhn
 
 ;; put path to aesthetic bar config files here ;;
-(defvar eww "$HOME/.local/bin/eww -c $HOME/.config/eww/bar")
+(defvar eww "/usr/bin/eww -c $HOME/.config/eww/bar")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;							Widget Section's							 ;;	
@@ -53,40 +53,16 @@
 					  :duration "550ms"
   			(scale :class "bribar" 
 			  	   :value current-brightness 
-				   :tooltip "Brightness: ${current-brightness}%" 
-				   :onchange "brightnessctl set {}%" 
+				   :toltip "Brightness: ${current-brightness}%" 
+				   :onchange "light -S {}%" 
 				   :orientation "v" 
 				   :flipped true 
 				   :max 101 
 				   :min 0))
   			(label :class "brightness-icon" 
 			  	   :text ""))))
-(defpoll current-brightness :interval "1s" "brightnessctl -m -d amdgpu_bl0 | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
+(defpoll current-brightness :interval "1s" "light")
 (defvar bright false)
-
-;; Volume Widgets ;;
-(defwidget volume []
-	(eventbox :onhover "${eww} update volume=true" 		
-			      :onhoverlost "${eww} update volume=false"
-	(box      :orientation "v" 	  
-			      :space-evenly false 
-			      :spacing "2"
-	(revealer :transition "slideup" 
-			      :reveal volume
-			      :duration "550ms"
-	(scale    :class "volbar" 	  
-			  :value current-volume 
-			  :orientation "v"      
-			  :flipped true
-			  :tooltip "${current-volume}%" 
-			  :max 101 
-			  :min 0 
-			  :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%" ))
-	(label  :class "volume-icon"
-					:halign "end" 
-	        :text ""))))
-(defpoll current-volume :interval "1s" "wpctl get-volume @DEFAULT_AUDIO_SINK@")
-(defvar volume false)
 
 ;; Control Panel Widgets ;;	
 (defwidget control []
@@ -95,8 +71,7 @@
 		 :class "control"
 		(bat)
 		(wifi)
-		(bright)
-		(volume)))
+		(bright)))
 
 ;; Clock Widgets ;;
 (defwidget time []
