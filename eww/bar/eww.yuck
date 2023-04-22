@@ -65,37 +65,38 @@
 (defvar bright false)
 
 ;; Volume Widgets ;;
-(defwidget volum []
-	(eventbox :onhover "${eww} update volum=true" 		
-			  :onhoverlost "${eww} update volum=false"
+(defwidget volume []
+	(eventbox :onhover "${eww} update volume=true" 		
+			      :onhoverlost "${eww} update volume=false"
 	(box      :orientation "v" 	  
-			  :space-evenly "false" 
-			  :spacing "2"
+			      :space-evenly false 
+			      :spacing "2"
 	(revealer :transition "slideup" 
-			  :reveal volum         
-			  :duration "550ms"
+			      :reveal volume
+			      :duration "550ms"
 	(scale    :class "volbar" 	  
 			  :value current-volume 
 			  :orientation "v"      
-			  :flipped true 
-			  :tooltip "Volume: ${current-volume}%" 
+			  :flipped true
+			  :tooltip "${current-volume}%" 
 			  :max 101 
 			  :min 0 
-			  :onchange "amixer -D pulse sset Master {}%" ))
-	(button   :onclick "scripts/popup audio"   :class "volume-icon" ""))))
-(defpoll current-volume :interval "1s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
-(defvar volum false)
+			  :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%" ))
+	(label  :class "volume-icon"
+					:halign "end" 
+	        :text ""))))
+(defpoll current-volume :interval "1s" "wpctl get-volume @DEFAULT_AUDIO_SINK@")
+(defvar volume false)
 
 ;; Control Panel Widgets ;;	
 (defwidget control []
 	(box :orientation "v" 
 		 :space-evenly false  
 		 :class "control"
-(bat)
-(wifi)
-; (bright)
-; (volum)
-))
+		(bat)
+		(wifi)
+		(bright)
+		(volume)))
 
 ;; Clock Widgets ;;
 (defwidget time []
@@ -164,8 +165,8 @@
 (defwidget start []
 	(box	:orientation "v" 
 			:space-evenly "false" 
-			:valign "start" 
-(time)))
+			:valign "start"
+			(control)))
 
 ;; End Widgets ;;
 (defwidget end []
@@ -173,9 +174,7 @@
 		 :space-evenly "false" 
 		 :valign "end" 
 		 :spacing 5
-(control)
-; (power)
-))
+		(time)))
 
 ;; Bar Widgets ;;
 (defwidget bar []
