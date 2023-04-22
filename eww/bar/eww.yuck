@@ -115,6 +115,7 @@
 		:orientation "v"
 		:class "weather"
 		:valign "end"
+		:tooltip "${wd.conditions}"
 		(label :class "weather-temp" :text "${wd.temperature}")
 		(label :class "weather-units" :text "${wd.units}")))
 (defpoll wd :interval "5s" "scripts/weather.clj")
