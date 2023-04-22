@@ -53,7 +53,6 @@
 					  :duration "550ms"
   			(scale :class "bribar" 
 			  	   :value current-brightness 
-				   :toltip "Brightness: ${current-brightness}%" 
 				   :onchange "light -S {}%" 
 				   :orientation "v" 
 				   :flipped true 
@@ -64,6 +63,31 @@
 (defpoll current-brightness :interval "1s" "light")
 (defvar bright false)
 
+(defwidget volume []
+	(eventbox 
+		:onhover "${eww} update volume=true"
+	  :onhoverlost "${eww} update volume=false"
+		(box :orientation "v"
+         :space-evenly false
+         :spacing 2
+         (revealer 
+            :transition "slideup"
+						:reveal volume
+						:duration "550ms"
+            (scale 
+              :class "volbar"
+              :value (* 100 current-volume)
+              :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%"
+							:orientation "v"
+							:flipped true
+							:max 101
+							:min 0))
+			(label :class "volume-icon" :text ""))))
+(defvar volume false)
+(defpoll current-volume
+	:interval "1s" 
+	"wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk -v RS='[.0-9]+' '$0=RT'")
+
 ;; Control Panel Widgets ;;	
 (defwidget control []
 	(box :orientation "v" 
@@ -71,7 +95,8 @@
 		 :class "control"
 		(bat)
 		(wifi)
-		(bright)))
+		(bright)
+		(volume)))
 
 ;; Clock Widgets ;;
 (defwidget time []
