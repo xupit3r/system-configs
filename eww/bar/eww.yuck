@@ -110,6 +110,15 @@
 (defpoll min	:interval "1s"	"date '+%M'")
 (defpoll ap	  :interval "1s"	"date '+%p'")
 
+(defwidget weather []
+	(box 
+		:orientation "v"
+		:class "weather"
+		:valign "end"
+		(label :class "weather-temp" :text "${wd.temperature}")
+		(label :class "weather-units" :text "${wd.units}")))
+(defpoll wd :interval "5s" "scripts/weather.clj")
+
 ;; Calendar Widgets ;;
 (defwidget cal []
 	(box :class "cal-box" 
@@ -166,7 +175,8 @@
 	(box	:orientation "v" 
 			:space-evenly "false" 
 			:valign "start"
-			(control)))
+			(time)
+			(weather)))
 
 ;; End Widgets ;;
 (defwidget end []
@@ -174,7 +184,7 @@
 		 :space-evenly "false" 
 		 :valign "end" 
 		 :spacing 5
-		(time)))
+		(control)))
 
 ;; Bar Widgets ;;
 (defwidget bar []
