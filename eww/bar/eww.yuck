@@ -103,9 +103,9 @@
 	(box	:orientation "v" 
 			:class "time" 
 			:valign "end"
-	(label :class "time-hour" :text hour)
-	(label :class "time-min"  :text min)
-	(label :class "time-ap"   :text ap)))
+			(label :class "time-hour" :text hour)
+			(label :class "time-min"  :text min)
+			(label :class "time-ap"   :text ap)))
 (defpoll hour	:interval "1s"	"date '+%I'")
 (defpoll min	:interval "1s"	"date '+%M'")
 (defpoll ap	  :interval "1s"	"date '+%p'")
@@ -113,11 +113,11 @@
 (defwidget weather []
 	(box 
 		:orientation "v"
-		:class "weather"
+		:class "weather ${wd.conditions}"
 		:valign "end"
-		:tooltip "${wd.conditions}"
-		(label :class "weather-temp" :text "${wd.temperature}")
-		(label :class "weather-units" :text "${wd.units}")))
+		:tooltip "${wd.conditions.description}"
+		(label :class "weather-temp" :text "${wd.temperature} ${wd.units}")	
+		(label :class "weather-icon" :text "${wd.conditions.icon}")))
 (defpoll wd :interval "5s" "scripts/weather.clj")
 
 ;; Calendar Widgets ;;
