@@ -9,6 +9,21 @@ return require('packer').startup(function()
   use 'navarasu/onedark.nvim'
   use 'nyoom-engineering/oxocarbon.nvim'
   use "lunarvim/synthwave84.nvim"
+ 
+  -- lisp parens help
+  use {
+    'eraserhd/parinfer-rust',
+    opt = true,
+    rtp = 'target/release',
+    run = 'cargo build --release'
+  }
+
+  -- yuck (EWW) support
+  use 'elkowar/yuck.vim'
+  
+  -- scss support
+  use 'cakebaker/scss-syntax.vim'
+
   -- clojure IDE
   use 'Olical/conjure'
 

@@ -35,6 +35,12 @@ vim.o.termguicolors = true
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menu,menuone'
 
+-- indentiation shit
+vim.o.expandtab = true
+vim.o.smartindent = true
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+
 --Remap for dealing with word wrap
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
@@ -62,6 +68,7 @@ local servers = {
   "clojure_lsp",
   "dockerls",
   "dotls",
+  "emmet_ls",
   "html",
   "jsonls",
   "pyright",
@@ -131,47 +138,26 @@ local on_attach = function(_, bufnr)
   ]]
 end
 
-local server_specific_opts = {
-  sumneko_lua = function(opts)
-    opts.settings = {
-      Lua = {
-        -- NOTE: This is required for expansion of lua function signatures!
-        completion = {callSnippet = "Replace"},
-        diagnostics = {
-          globals = {'vim'},
+-- some config for emmemt + css/sass/less/etc
+local lspconfig = require('lspconfig')
+local configs = require('lspconfig/configs')
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+lspconfig.emmet_ls.setup({
+    -- on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "css", "html", "less", "sass", "scss", "pug" },
+    init_options = {
+      html = {
+        options = {
+          -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+          ["bem.enabled"] = true,
         },
       },
     }
-  end,
+})
 
-  html = function(opts)
-    opts.filetypes = {"html", "htmldjango"}
-  end,
-}
-
--- `nvim-cmp` comes with additional capabilities, alongside the ones
--- provided by Neovim!
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-lsp_installer.on_server_ready(function(server)
-  -- the keymaps, flags and capabilities that will be sent to the server as
-  -- options.
-  local opts = {
-    on_attach = on_attach,
-    flags = {debounce_text_changes = 150},
-    capabilities = capabilities,
-  }
-
-  -- If the current surver's name matches with the ones specified in the
-  -- `server_specific_opts`, set the options.
-  if server_specific_opts[server.name] then
-    server_specific_opts[server.name](opts)
-  end
-
-  -- And set up the server with our configuration!
-  server:setup(opts)
-end)
 
 -- nvim-cmp
 local lspkind = require('lspkind')
