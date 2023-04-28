@@ -54,6 +54,7 @@ Item {
         id: label
 
         font.pointSize: iconSize / 3
+        font.bold: true
         renderType: Text.QtRendering
         anchors {
             top: icon.bottom
