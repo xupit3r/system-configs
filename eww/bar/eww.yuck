@@ -151,24 +151,24 @@
 				:space-evenly "false"
 
 	(button   	:class "button-bspres"  			
-				:tooltip "BSPWM Restart" 
-				:onclick "bspc wm -r" "" )
+				:tooltip "Reload Hyprland" 
+				:onclick "hyprctl reload" "" )
 
   	(button		:class "button-reb"					
 	  			:tooltip "Reboot"		 
-				:onclick "reboot"	"")
+				:onclick "reboot"	"")
 
 	(button		:class "button-quit" 				
 				:tooltip "Logout" 		 
-				:onclick "killall bspwm" "")
+				:onclick "hyprctl dispatch exit" "")
 
 	(button		:class "button-lock" 				
 				:tooltip "Lock Screen"	 
-				:onclick "betterlockscreen -l"	"")))
+				:onclick "scripts/lockscreen" "")))
 
 	(button		:class "button-off"					
 				:tooltip "Shutdown"		 
-				:onclick "shutdown now"	""))))
+				:onclick "shutdown now"	""))))
 (defvar power false)
 
 ;; Start Widgets ;;
@@ -185,7 +185,8 @@
 		 :space-evenly "false" 
 		 :valign "end" 
 		 :spacing 5
-		(control)))
+		(control)
+    (power)))
 
 ;; Bar Widgets ;;
 (defwidget bar []
@@ -220,8 +221,3 @@
 						:width "270px" 
 						:height "60px")
 (cal))
-
-
-
-
-
