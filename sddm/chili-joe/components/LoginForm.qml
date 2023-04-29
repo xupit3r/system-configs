@@ -39,17 +39,17 @@ LoginFormLayout {
 
     RowLayout {
 
-        Layout.leftMargin: loginButton.width + inputSpacing * 2
-        Layout.minimumWidth: passwordField.width + loginButton.width + inputSpacing * 2
+        Layout.leftMargin: inputSpacing * 2
+        Layout.minimumWidth: passwordField.width + inputSpacing * 2
 
         TextField {
             id: passwordField
 
 
-        	placeholderText: textConstants.password
+            placeholderText: textConstants.password
             echoMode: TextInput.Password
             onAccepted: startLogin()
-        	focus: true
+            focus: true
 
             font.pointSize: usernameFontSize * 0.9
             implicitWidth: root.width / 5
@@ -67,7 +67,7 @@ LoginFormLayout {
                 }
             }
 
-        	Keys.onEscapePressed: {
+            Keys.onEscapePressed: {
                 loginFormStack.currentItem.forceActiveFocus();
             }
 
@@ -82,15 +82,6 @@ LoginFormLayout {
                 }
             }
 
-            Keys.onReleased: {
-                if (loginButton.opacity == 0 && length > 0) {
-                    showLoginButton.start()
-                }
-                if (loginButton.opacity > 0 && length == 0) {
-                    hideLoginButton.start()
-                }
-            }
-
             Connections {
                 target: sddm
                 onLoginFailed: {
@@ -99,40 +90,6 @@ LoginFormLayout {
                 }
             }
         }
-        
-        Image {
-            id: loginButton
-
-            Layout.leftMargin: inputSpacing
-
-            source: "../assets/login.svgz"
-            sourceSize: Qt.size(passwordField.height, passwordField.height)
-            smooth: true
-            opacity: 0
-            visible: opacity > 0
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: startLogin();
-            }
-
-            PropertyAnimation {
-                id: showLoginButton
-                target: loginButton
-                properties: "opacity"
-                to: 0.75
-                duration: 100
-            }
-            
-            PropertyAnimation {
-                id: hideLoginButton
-                target: loginButton
-                properties: "opacity"
-                to: 0
-                duration: 80
-            }
-        }
-        
     }
 
 }

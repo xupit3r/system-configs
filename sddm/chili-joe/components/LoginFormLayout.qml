@@ -28,6 +28,7 @@ Item {
     property alias userListModel: userListView.model
     property alias actionItems: actionItemsLayout.children
     property alias notificationMessage: notificationsLabel.text
+    property alias notifcationFontSize: userListView.rootFontSize
 
     property alias faceSize: userListView.avatarSize
     property alias usernameFontSize: userListView.rootFontSize
@@ -76,6 +77,7 @@ Item {
                 Layout.topMargin: usernameFontSize / 2
                 color: usernameFontColor
                 font.italic: true
+                font.pointSize: notifcationFontSize
                 opacity: notificationMessage ? 1 : 0
 
                 Behavior on opacity {
