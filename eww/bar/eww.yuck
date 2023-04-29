@@ -169,19 +169,18 @@
 ;; Start Widgets ;;
 (defwidget start []
 	(box	:orientation "v" 
-			:space-evenly "false" 
+			:space-evenly false 
 			:valign "start"
 			(time)
-			(weather)))
+			(weather)
+      (control)))
 
 ;; End Widgets ;;
 (defwidget end []
 	(box :orientation "v" 
 		 :space-evenly "false" 
-		 :valign "end" 
-		 :spacing 5
-		(control)
-    (power)))
+		 :valign "end"
+		(power)))
 
 ;; Bar Widgets ;;
 (defwidget bar []
