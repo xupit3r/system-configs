@@ -261,9 +261,10 @@ calendar:indeterminate {
 }
 
 button {
-  transition: color 500ms;
+  transition: color 500ms, background-color: 250ms;
 
   &:hover {
-    color: $gray;
+    color: darken($foreground, 20%);
+    background-color: lighten($background, 20%);
   }
 }

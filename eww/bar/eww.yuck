@@ -151,23 +151,18 @@
 				:space-evenly "false"
 
 	(button   	:class "button-bspres"  			
-				:tooltip "Reload Hyprland" 
 				:onclick "hyprctl reload" "" )
 
   	(button		:class "button-reb"					
-	  			:tooltip "Reboot"		 
 				:onclick "reboot"	"")
 
 	(button		:class "button-quit" 				
-				:tooltip "Logout" 		 
 				:onclick "hyprctl dispatch exit" "")
 
 	(button		:class "button-lock" 				
-				:tooltip "Lock Screen"	 
 				:onclick "scripts/lockscreen" "")))
 
-	(button		:class "button-off"					
-				:tooltip "Shutdown"		 
+	(button		:class "button-off"					 
 				:onclick "shutdown now"	""))))
 (defvar power false)
 
