@@ -1,5 +1,5 @@
 [SddmGreeterTheme]
-Name=Joe
+Name=Chili Joe
 Description=custom theme based on chili
 Author=Joe D'Alessandro
 Copyright=(c) 2023, Joe D'Alessandro
@@ -12,5 +12,5 @@ Screenshot=
 MainScript=Main.qml
 ConfigFile=theme.conf
 TranslationsDirectory=translations
-Theme-Id=joe
+Theme-Id=chili-joe
 Theme-API=2.0
