@@ -259,3 +259,11 @@ calendar:indeterminate {
 .button-lock {
   color: $blue;
 }
+
+button {
+  transition: color 500ms;
+
+  &:hover {
+    color: $gray;
+  }
+}
