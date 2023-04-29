@@ -39,22 +39,6 @@ tooltip {
   font-family: "Satoshi";
 }
 
-// Launcher
-.launcher_icon{
-    color: $cyan;
-    font-family: "Font Awesome 6 Pro";
-    font-size: 1.7em;
-    padding: 1rem 0 1rem 0;
-}
-
-// Workspaces
-.works {
-font-family: "Font Awesome 6 Pro";
-padding: .2rem .7rem .2rem .7rem;
-background-color: $black;
-border-radius: 5px;
-}
-
 .0, .01, .02, .03, .04, .05, .06,
 .011, .022, .033, .044, .055, .066{
   margin: .55rem 0 .55rem 0;
@@ -117,30 +101,34 @@ color: $gray;
 
 // Control Panel
 .control {
-padding: .5rem;
-font-family: "Material Icons";
-font-size: 1.6em;
-background-color: $black;
-border-radius: 5px;
+  padding: .33em;
+  font-family: "Material Icons";
+  font-size: 1.6em;
+  background-color: $black;
+  border-radius: 5px;
 }
+
 .bat{
-  font-family: "JetBrains Mono Nerd Font";
-  font-size: 1.2em;
-  padding: 3px;
+  font-size: 1em;
+  padding: .33em;
   color: $green;
 }
+
 .wifi-icon{
   margin-bottom: .2rem;
   color: $magenta;
 }
+
 .brightness-icon{
   margin: .2rem 0 .2rem 0;
   color: $yellow;
 }
+
 .volume-icon{
   margin: .2rem 0 .2rem 0;
   color: $blue;
 }
+
 scale trough {
   all: unset;
   background-color: $background;
@@ -149,10 +137,12 @@ scale trough {
   min-width: 10px;
   margin: .3rem 0 .3rem 0;
 }
+
 .bribar trough highlight {
   background-color: $yellow;
   border-radius: 5px;
 }
+
 .volbar trough highlight {
   background-color: $blue;
   border-radius: 5px;
@@ -195,21 +185,20 @@ scale trough {
 // Calendar
 .cal-box {
   background-color: $black;
-  font-family: "Comic Mono";
-  font-size: 1em;
+  font-family: "Satoshi";
   font-weight: bold;
 
   .cal-inner-box {
-      padding: 1rem 1rem .2rem;
+    padding: 1rem 1rem .2rem;
 
-      .cal {
-          &.highlight {
-              padding: 10rem;
-          }
-
-          padding: .8rem .25rem 0rem;
-          margin-left: 10px;
+    .cal {
+      &.highlight {
+          padding: 10rem;
       }
+
+      padding: .8rem .25rem 0rem;
+      margin-left: 10px;
+    }
   }
 }
 
@@ -218,46 +207,55 @@ calendar:selected {
 }
 
 calendar.header {
-color: $blue;
-font-weight: bold;
+  color: $blue;
+  font-weight: bold;
 }
 
 calendar.button {
-color: $magenta;
+  color: $magenta;
 }
 
 calendar.highlight {
-color: $magenta;
-font-weight: bold;
+  color: $magenta;
+  font-weight: bold;
 }
 
 calendar:indeterminate {
-color: $background;
+  color: $background;
 }
 
 // Powermenu
 .powermenu {
   font-family: "Material Icons";
-  font-size: 1.4em;
+  font-size: 1.6em;
   font-weight: bold;
 }
-.button-bspres, .button-reb, .button-lock,
-.button-quit, .button-off{
+
+.button-bspres,
+.button-reb,
+.button-lock,
+.button-quit,
+.button-off {
   padding: .5rem .2rem .3rem .2rem;
 }
-.button-off{
+
+.button-off {
   margin-bottom: .5rem;
   color: $red;
 }
-.button-bspres{
+
+.button-bspres {
   color: $green;
 }
-.button-reb{
+
+.button-reb {
   color: $yellow
 }
-.button-quit{
+
+.button-quit {
   color: $magenta;
 }
-.button-lock{
+
+.button-lock {
   color: $blue;
 }

@@ -202,13 +202,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bar Windows ;;
 (defwindow bar
-	:geometry (geometry :x "0" 
-						:y "0" 
-						:height "100%" 
-						:width "40px")
+	:geometry (geometry 
+              :x "0" 
+						  :y "0" 
+						  :height "100%" 
+						  :width "40px")
 	:monitor 0
-	:reserve (struts :distance "40px" 
-					 :side "left")
+	:reserve (struts 
+              :distance "50px" 
+              :side "left")
 	:wm-ignore false
 	:hexpand "false"
 	:vexpand "false"
