@@ -20,9 +20,21 @@ return require('packer').startup(function()
 
   -- yuck (EWW) support
   use 'elkowar/yuck.vim'
-  
+
+  -- rasi (rofi) support
+  use {
+    'Fymyte/rasi.vim',
+    ft = 'rasi',
+  }
+
+  -- QML syntax highlighting
+  use 'peterhoeg/vim-qml'
+
   -- scss support
   use 'cakebaker/scss-syntax.vim'
+
+  -- show hex colors in editor
+  use 'NvChad/nvim-colorizer.lua'
 
   -- clojure IDE
   use 'Olical/conjure'
@@ -62,9 +74,6 @@ return require('packer').startup(function()
     }
   }
 
-  -- bracket autocompletion
-  use 'vim-scripts/auto-pairs-gentle'
-
   -- Fancier statusline
   use {
     'nvim-lualine/lualine.nvim',
@@ -76,4 +85,18 @@ return require('packer').startup(function()
 
   -- Fast incremental parsing library
   use 'nvim-treesitter/nvim-treesitter'
+  
+  -- rainbow brackets!
+  use {
+    'HiPhish/nvim-ts-rainbow2',
+    requires = {
+      'nvim-treesitter/nvim-treesitter'
+    },
+  }
+
+  -- autopairs!
+  use {
+    'windwp/nvim-autopairs',
+    config = function() require("nvim-autopairs").setup {} end
+  }
 end)
