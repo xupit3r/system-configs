@@ -7,9 +7,18 @@ return require('packer').startup(function()
   -- some themes
   use 'folke/tokyonight.nvim'
   use 'navarasu/onedark.nvim'
-  use 'nyoom-engineering/oxocarbon.nvim'
-  use "lunarvim/synthwave84.nvim"
- 
+  use { 
+    'catppuccin/nvim', 
+    as = 'catppuccin' 
+  }
+  use 'lunarvim/synthwave84.nvim'
+  use { 
+    'kartikp10/noctis.nvim',
+    requires = { 
+      'rktjmp/lush.nvim'
+    }
+  }
+
   -- lisp parens help
   use {
     'eraserhd/parinfer-rust',
@@ -36,9 +45,6 @@ return require('packer').startup(function()
   -- show hex colors in editor
   use 'NvChad/nvim-colorizer.lua'
 
-  -- clojure IDE
-  use 'Olical/conjure'
-
   -- LSP Client
   use 'neovim/nvim-lspconfig'
 
@@ -53,7 +59,12 @@ return require('packer').startup(function()
   use 'onsails/lspkind-nvim'
 
   -- show various elements of LSP as UI
-  use {'tami5/lspsaga.nvim', requires = {'neovim/nvim-lspconfig'}}
+  use {
+    'tami5/lspsaga.nvim', 
+    requires = {
+      'neovim/nvim-lspconfig'
+    }
+  }
 
   -- Autocompletion plugin
   use {
@@ -68,7 +79,8 @@ return require('packer').startup(function()
 
   -- snippets
   use {
-    'hrsh7th/cmp-vsnip', requires = {
+    'hrsh7th/cmp-vsnip', 
+    requires = {
       'hrsh7th/vim-vsnip',
       'rafamadriz/friendly-snippets',
     }
@@ -98,5 +110,19 @@ return require('packer').startup(function()
   use {
     'windwp/nvim-autopairs',
     config = function() require("nvim-autopairs").setup {} end
+  }
+
+  -- highligh other instances of things
+  use 'RRethy/vim-illuminate'
+
+  -- multiple cursors!
+  use 'mg979/vim-visual-multi'
+  
+  -- rust tools (to use rust analyzer)
+  use {
+    'simrat39/rust-tools.nvim',
+    requires = {
+      'neovim/nvim-lspconfig'
+    }
   }
 end)

@@ -264,14 +264,11 @@ cmp.setup.cmdline(':', {
   })
 })
 
--- onedark
-require("onedark").setup({
-  style = "darker",
-})
-require('onedark').load()
-
 -- lualine
 require('lualine').setup({
+  options = {
+    theme = 'catppuccin'
+  },
   sections = {
     lualine_c = {
       {'filename', path = 1},
@@ -345,3 +342,59 @@ npairs.setup({
     check_ts = true,
 })
 
+-- setup rust tools
+local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
+
+-- setup the tokyonight theme
+require("tokyonight").setup({
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  style = "storm",
+  terminal_colors = true,
+  styles = {
+    comments = { italic = true },
+    keywords = { italic = true },
+    sidebars = "dark",
+    floats = "dark",
+  },
+  sidebars = { "qf", "help", "packer" },
+})
+
+require('catppuccin').setup {
+  flavour = 'mocha',
+  color_overrides = {
+    mocha = {
+      base = "#000000",
+      mantle = "#000000",
+      crust = "#000000",
+    },
+  },
+  highlight_overrides = {
+    mocha = function(C)
+      return {
+        TabLineSel = { bg = C.pink },
+        CmpBorder = { fg = C.surface2 },
+        Pmenu = { bg = C.none },
+        TelescopeBorder = { link = "FloatBorder" },
+      }
+    end,
+  },
+  integrations = {
+    cmp = true,
+    gitsigns = true,
+    nvimtree = true
+  }
+}
+
+vim.cmd [[ colorscheme catppuccin ]]
