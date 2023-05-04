@@ -148,4 +148,7 @@ return require('packer').startup(function()
       'nvim-lua/plenary.nvim'
     }
   }
+
+  -- coc (code completion)
+  use {'neoclide/coc.nvim', branch = 'release'}
 end)
