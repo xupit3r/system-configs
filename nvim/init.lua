@@ -1,4 +1,5 @@
 require('plugins')
+require('opts')
 
 vim.cmd [[
 augroup Packer
@@ -52,6 +53,18 @@ autocmd!
 autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 augroup end
 ]]
+
+-- Mason Setup
+require("mason").setup({
+  ui = {
+    icons = {
+      package_installed = "",
+      package_pending = "",
+      package_uninstalled = "",
+    },
+  }
+})
+require("mason-lspconfig").setup()
 
 -- Plugin configuration
 -- LSP and LS Installer
@@ -200,51 +213,56 @@ local cmp_kinds = {
   TypeParameter = "",
 }
 
+-- Completion Plugin Setup
+local cmp = require'cmp'
 cmp.setup({
+  -- Enable LSP snippets
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+        vim.fn["vsnip#anonymous"](args.body)
     end,
   },
-
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    -- Add tab support
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
       select = true,
-    },
-
-    -- Use Tab and Shift-Tab to browse through the suggestions.
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif vim.fn["vsnip#available"](1) == 1 then
-        feedkey("<Plug>(vsnip-expand-or-jump)", "")
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-
-    ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-        feedkey("<Plug>(vsnip-jump-prev)", "")
-      end
-    end, { "i", "s" }),
+    })
   },
-
+  -- Installed sources:
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-    { name = 'buffer' },
+    { name = 'path' },                              -- file paths
+    { name = 'nvim_lsp', keyword_length = 3 },      -- from language server
+    { name = 'nvim_lsp_signature_help'},            -- display function signatures with current parameter emphasized
+    { name = 'nvim_lua', keyword_length = 2},       -- complete neovim's Lua runtime API such vim.lsp.*
+    { name = 'buffer', keyword_length = 2 },        -- source current buffer
+    { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip 
+    { name = 'calc'},                               -- source for math calculation
+  },
+  window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+  },
+  formatting = {
+      fields = {'menu', 'abbr', 'kind'},
+      format = function(entry, item)
+          local menu_icon ={
+              nvim_lsp = 'λ',
+              vsnip = '⋗',
+              buffer = 'Ω',
+              path = '🖫',
+          }
+          item.menu = menu_icon[entry.source.name]
+          return item
+      end,
   },
 })
 
@@ -280,18 +298,19 @@ require('lualine').setup({
 -- treesitter
 require('nvim-treesitter.configs').setup {
   ensure_installed = "all",
+  auto_install = true,
   highlight = {
-    enable = true, -- false will disable the whole extension
+    enable = true,
+    additional_vim_regex_highlighting=false,
   },
+  ident = { 
+    enable = true 
+  }, 
   rainbow = {
     enable = true,
-    -- list of languages you want to disable the plugin for
-    disable = { 'jsx', 'cpp', 'vue', 'html', },
-    -- Which query to use for finding delimiters
-    query = 'rainbow-parens',
-    -- Highlight the entire buffer all at once
-    strategy = require('ts-rainbow').strategy.global,
-  },
+    extended_mode = true,
+    max_file_lines = nil,
+  }
 }
 
 -- lspsaga
@@ -342,6 +361,11 @@ npairs.setup({
     check_ts = true,
 })
 
+
+--
+-- Rust stuffs
+--
+
 -- setup rust tools
 local rt = require("rust-tools")
 
@@ -355,6 +379,44 @@ rt.setup({
     end,
   },
 })
+
+-- LSP Diagnostics Options Setup 
+local sign = function(opts)
+  vim.fn.sign_define(opts.name, {
+    texthl = opts.name,
+    text = opts.text,
+    numhl = ''
+  })
+end
+
+sign({name = 'DiagnosticSignError', text = ''})
+sign({name = 'DiagnosticSignWarn', text = ''})
+sign({name = 'DiagnosticSignHint', text = ''})
+sign({name = 'DiagnosticSignInfo', text = ''})
+
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  update_in_insert = true,
+  underline = true,
+  severity_sort = false,
+  float = {
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
+})
+
+vim.cmd([[
+set signcolumn=yes
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
+
+
+--
+-- THEMES
+--
 
 -- setup the tokyonight theme
 require("tokyonight").setup({

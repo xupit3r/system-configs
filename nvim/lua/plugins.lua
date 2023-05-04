@@ -74,6 +74,8 @@ return require('packer').startup(function()
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-nvim-lsp-signature-help'
     }
   }
 
@@ -117,7 +119,11 @@ return require('packer').startup(function()
 
   -- multiple cursors!
   use 'mg979/vim-visual-multi'
-  
+
+  -- lsp servers, debuggers, and linters manager
+  use 'williamboman/mason.nvim'    
+  use 'williamboman/mason-lspconfig.nvim'
+
   -- rust tools (to use rust analyzer)
   use {
     'simrat39/rust-tools.nvim',
