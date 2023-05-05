@@ -48,23 +48,9 @@ return require('packer').startup(function()
   -- LSP Client
   use 'neovim/nvim-lspconfig'
 
-  -- Language Server installer
-  use {
-    'williamboman/nvim-lsp-installer',
-    requires = 'neovim/nvim-lspconfig',
-  }
-
   -- BONUS: Customizations over LSP
   -- Show VSCode-esque pictograms
   use 'onsails/lspkind-nvim'
-
-  -- show various elements of LSP as UI
-  use {
-    'tami5/lspsaga.nvim', 
-    requires = {
-      'neovim/nvim-lspconfig'
-    }
-  }
 
   -- Autocompletion plugin
   use {
@@ -132,6 +118,17 @@ return require('packer').startup(function()
     }
   }
 
+  -- some nice treesitter tools
+  use({
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    requires = {
+      {"nvim-tree/nvim-web-devicons"}, 
+      {"nvim-treesitter/nvim-treesitter"}
+    }
+  })
+
+  -- a nice little search/jump tool
   use {
     'phaazon/hop.nvim',
     branch = 'v2', -- optional but strongly recommended
@@ -148,7 +145,4 @@ return require('packer').startup(function()
       'nvim-lua/plenary.nvim'
     }
   }
-
-  -- coc (code completion)
-  use {'neoclide/coc.nvim', branch = 'release'}
 end)
