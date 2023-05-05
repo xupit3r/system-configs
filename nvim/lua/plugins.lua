@@ -6,17 +6,9 @@ return require('packer').startup(function()
 
   -- some themes
   use 'folke/tokyonight.nvim'
-  use 'navarasu/onedark.nvim'
-  use { 
-    'catppuccin/nvim', 
-    as = 'catppuccin' 
-  }
-  use 'lunarvim/synthwave84.nvim'
-  use { 
-    'kartikp10/noctis.nvim',
-    requires = { 
-      'rktjmp/lush.nvim'
-    }
+  use {
+    'catppuccin/nvim',
+    as = 'catppuccin'
   }
 
   -- lisp parens help
@@ -67,7 +59,7 @@ return require('packer').startup(function()
 
   -- snippets
   use {
-    'hrsh7th/cmp-vsnip', 
+    'hrsh7th/cmp-vsnip',
     requires = {
       'hrsh7th/vim-vsnip',
       'rafamadriz/friendly-snippets',
@@ -85,7 +77,7 @@ return require('packer').startup(function()
 
   -- Fast incremental parsing library
   use 'nvim-treesitter/nvim-treesitter'
-  
+
   -- rainbow brackets!
   use {
     'HiPhish/nvim-ts-rainbow2',
@@ -107,7 +99,7 @@ return require('packer').startup(function()
   use 'mg979/vim-visual-multi'
 
   -- lsp servers, debuggers, and linters manager
-  use 'williamboman/mason.nvim'    
+  use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
 
   -- rust tools (to use rust analyzer)
@@ -123,7 +115,7 @@ return require('packer').startup(function()
     "glepnir/lspsaga.nvim",
     branch = "main",
     requires = {
-      {"nvim-tree/nvim-web-devicons"}, 
+      {"nvim-tree/nvim-web-devicons"},
       {"nvim-treesitter/nvim-treesitter"}
     }
   })

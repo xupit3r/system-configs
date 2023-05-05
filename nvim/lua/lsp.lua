@@ -1,3 +1,25 @@
+local servers = {
+  "awk_ls",
+  "bashls",
+  "clangd",
+  "cmake",
+  "cssls",
+  "clojure_lsp",
+  "dockerls",
+  "emmet_ls",
+  "jsonls",
+  "lua_ls",
+  "marksman",
+  "intelephense",
+  "pyright",
+  "ruby_ls",
+  "rust_analyzer",
+  "sqlls",
+  "tsserver",
+  "volar",
+  "yamlls",
+}
+
 -- Mason Setup
 -- need to figure out how to run :MasonInstall here...
 -- codelldb needs some auto install'n
@@ -14,75 +36,15 @@ require("mason").setup({
 -- set of language servers i would like to have
 -- installed
 require("mason-lspconfig").setup({
-  ensure_installed = {
-    "awk_ls",
-    "bashls",
-    "clangd",
-    "cmake",
-    "cssls",
-    "clojure_lsp",
-    "dockerls",
-    "emmet_ls",
-    "jsonls",
-    "lua_ls",
-    "marksman",
-    "intelephense",
-    "pyright",
-    "ruby_ls",
-    "rust_analyzer",
-    "sqlls",
-    "tsserver",
-    "volar",
-    "yamlls",
-  },
+  ensure_installed = servers,
   auto_install = true
 })
 
--- nvim-cmp
+-- Completion Plugin Setup
 local lspkind = require('lspkind')
 local cmp = require("cmp")
 
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
-local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
-local cmp_kinds = {
-  Text = "",
-  Method = "",
-  Function = "",
-  Constructor = "",
-  Field = "ﰠ",
-  Variable = "",
-  Class = "ﴯ",
-  Interface = "",
-  Module = "",
-  Property = "ﰠ",
-  Unit = "塞",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "פּ",
-  Event = "",
-  Operator = "",
-  TypeParameter = "",
-}
-
--- Completion Plugin Setup
-local cmp = require'cmp'
 cmp.setup({
-  -- Enable LSP snippets
   snippet = {
     expand = function(args)
         vim.fn["vsnip#anonymous"](args.body)
@@ -110,7 +72,7 @@ cmp.setup({
     { name = 'nvim_lsp_signature_help'},            -- display function signatures with current parameter emphasized
     { name = 'nvim_lua', keyword_length = 2},       -- complete neovim's Lua runtime API such vim.lsp.*
     { name = 'buffer', keyword_length = 2 },        -- source current buffer
-    { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip 
+    { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip
     { name = 'calc'},                               -- source for math calculation
   },
   window = {
@@ -118,17 +80,14 @@ cmp.setup({
       documentation = cmp.config.window.bordered(),
   },
   formatting = {
-      fields = {'menu', 'abbr', 'kind'},
-      format = function(entry, item)
-          local menu_icon ={
-              nvim_lsp = 'λ',
-              vsnip = '⋗',
-              buffer = 'Ω',
-              path = '🖫',
-          }
-          item.menu = menu_icon[entry.source.name]
-          return item
-      end,
+     format = lspkind.cmp_format {
+        with_text = true,
+        menu = {
+           buffer   = "[buf]",
+           nvim_lsp = "[LSP]",
+           path     = "[path]",
+        },
+     },
   },
 })
 
@@ -198,3 +157,37 @@ vim.cmd([[
 set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
+
+-- command "on_attach" function for lsp servers
+local on_attach = function(client, bufnr)
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings to magical LSP functions!
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gk', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', 'gK', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+end
+
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- Capabilities required for the visualstudio lsps (css, html, etc)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+-- Activate LSPs
+-- All LSPs in this list need to be manually installed via NPM/PNPM/whatevs
+local lspconfig = require('lspconfig')
+for _, lsp in pairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilites = capabilities,
+  }
+end

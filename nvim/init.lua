@@ -90,7 +90,7 @@ require("colorizer").setup {
     css_fn = false,
     mode = "background",
     tailwind = false,
-    sass = { 
+    sass = {
       enable = false,
       parsers = { "css" },
     },
