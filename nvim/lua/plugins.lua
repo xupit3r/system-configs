@@ -141,4 +141,6 @@ return require('packer').startup(function()
   -- comment assist plugin
   use 'numToStr/Comment.nvim'
 
+  -- indentation assitance
+  use 'lukas-reineke/indent-blankline.nvim'
 end)
