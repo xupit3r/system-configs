@@ -154,8 +154,8 @@ vim.diagnostic.config({
 })
 
 vim.cmd([[
-set signcolumn=yes
-autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+  set signcolumn=yes
+  autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
 
 -- command "on_attach" function for lsp servers
@@ -186,8 +186,30 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- All LSPs in this list need to be manually installed via NPM/PNPM/whatevs
 local lspconfig = require('lspconfig')
 for _, lsp in pairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilites = capabilities,
-  }
+  if lsp == 'emmet_ls' then
+    lspconfig.emmet_ls.setup({
+      on_attach = on_attach,
+      capabilites = capabilites,
+      filetypes = {
+        "css",
+        "eruby",
+        "html",
+        "javascript",
+        "javascriptreact",
+        "less",
+        "sass",
+        "scss",
+        "svelte",
+        "pug",
+        "typescriptreact",
+        "vue"
+      },
+    })
+  else
+    lspconfig[lsp].setup({
+      on_attach = on_attach,
+      capabilites = capabilities,
+    })
+  end
 end
+

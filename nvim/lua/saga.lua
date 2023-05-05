@@ -8,12 +8,48 @@ require("lspsaga").setup({
     scroll_down = "<C-f>",
     scroll_up = "<C-b>",
   },
+  definition = {
+    edit = "<C-c>o",
+    vsplit = "<C-c>v",
+    split = "<C-c>i",
+    tabe = "<C-c>t",
+    quit = "q",
+  },
   lightbulb = {
     enable = true,
     enable_in_insert = true,
     sign = true,
     sign_priority = 40,
     virtual_text = true,
+  },
+  code_action = {
+    num_shortcut = true,
+    show_server_name = false,
+    extend_gitsigns = true,
+    keys = {
+      -- string | table type
+      quit = "q",
+      exec = "<CR>",
+    },
+  },
+  rename = {
+    quit = "<C-c>",
+    exec = "<CR>",
+    mark = "x",
+    confirm = "<CR>",
+    in_select = true,
+  },
+  callhierarchy = {
+    show_detail = false,
+    keys = {
+      edit = "e",
+      vsplit = "s",
+      split = "i",
+      tabe = "t",
+      jump = "o",
+      quit = "q",
+      expand_collapse = "u",
+    },
   },
   hover = {
     max_width = 0.6,
@@ -83,7 +119,7 @@ keymap("n", "<leader>sl", "<cmd>Lspsaga show_line_diagnostics<CR>")
 
 -- Show buffer diagnostics
 keymap("n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
-
+  
 -- Show workspace diagnostics
 keymap("n", "<leader>sw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
 
