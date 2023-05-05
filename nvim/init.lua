@@ -6,7 +6,7 @@ require('trees')
 require('search')
 require('theme')
 
--- setup packer to run on changes
+-- setup packer to run on --[[ changes ]]
 vim.cmd [[
 augroup Packer
   autocmd!
@@ -55,6 +55,9 @@ vim.o.expandtab = true
 vim.o.smartindent = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
+
+-- comment toggl'n
+require('Comment').setup()
 
 -- lualine
 require('lualine').setup({

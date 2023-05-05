@@ -137,4 +137,8 @@ return require('packer').startup(function()
       'nvim-lua/plenary.nvim'
     }
   }
+
+  -- comment assist plugin
+  use 'numToStr/Comment.nvim'
+
 end)
