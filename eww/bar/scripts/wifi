@@ -2,7 +2,7 @@
 
 symbol() {
 [ $(cat /sys/class/net/w*/operstate) = down ] && echo "󰖪" && exit
-echo "󱚽"
+echo "󰖩"
 }
 
 name() {
