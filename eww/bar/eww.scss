@@ -2,10 +2,10 @@
   all: unset;
 }
 
-$background: #1A1B26;
+$background: #1a0b25;
 $foreground: #A9B1D6;
 
-$black: #24283B;
+$black: #35164b;
 $gray: #565F89;
 $red: #F7768E;
 $green: #73DACA;
@@ -161,8 +161,9 @@ calendar:indeterminate {
 // Powermenu
 .powermenu {
   font-family: "JetBrainsMono Nerd Fonts";
-  font-size: 1.8em;
+  font-size: 1.6em;
   font-weight: bold;
+  margin-right: 8px;
 }
 
 .button-bspres,

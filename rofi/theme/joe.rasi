@@ -1,5 +1,5 @@
 * {
-    font:   "Satoshi Medium 14";
+  font:   "Satoshi Medium 14";
 
     background-color:   @bg0;
     text-color:         @fg0;
@@ -8,10 +8,10 @@
     padding:    0px;
     spacing:    0px;
 
-    bg0:    #1A1B26;
+    bg0:    #1a0b25;
     bg1:    #3B4252;
-    bg2:    #4C566A80;
-    bg3:    #ff59a3f2;
+    bg2:    #240f33d9;
+    bg3:    #F7768Ef2;
     fg0:    #D8DEE9;
     fg1:    #ECEFF4;
     fg2:    #D8DEE9;
