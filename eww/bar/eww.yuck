@@ -23,18 +23,17 @@
 
 ;; Battery Widgets ;;
 (defwidget bat []
-	(box	:orientation "v"	
-			:space-evenly "false"
-	(label	:class "bat"		
-			:halign "end"		
-			:text battery	
-			:tooltip "Battery: ${battery-cappacity}%")))
+	(box	:orientation "v"
+        :class "bat control-width"
+        :tooltip "Battery: ${battery-cappacity}%"
+        battery))
 (defpoll battery			:interval "1s"	"scripts/battery icon")
 (defpoll battery-cappacity	:interval "1s"	"scripts/battery percent")
 
 ;; Wifi Widgets ;;
 (defwidget wifi []
-	(box		:orientation "v"  
+	(box	:orientation "v"
+        :class "control-widget"
 				:tooltip wifi-name
 	(button		:onclick "scripts/popup wifi" 
 				:class "wifi-icon" wifi-icon)))
@@ -43,33 +42,35 @@
 
 ;; Brightness Widgets ;;
 (defwidget bright []
-  (eventbox :onhover "${eww} update bright=true"   
-  			:onhoverlost "${eww} update bright=false"
-  			(box    :orientation "v"  
-			  		:space-evenly "false"  
-					:spacing 2
-  			(revealer :transition "slideup" 
-			  		  :reveal bright   
-					  :duration "550ms"
-  			(scale :class "bribar" 
-			  	   :value current-brightness 
-				   :onchange "light -S {}%" 
-				   :orientation "v" 
-				   :flipped true 
-				   :max 101 
-				   :min 0))
-  			(label :class "brightness-icon" 
-			  	   :text ""))))
+  (eventbox
+    :class "control-widget"
+    :onhover "${eww} update bright=true"   
+    :onhoverlost "${eww} update bright=false"
+    (box :orientation "v"
+         :space-evenly false
+         (revealer 
+           :transition "slideup"
+           :reveal bright
+           :duration "550ms"
+  			(scale 
+          :class "bribar"
+          :value current-brightness
+          :onchange "light -S {}%"
+          :orientation "v"
+          :flipped true
+          :max 101
+          :min 0))
+  			(label :class "brightness-icon" :text "󰃠"))))
 (defpoll current-brightness :interval "1s" "light")
 (defvar bright false)
 
 (defwidget volume []
-	(eventbox 
+	(eventbox
+    :class "control-widget"
 		:onhover "${eww} update volume=true"
 	  :onhoverlost "${eww} update volume=false"
 		(box :orientation "v"
          :space-evenly false
-         :spacing 2
          (revealer 
             :transition "slideup"
 						:reveal volume
@@ -82,7 +83,7 @@
 							:flipped true
 							:max 101
 							:min 0))
-			(label :class "volume-icon" :text ""))))
+			(label :class "volume-icon" :text ""))))
 (defvar volume false)
 (defpoll current-volume
 	:interval "1s" 
@@ -90,9 +91,10 @@
 
 ;; Control Panel Widgets ;;	
 (defwidget control []
-	(box :orientation "v" 
-		 :space-evenly false  
-		 :class "control"
+	(box :orientation "v"
+       :halign "center"
+       :space-evenly false
+       :class "control"
 		(bat)
 		(wifi)
 		(bright)
@@ -140,30 +142,28 @@
 (defwidget power []
 	(eventbox	:onhover "${eww} update power=true"	
 				:onhoverlost "${eww} update power=false" 
-	(box		:orientation "v"					
-				:space-evenly "false" 	 
-				:vexpand "false" 	
-				:class "powermenu"
-	(revealer	:transition "slideup"				
-				:reveal power			 
-				:duration "550ms"
-	(box		:orientation "v"					
-				:space-evenly "false"
+	(box  :orientation "v"
+        :space-evenly "false"
+        :vexpand "false"
+        :class "powermenu"
+	(revealer
+    :transition "slideup"
+    :reveal power
+    :duration "500ms"
+	(box
+    :orientation "v"
+    :space-evenly "false"
+    (button :class "button-quit"
+            :onclick "hyprctl dispatch exit" "󰍃")
+    (button :class "button-lock"
+            :onclick "scripts/lockscreen" "")
+    (button :class "button-reb"
+            :onclick "reboot"	"󰜉")))
 
-	(button   	:class "button-bspres"  			
-				:onclick "hyprctl reload" "" )
-
-  	(button		:class "button-reb"					
-				:onclick "reboot"	"")
-
-	(button		:class "button-quit" 				
-				:onclick "hyprctl dispatch exit" "")
-
-	(button		:class "button-lock" 				
-				:onclick "scripts/lockscreen" "")))
-
-	(button		:class "button-off"					 
-				:onclick "shutdown now"	""))))
+  ;; this is the only button that will be shown,
+  ;; the rest will be revealed on hover
+  (button :class "button-off"
+          :onclick "shutdown now"	"⏻"))))
 (defvar power false)
 
 ;; Start Widgets ;;

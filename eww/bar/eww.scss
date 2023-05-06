@@ -1,14 +1,7 @@
-/* Created   by https://github.com/rxyhn 
-   Designed  by https://github.com/rxyhn
-   Maintaned by https://github.com/rxyhn
-*/
-
-// Global
-*{
+* {
   all: unset;
 }
 
-// Variable Color's
 $background: #1A1B26;
 $foreground: #A9B1D6;
 
@@ -32,111 +25,49 @@ tooltip {
   color: $foreground;
 }
 
-// EWW BAR
 .eww_bar{
   background-color: $background;
-  padding: .5rem;
+  padding: .2em;
   font-family: "Satoshi";
-}
-
-.0, .01, .02, .03, .04, .05, .06,
-.011, .022, .033, .044, .055, .066{
-  margin: .55rem 0 .55rem 0;
-}
-
-/* Unoccupied */
-.0 {
-color: $gray;
-}
-
-/* Occupied */
-.01, .02, .03, .04, .05, .06 {
-  color: $gray;
-}
-
-/* Focused */
-.011,
-.022,
-.033,
-.044,
-.055,
-.066 {
-  color: $foreground;
-}
-
-.0:nth-child(1),
-.0:nth-child(3){
-  font-size: 1.5em;
-}
-.0:nth-child(2){
-  font-size: 1.4em;
-}
-.0:nth-child(4),
-.0:nth-child(5){
-  font-size: 1.6em;
-}
-.0:nth-child(6){
-  font-size: 1.7em;
-}
-.01,
-.011,
-.03,
-.033{
-  font-size: 1.5em;
-}
-.02,
-.022{
-  font-size: 1.4em;
-}
-.04,
-.05,
-.044,
-.055{
-  font-size: 1.6em;
-}
-.06,
-.066{
-  font-size: 1.7em;
 }
 
 // Control Panel
 .control {
-  margin: .25rem 0;
-  padding: .4em;
-  font-family: "Material Icons";
+  min-width: 1.1em;
+  font-family: "JetBrainsMono Nerd Font";
   font-size: 1.6em;
+  padding: .3em;
+  margin: .3em;
   background-color: $black;
   border-radius: 5px;
 }
 
 .bat{
-  font-size: 1em;
-  padding: .33em;
   color: $green;
 }
 
 .wifi-icon{
-  margin-bottom: .2rem;
   color: $magenta;
+  margin-right: 8px;
 }
 
 .brightness-icon{
-  margin: .2rem 0 .2rem 0;
   color: $yellow;
+  margin-right: 8px;
 }
 
 .volume-icon{
-  margin: .2rem 0 .2rem 0;
   color: $blue;
+  margin-right: 6px;
 }
 
 scale trough {
   all: unset;
   background-color: $background;
   border-radius: 5px;
-  min-height: 80px;
+  min-height: 90px;
   min-width: 10px;
-  margin: .3rem 0 .3rem 0;
+  margin: .3rem 0;
 }
 
 .bribar trough highlight {
@@ -157,8 +88,8 @@ scale trough {
   background-color: $black;
   color: $white;
   border-radius: 5px;
-  padding: .7rem 0 .5rem 0;
-  margin: .5rem 0 .5rem 0;
+  padding: .3em;
+  margin: .3em;
   
   .time-ap {
     font-size: 1rem;
@@ -172,13 +103,15 @@ scale trough {
   background-color: $black;
   color: $white;
   border-radius: 5px;
-  padding: .25rem 0;
-  margin: .25rem 0;
+  padding: .3em;
+  margin: .3em;
  
   .weather-icon {
-    font-family: "Weather Icons";
-    font-size: 1.50rem;
-    padding-top: 0;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
+    margin-top: -5px;
     color: $blue;
   }
 }
@@ -227,8 +160,8 @@ calendar:indeterminate {
 
 // Powermenu
 .powermenu {
-  font-family: "Material Icons";
-  font-size: 1.6em;
+  font-family: "JetBrainsMono Nerd Fonts";
+  font-size: 1.8em;
   font-weight: bold;
 }
 
