@@ -1,1 +1,12 @@
 @theme "/home/joe/.config/rofi/theme/joe.rasi"
+
+configuration {
+  font: "Satoshi 13";
+  modes: "drun,emoji";
+  combi-modi: "drun,emoji";
+  combi-hide-mode-prefix: true;
+  terminal: "kitty";
+  show-icons: true;
+  icon-them: "Sweet Rainbow";
+  steal-focus: true;
+}
