@@ -120,16 +120,6 @@ return require('packer').startup(function()
     }
   })
 
-  -- a nice little search/jump tool
-  use {
-    'phaazon/hop.nvim',
-    branch = 'v2', -- optional but strongly recommended
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-    end
-  }
-
   -- telscope
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
@@ -143,4 +133,16 @@ return require('packer').startup(function()
 
   -- indentation assitance
   use 'lukas-reineke/indent-blankline.nvim'
+
+  -- project management
+  use 'ahmedkhalf/project.nvim'
+
+  -- file browser
+  use {
+    'nvim-telescope/telescope-file-browser.nvim',
+    requires = {
+      'nvim-telescope/telescope.nvim',
+      'nvim-lua/plenary.nvim'
+    }
+  }
 end)
