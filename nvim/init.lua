@@ -3,7 +3,7 @@ require('lsp')
 require('saga')
 require('opts')
 require('trees')
-require('search')
+require('gaze')
 require('theme')
 
 -- setup packer to run on --[[ changes ]]
