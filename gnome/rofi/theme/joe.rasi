@@ -11,7 +11,7 @@
     bg0:    #1a0b25;
     bg1:    #3B4252;
     bg2:    #252330;
-    bg3:    #ff7ed0;
+    bg3:    #ff7ed0d9;
     fg0:    #D8DEE9;
     fg1:    #ECEFF4;
     fg2:    #D8DEE9;
@@ -38,7 +38,7 @@ inputbar {
 
     padding:    8px 16px;
     spacing:    8px;
-    children:   [ prompt, entry ];
+    children:   [ entry ];
 }
 
 prompt {
@@ -95,5 +95,5 @@ element-icon {
 
 element-text {
     text-color: inherit;
-    background-color: inherit;
+    background-color: transparent;
 }
