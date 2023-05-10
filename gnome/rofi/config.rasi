@@ -1,0 +1,10 @@
+configuration {
+  font: "Satoshi 13";
+  modes: "emoji";
+  show-icons: false;
+  normal-window: true;
+  location: 0;
+}
+
+@theme "/home/joe/.config/rofi/theme/joe.rasi"
+
