@@ -120,7 +120,11 @@ return require('packer').startup(function()
     }
   })
 
-  -- telscope
+  -- lsp formatting and MOAR
+  use 'jay-babu/mason-null-ls.nvim'
+  use 'jose-elias-alvarez/null-ls.nvim'
+
+  -- telescope
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
     requires = {
@@ -145,4 +149,4 @@ return require('packer').startup(function()
       'nvim-lua/plenary.nvim'
     }
   }
-end)
+ end)

@@ -1,26 +1,27 @@
-require('plugins')
-require('lsp')
-require('saga')
-require('opts')
-require('trees')
-require('gaze')
-require('theme')
+require("plugins")
+require("lsp")
+require("saga")
+require("opts")
+require("trees")
+require("gaze")
+require("format")
+require("theme")
 
 -- setup packer to run on --[[ changes ]]
-vim.cmd [[
+vim.cmd([[
 augroup Packer
   autocmd!
   autocmd BufWritePost init.lua PackerCompile
 augroup end
-]]
+]])
 
 -- Highlight on yank
-vim.cmd [[
+vim.cmd([[
 augroup YankHighlight
   autocmd!
   autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 augroup end
-]]
+]])
 
 -- autowrite content
 vim.o.autowriteall = true
@@ -42,13 +43,13 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 
 -- Shows signs by Autocompletion plugin
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 
 -- Enable termguicolors. Very essential if you want 24-bit RGB color in TUI.
 vim.o.termguicolors = true
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menu,menuone'
+vim.o.completeopt = "menu,menuone"
 
 -- indentiation shit
 vim.o.expandtab = true
@@ -57,68 +58,67 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 
 -- comment toggl'n
-require('Comment').setup()
+require("Comment").setup()
 
 -- show indent guides
-require('indent_blankline').setup({
-  space_char_blankline = ' ',
-  show_current_context = true,
-  show_current_context_start = true,
-
+require("indent_blankline").setup({
+	space_char_blankline = " ",
+	show_current_context = true,
+	show_current_context_start = true,
 })
 
 -- lualine
-require('lualine').setup({
-  options = {
-    theme = 'catppuccin'
-  },
-  sections = {
-    lualine_c = {
-      {'filename', path = 1},
-      'lsp_progress',
-    },
-  },
+require("lualine").setup({
+	options = {
+		theme = "catppuccin",
+	},
+	sections = {
+		lualine_c = {
+			{ "filename", path = 1 },
+			"lsp_progress",
+		},
+	},
 })
 
 -- some config for the auotpairs stuffs...
 local npairs = require("nvim-autopairs")
 npairs.setup({
-    check_ts = true,
+	check_ts = true,
 })
 
 -- color highlighting
-require("colorizer").setup {
-  filetypes = { "*" },
-  user_default_options = {
-    RGB = true,
-    RRGGBB = true,
-    names = true,
-    RRGGBBAA = false,
-    AARRGGBB = false,
-    rgb_fn = false,
-    hsl_fn = false,
-    css = false,
-    css_fn = false,
-    mode = "background",
-    tailwind = false,
-    sass = {
-      enable = false,
-      parsers = { "css" },
-    },
-    virtualtext = "■",
-    always_update = false
-  },
-}
+require("colorizer").setup({
+	filetypes = { "*" },
+	user_default_options = {
+		RGB = true,
+		RRGGBB = true,
+		names = true,
+		RRGGBBAA = false,
+		AARRGGBB = false,
+		rgb_fn = false,
+		hsl_fn = false,
+		css = false,
+		css_fn = false,
+		mode = "background",
+		tailwind = false,
+		sass = {
+			enable = false,
+			parsers = { "css" },
+		},
+		virtualtext = "■",
+		always_update = false,
+	},
+})
 
-require('project_nvim').setup({
-  sync_root_with_cwd = true,
-  respect_buf_cwd = true,
-  update_focused_file = {
-    enable = true,
-    update_root = true
-  },
+require("project_nvim").setup({
+	sync_root_with_cwd = true,
+	respect_buf_cwd = true,
+	update_focused_file = {
+		enable = true,
+		update_root = true,
+	},
 })
 
 -- add projects support to telescope
-local telescope = require('telescope')
-telescope.load_extension('projects')
+local telescope = require("telescope")
+telescope.load_extension("projects")
