@@ -8,6 +8,7 @@ require("utils")
 require("prettys")
 require("theme")
 require("projects")
+require("vcs")
 
 -- setup packer to run on --[[ changes ]]
 vim.cmd([[

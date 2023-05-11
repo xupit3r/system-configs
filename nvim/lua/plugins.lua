@@ -160,4 +160,7 @@ return require("packer").startup(function()
 			"nvim-lua/plenary.nvim",
 		},
 	})
+
+	-- some nice little git stuffs
+	use("lewis6991/gitsigns.nvim")
 end)
