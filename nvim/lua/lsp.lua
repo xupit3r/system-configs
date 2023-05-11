@@ -41,8 +41,35 @@ require("mason-lspconfig").setup({
 })
 
 -- Completion Plugin Setup
-local lspkind = require("lspkind")
 local cmp = require("cmp")
+
+local kind_icons = {
+	Text = "",
+	Method = "",
+	Function = "",
+	Constructor = "",
+	Field = "",
+	Variable = "",
+	Class = "",
+	Interface = "",
+	Module = "",
+	Property = "",
+	Unit = "",
+	Value = "",
+	Enum = "",
+	Keyword = "",
+	Snippet = "",
+	Color = "",
+	File = "",
+	Reference = "",
+	Folder = "",
+	EnumMember = "",
+	Constant = "",
+	Struct = "",
+	Event = "",
+	Operator = "",
+	TypeParameter = "",
+}
 
 cmp.setup({
 	snippet = {
@@ -66,32 +93,36 @@ cmp.setup({
 		}),
 	},
 	-- Installed sources:
-	sources = {
-		{ name = "path" },
-		{ name = "nvim_lsp", keyword_length = 3 },
-		{ name = "nvim_lsp_signature_help" },
-		{ name = "nvim_lua", keyword_length = 2 },
-		{ name = "buffer", keyword_length = 2 },
-		{ name = "vsnip", keyword_length = 2 },
-	},
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "vsnip" },
+	}, {
+		{ name = "buffer" },
+	}),
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
 	formatting = {
-		format = lspkind.cmp_format({
-			with_text = true,
-			menu = {
-				buffer = "[buf]",
-				nvim_lsp = "[LSP]",
-				path = "[path]",
-			},
-		}),
+		fields = { "kind", "abbr", "menu" },
+		format = function(entry, vim_item)
+			vim_item.kind = kind_icons[vim_item.kind]
+			vim_item.menu = ({
+				nvim_lsp = "",
+				nvim_lua = "",
+				vsnip = "",
+				nvim_lsp_signature_help = "",
+				buffer = "",
+				path = "",
+			})[entry.source.name]
+			return vim_item
+		end,
 	},
 })
 
 -- Use buffer source for `/`
-cmp.setup.cmdline("/", {
+cmp.setup.cmdline({ "/", "?" }, {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
 		{ name = "buffer" },
 	},
@@ -99,6 +130,7 @@ cmp.setup.cmdline("/", {
 
 -- Use cmdline & path source for ':'
 cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "path" },
 	}, {
@@ -153,25 +185,26 @@ vim.cmd([[
   autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
 
--- command "on_attach" function for lsp servers
-local on_attach = function(client, bufnr)
-	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+-- attach
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local opts = { buffer = args.buf }
 
-	-- Mappings to magical LSP functions!
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-	vim.keymap.set("n", "gk", vim.lsp.buf.hover, bufopts)
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, bufopts)
-	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
-	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-	vim.keymap.set("n", "<space>f", function()
-		vim.lsp.buf.format({ async = true })
-	end, bufopts)
-end
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "gk", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+		vim.keymap.set("n", "gh", vim.lsp.buf.signature_help, opts)
+		vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+		vim.keymap.set("n", "gn", vim.lsp.buf.rename, opts)
+		vim.keymap.set("n", "g.", vim.lsp.buf.code_action, opts)
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+
+		vim.keymap.set("n", "<space>f", function()
+			vim.lsp.buf.format({ async = true })
+		end, opts)
+	end,
+})
 
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -185,23 +218,18 @@ local lspconfig = require("lspconfig")
 for _, lsp in pairs(servers) do
 	if lsp == "emmet_ls" then
 		lspconfig.emmet_ls.setup({
-			on_attach = on_attach,
 			capabilities = capabilities,
 			filetypes = {
 				"css",
-				"eruby",
 				"html",
 				"less",
 				"sass",
 				"scss",
-				"svelte",
 				"pug",
-				"vue",
 			},
 		})
 	elseif lsp == "lua_ls" then
 		lspconfig.lua_ls.setup({
-			on_attach = on_attach,
 			capabilities = capabilities,
 			settings = {
 				Lua = {
@@ -223,7 +251,6 @@ for _, lsp in pairs(servers) do
 		})
 	elseif lsp == "volar" then
 		lspconfig.volar.setup({
-			on_attach = on_attach,
 			capabilities = capabilities,
 			filetypes = {
 				"javascript",
@@ -231,15 +258,9 @@ for _, lsp in pairs(servers) do
 				"vue",
 				"json",
 			},
-			init_options = {
-				typescript = {
-					tsdk = "/home/joe/.nvm/versions/node/v18.0.0/lib/node_modules/typescript/lib/",
-				},
-			},
 		})
 	else
 		lspconfig[lsp].setup({
-			on_attach = on_attach,
 			capabilities = capabilities,
 		})
 	end
