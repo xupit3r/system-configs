@@ -7,7 +7,7 @@ pip3 install neovim --upgrade
 gem install neovim
 
 # install nodejs stuffs
-sudo npm i -g neovim emmet
+sudo npm i -g neovim emmet typescript-language-server typescript @volar/vue-language-server
 
 # some pakages
 sudo pacman -Syu ripgrep fd luarocks wget curl

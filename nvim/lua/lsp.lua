@@ -221,6 +221,22 @@ for _, lsp in pairs(servers) do
 				},
 			},
 		})
+	elseif lsp == "volar" then
+		lspconfig.volar.setup({
+			on_attach = on_attach,
+			capabilities = capabilities,
+			filetypes = {
+				"javascript",
+				"javascriptreact",
+				"vue",
+				"json",
+			},
+			init_options = {
+				typescript = {
+					tsdk = "/home/joe/.nvm/versions/node/v18.0.0/lib/node_modules/typescript/lib/",
+				},
+			},
+		})
 	else
 		lspconfig[lsp].setup({
 			on_attach = on_attach,
