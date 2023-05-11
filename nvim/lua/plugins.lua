@@ -152,4 +152,12 @@ return require("packer").startup(function()
 			"nvim-lua/plenary.nvim",
 		},
 	})
+
+	-- nice little diff viewer / merge tool
+	use({
+		"sindrets/diffview.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+	})
 end)

@@ -1,11 +1,13 @@
 require("plugins")
 require("lsp")
 require("saga")
-require("opts")
 require("trees")
 require("gaze")
 require("format")
+require("utils")
+require("prettys")
 require("theme")
+require("projects")
 
 -- setup packer to run on --[[ changes ]]
 vim.cmd([[
@@ -23,6 +25,15 @@ augroup YankHighlight
 augroup end
 ]])
 
+-- Fixed column for diagnostics to appear
+-- Show autodiagnostic popup on cursor hover_range
+-- Goto previous / next diagnostic warning / error
+-- Show inlay_hints more frequently
+vim.cmd([[
+  set signcolumn=yes
+  autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
+
 -- autowrite content
 vim.o.autowriteall = true
 
@@ -30,10 +41,7 @@ vim.o.autowriteall = true
 vim.wo.number = true
 
 -- Show chars at the end of line
-vim.opt.list = true
-
--- Enable break indent
-vim.o.breakindent = true
+vim.o.list = true
 
 --Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
@@ -49,76 +57,13 @@ vim.wo.signcolumn = "yes"
 vim.o.termguicolors = true
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = "menu,menuone"
+vim.o.completeopt = "menu,menuone,noselect,noinsert"
 
--- indentiation shit
+-- some indentation rules
 vim.o.expandtab = true
 vim.o.smartindent = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 
--- comment toggl'n
-require("Comment").setup()
-
--- show indent guides
-require("indent_blankline").setup({
-	space_char_blankline = " ",
-	show_current_context = true,
-	show_current_context_start = true,
-})
-
--- lualine
-require("lualine").setup({
-	options = {
-		theme = "catppuccin",
-	},
-	sections = {
-		lualine_c = {
-			{ "filename", path = 1 },
-			"lsp_progress",
-		},
-	},
-})
-
--- some config for the auotpairs stuffs...
-local npairs = require("nvim-autopairs")
-npairs.setup({
-	check_ts = true,
-})
-
--- color highlighting
-require("colorizer").setup({
-	filetypes = { "*" },
-	user_default_options = {
-		RGB = true,
-		RRGGBB = true,
-		names = true,
-		RRGGBBAA = false,
-		AARRGGBB = false,
-		rgb_fn = false,
-		hsl_fn = false,
-		css = false,
-		css_fn = false,
-		mode = "background",
-		tailwind = false,
-		sass = {
-			enable = false,
-			parsers = { "css" },
-		},
-		virtualtext = "■",
-		always_update = false,
-	},
-})
-
-require("project_nvim").setup({
-	sync_root_with_cwd = true,
-	respect_buf_cwd = true,
-	update_focused_file = {
-		enable = true,
-		update_root = true,
-	},
-})
-
--- add projects support to telescope
-local telescope = require("telescope")
-telescope.load_extension("projects")
+-- Enable break indent
+vim.o.breakindent = true
