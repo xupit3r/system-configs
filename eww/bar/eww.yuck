@@ -1,219 +1,176 @@
-;; Created   by https://github.com/rxyhn
-;; Designed  by https://github.com/rxyhn
-;; Maintaned by https://github.com/rxyhn
-
 ;; put path to aesthetic bar config files here ;;
 (defvar eww "/usr/bin/eww -c $HOME/.config/eww/bar")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;							Widget Section's							 ;;	
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Launcher Widgets ;;
-(defwidget launcher []
-	(box :orientation "v" 
-		 :space-evenly "false" 
-		 :spacing -15
-  	(button :class "launcher_icon" 
-		   	:onclick "scripts/popup launcher"  "")))
-
-;; Workspaces Widgets ;;
-(defwidget workspaces []
-	(literal :content workspace))
-(deflisten workspace "scripts/workspace")
-
-;; Battery Widgets ;;
+;; battery
 (defwidget bat []
-	(box	:orientation "v"
-        :class "bat control-width"
-        :tooltip "Battery: ${battery-cappacity}%"
-        battery))
-(defpoll battery			:interval "1s"	"scripts/battery icon")
-(defpoll battery-cappacity	:interval "1s"	"scripts/battery percent")
+	(box
+    :orientation "h"
+    :class "bat control-width"
+    :tooltip "Battery: ${battery-cappacity}%"
+    battery))
+(defpoll battery
+  :interval "1s"
+  "scripts/battery icon")
+(defpoll battery-cappacity
+  :interval "1s"
+  "scripts/battery percent")
 
-;; Wifi Widgets ;;
+;; wifi
 (defwidget wifi []
-	(box	:orientation "v"
-        :class "control-widget"
-				:tooltip wifi-name
-	(button		:onclick "scripts/popup wifi" 
-				:class "wifi-icon" wifi-icon)))
-(defpoll wifi-icon :interval "1s" "scripts/wifi icon")
-(defpoll wifi-name :interval "1s" "scripts/wifi name")
+	(box
+    :orientation "h"
+    :class "control-widget"
+    :tooltip wifi-name
+    (button
+      :onclick "scripts/popup wifi"
+      :class "wifi-icon" wifi-icon)))
+(defpoll wifi-icon
+  :interval "1s"
+  "scripts/wifi icon")
+(defpoll wifi-name
+  :interval "1s"
+  "scripts/wifi name")
 
-;; Brightness Widgets ;;
+;; brightness
 (defwidget bright []
   (eventbox
     :class "control-widget"
-    :onhover "${eww} update bright=true"   
+    :onhover "${eww} update bright=true"
     :onhoverlost "${eww} update bright=false"
-    (box :orientation "v"
-         :space-evenly false
-         (revealer 
-           :transition "slideup"
-           :reveal bright
-           :duration "550ms"
-  			(scale 
+    (box
+      :orientation "h"
+      :space-evenly false
+      (revealer
+        :transition "slideleft"
+        :reveal bright
+        :duration "550ms"
+        (scale
           :class "bribar"
           :value current-brightness
           :onchange "light -S {}%"
-          :orientation "v"
+          :orientation "h"
           :flipped true
           :max 101
           :min 0))
   			(label :class "brightness-icon" :text "󰃠"))))
-(defpoll current-brightness :interval "1s" "light")
+(defpoll current-brightness
+  :interval "1s"
+  "light")
 (defvar bright false)
 
+;; volume
 (defwidget volume []
 	(eventbox
     :class "control-widget"
 		:onhover "${eww} update volume=true"
 	  :onhoverlost "${eww} update volume=false"
-		(box :orientation "v"
-         :space-evenly false
-         (revealer 
-            :transition "slideup"
-						:reveal volume
-						:duration "550ms"
-            (scale 
-              :class "volbar"
-              :value (* 100 current-volume)
-              :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%"
-							:orientation "v"
-							:flipped true
-							:max 101
-							:min 0))
-			(label :class "volume-icon" :text ""))))
+		(box 
+      :orientation "h"
+      :space-evenly false
+      (revealer
+        :transition "slideleft"
+        :reveal volume
+        :duration "550ms"
+        (scale 
+          :class "volbar"
+          :value (* 100 current-volume)
+          :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%"
+          :orientation "h"
+          :flipped true
+          :max 101
+          :min 0))
+      (label :class "volume-icon" :text ""))))
 (defvar volume false)
 (defpoll current-volume
-	:interval "1s" 
+	:interval "1s"
 	"wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk -v RS='[.0-9]+' '$0=RT'")
 
-;; Control Panel Widgets ;;	
+;; "control panel"
 (defwidget control []
-	(box :orientation "v"
-       :halign "center"
-       :space-evenly false
-       :class "control"
+	(box
+    :orientation "h"
+    :halign "center"
+    :space-evenly false
+    :class "control"
 		(bat)
 		(wifi)
 		(bright)
 		(volume)))
 
-;; Clock Widgets ;;
-(defwidget time []
-	(box	:orientation "v" 
-			:class "time" 
-			:valign "end"
-			(label :class "time-hour" :text hour)
-			(label :class "time-min"  :text min)
-			(label :class "time-ap"   :text ap)))
-(defpoll hour	:interval "1s"	"date '+%I'")
-(defpoll min	:interval "1s"	"date '+%M'")
-(defpoll ap	  :interval "1s"	"date '+%p'")
+;; date display
+(defwidget date []
+	(box
+    :orientation "h"
+    :class "date"
+    :halign "start"
+    (label :class "date-str" :text datestr)))
+(defpoll datestr
+  :interval "1s"
+  "date +'%a, %b %-d %Y, %-l:%M %p'")
 
+;; weather
 (defwidget weather []
 	(box 
-		:orientation "v"
+		:orientation "h"
 		:class "weather ${wd.conditions}"
-		:valign "end"
+		:halign "start"
 		:tooltip "${wd.conditions.description}"
-		(label :class "weather-temp" :text "${wd.temperature} ${wd.units}")	
+		(label :class "weather-temp" :text "${wd.temperature} ${wd.units}")
 		(label :class "weather-icon" :text "${wd.conditions.icon}")))
-(defpoll wd :interval "5s" "scripts/weather.clj")
+(defpoll wd 
+  :interval "5s" 
+  "scripts/weather.clj")
 
-;; Calendar Widgets ;;
-(defwidget cal []
-	(box :class "cal-box" 
-		 :orientation "v"
-	(box :class "cal-inner-box"
-	(calendar :class "cal" 
-			  :day calendar_day 
-			  :month calendar_month 
-			  :year calendar_year))))
-(defpoll calendar_day :interval "10h"
-    "date '+%d'")
-(defpoll calendar_month :interval "10h"
-    "scripts/calendar")
-(defpoll calendar_year :interval "10h"
-    "date '+%Y'")
-
-;; Powermenu Widgets ;;
+;; powermenu
 (defwidget power []
-	(eventbox	:onhover "${eww} update power=true"	
-				:onhoverlost "${eww} update power=false" 
-	(box  :orientation "v"
-        :space-evenly "false"
-        :vexpand "false"
-        :class "powermenu"
-	(revealer
-    :transition "slideup"
-    :reveal power
-    :duration "500ms"
-	(box
-    :orientation "v"
-    :space-evenly "false"
+  (box 
+    :orientation "h"
+    :space-evenly false
+    :class "powermenu"
     (button :class "button-quit"
             :onclick "hyprctl dispatch exit" "󰍃")
     (button :class "button-lock"
             :onclick "scripts/lockscreen" "")
     (button :class "button-reb"
-            :onclick "reboot"	"󰜉")))
+            :onclick "reboot"	"󰜉")
+    (button :class "button-off"
+            :onclick "shutdown now"	"⏻")))
 
-  ;; this is the only button that will be shown,
-  ;; the rest will be revealed on hover
-  (button :class "button-off"
-          :onclick "shutdown now"	"⏻"))))
-(defvar power false)
-
-;; Start Widgets ;;
+;; stuff to the left
 (defwidget start []
-	(box	:orientation "v" 
-			:space-evenly false 
-			:valign "start"
-			(time)
-			(weather)
-      (control)))
+	(box
+    :orientation "h"
+    :space-evenly false
+    :halign "start"
+    (date)
+    (weather)))
 
-;; End Widgets ;;
+;; stuff to the right
 (defwidget end []
-	(box :orientation "v" 
-		 :space-evenly "false" 
-		 :valign "end"
+	(box 
+    :orientation "h"
+    :space-evenly false
+    :halign "end"
+    (control)
 		(power)))
 
-;; Bar Widgets ;;
+;; the actual bar widget collection
 (defwidget bar []
-	(box :class "eww_bar" 
-		 :orientation "v" 
-		 :vexpand "false" 
-		 :hexpand "false"
+	(box 
+    :class "eww_bar"
+    :orientation "h"
+    :vexpand false
+    :hexpand false
 (start)
 (end)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;							Window Section's							 ;;	
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Bar Windows ;;
+;; the bar "window"
 (defwindow bar
 	:geometry (geometry 
               :x "0" 
 						  :y "0" 
-						  :height "100%" 
-						  :width "40px")
+						  :height "30px" 
+						  :width "100%")
 	:monitor 0
-	:reserve (struts 
-              :distance "50px" 
-              :side "left")
 	:wm-ignore false
-	:hexpand "false"
-	:vexpand "false"
 (bar))
-
-;; Calendar Windows ;;
-(defwindow calendar
-	:geometry (geometry :x "70px" 
-						:y "65%" 
-						:width "270px" 
-						:height "60px")
-(cal))

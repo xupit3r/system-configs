@@ -1,5 +1,6 @@
 * {
   all: unset;
+  font-size: 16px;
 }
 
 $background: #1a0b25;
@@ -17,57 +18,57 @@ $white: $foreground;
 
 tooltip {
   font-family: "Satoshi";
-  font-size: 1.2rem;
+  font-size: 1em;
   font-weight: 600;
   border-radius: 5px;
-  padding: 10px;
+  padding: .25em .5em;
   background-color: $background;
   color: $foreground;
 }
 
 .eww_bar{
   background-color: $background;
-  padding: .2em;
+  padding: 0 .5em;
   font-family: "Satoshi";
 }
 
 // Control Panel
 .control {
-  min-width: 1.1em;
   font-family: "JetBrainsMono Nerd Font";
-  font-size: 1.6em;
-  padding: .3em;
-  margin: .3em;
+  font-size: 1em;
+  padding: .15em .5em;
+  margin: .25em;
   background-color: $black;
   border-radius: 5px;
 }
 
 .bat{
   color: $green;
+  margin: 0 .5em;
 }
 
 .wifi-icon{
   color: $magenta;
-  margin-right: 8px;
+  margin: 0 .5em;
 }
 
 .brightness-icon{
   color: $yellow;
-  margin-right: 8px;
+  margin: 0 .5em;
 }
 
 .volume-icon{
   color: $blue;
-  margin-right: 6px;
+  margin: 0 .5em;
 }
 
 scale trough {
   all: unset;
   background-color: $background;
   border-radius: 5px;
-  min-height: 90px;
-  min-width: 10px;
-  margin: .3rem 0;
+  min-height: .5em;
+  min-width: 5em;
+  margin: .1em .25em;
 }
 
 .bribar trough highlight {
@@ -80,119 +81,66 @@ scale trough {
   border-radius: 5px;
 }
 
-// Clock
-.time {
+.date {
   font-family: "Satoshi";
-  font-weight: bold;
-  font-size: 1.5em;
+  font-weight: 600;
+  font-size: 1em;
   background-color: $black;
   color: $white;
   border-radius: 5px;
-  padding: .3em;
-  margin: .3em;
-  
-  .time-ap {
-    font-size: 1rem;
-  }
+  padding: .15em .5em;
+  margin: .25em;
 }
 
 .weather {
   font-family: "Satoshi";
-  font-weight: 700;
-  font-size: 0.95em;
+  font-weight: 600;
+  font-size: 1em;
   background-color: $black;
   color: $white;
   border-radius: 5px;
-  padding: .3em;
-  margin: .3em;
+  padding: .15em .5em;
+  margin: .25em;
  
   .weather-icon {
     font-family: "JetBrainsMono Nerd Font";
-    font-size: 2em;
-    padding: 0;
-    margin: 0;
-    margin-top: -5px;
+    font-size: 1.1em;
     color: $blue;
   }
 }
 
-// Calendar
-.cal-box {
-  background-color: $black;
-  font-family: "Satoshi";
-  font-weight: bold;
-
-  .cal-inner-box {
-    padding: 1rem 1rem .2rem;
-
-    .cal {
-      &.highlight {
-          padding: 10rem;
-      }
-
-      padding: .8rem .25rem 0rem;
-      margin-left: 10px;
-    }
-  }
-}
-
-calendar:selected {
-  color: $blue;
-}
-
-calendar.header {
-  color: $blue;
-  font-weight: bold;
-}
-
-calendar.button {
-  color: $magenta;
-}
-
-calendar.highlight {
-  color: $magenta;
-  font-weight: bold;
-}
-
-calendar:indeterminate {
-  color: $background;
-}
-
-// Powermenu
 .powermenu {
   font-family: "JetBrainsMono Nerd Fonts";
-  font-size: 1.6em;
-  font-weight: bold;
-  margin-right: 8px;
-}
+  background-color: $black;
+  border-radius: 5px;
+  padding: .15em .5em;
+  margin: .25em;
 
-.button-bspres,
-.button-reb,
-.button-lock,
-.button-quit,
-.button-off {
-  padding: .5rem .2rem .3rem .2rem;
-}
+  button {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0 .5em;
+  }
 
-.button-off {
-  margin-bottom: .5rem;
-  color: $red;
-}
+  .button-off {
+    color: $red;
+  }
 
-.button-bspres {
-  color: $green;
-}
+  .button-bspres {
+    color: $green;
+  }
 
-.button-reb {
-  color: $yellow
-}
+  .button-reb {
+    color: $yellow
+  }
 
-.button-quit {
-  color: $magenta;
-}
+  .button-quit {
+    color: $magenta;
+  }
 
-.button-lock {
-  color: $blue;
+  .button-lock {
+    color: $blue;
+  }
 }
 
 button {
