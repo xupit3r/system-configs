@@ -1,6 +1,37 @@
 local null_ls = require("null-ls")
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
+-- autowrite content
+vim.o.autowriteall = true
+
+-- Show the line numbers
+vim.wo.number = true
+
+-- Show chars at the end of line
+vim.o.list = true
+
+--Case insensitive searching UNLESS /C or capital in search
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+-- Decrease update time
+vim.o.updatetime = 250
+
+-- Shows signs by Autocompletion plugin
+vim.wo.signcolumn = "yes"
+
+-- Enable termguicolors. Very essential if you want 24-bit RGB color in TUI.
+vim.o.termguicolors = true
+
+-- some indentation rules
+vim.o.expandtab = true
+vim.o.smartindent = true
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+
+-- Enable break indent
+vim.o.breakindent = true
+
 require("mason-null-ls").setup({
 	automatic_installation = true,
 })
@@ -37,6 +68,14 @@ null_ls.setup({
 
 -- some indentation setup
 require("indent_blankline").setup({
-  show_current_context = true,
-  show_current_context_start = true
+	show_current_context = true,
+	show_current_context_start = true,
 })
+
+-- Highlight on yank
+vim.cmd([[
+augroup YankHighlight
+  autocmd!
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+augroup end
+]])
