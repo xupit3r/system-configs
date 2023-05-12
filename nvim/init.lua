@@ -68,3 +68,6 @@ vim.o.shiftwidth = 2
 
 -- Enable break indent
 vim.o.breakindent = true
+
+-- disable warnings about perl
+vim.g.loaded_perl_provider = 0

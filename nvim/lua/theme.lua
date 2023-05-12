@@ -31,7 +31,10 @@ require("catppuccin").setup({
 	},
 	custom_highlights = function(colors)
 		return {
-			TabLineSel = { bg = colors.peach },
+			TabLineSel = {
+				bg = colors.peach,
+				fg = colors.surface2,
+			},
 		}
 	end,
 	integrations = {

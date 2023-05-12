@@ -43,22 +43,25 @@ require("mason-lspconfig").setup({
 -- Completion Plugin Setup
 local cmp = require("cmp")
 
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = "menu,menuone,noselect,noinsert"
+
 local kind_icons = {
-	Text = "",
-	Method = "",
-	Function = "",
-	Constructor = "",
-	Field = "",
-	Variable = "",
-	Class = "",
-	Interface = "",
+	Text = "",
+	Method = "󰘧",
+	Function = "󰘧",
+	Constructor = "󱌢",
+	Field = "",
+	Variable = "",
+	Class = "",
+	Interface = "",
 	Module = "",
 	Property = "",
 	Unit = "",
 	Value = "",
-	Enum = "",
-	Keyword = "",
-	Snippet = "",
+	Enum = "",
+	Keyword = "",
+	Snippet = "",
 	Color = "",
 	File = "",
 	Reference = "",
@@ -200,7 +203,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "g.", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
-		vim.keymap.set("n", "<space>f", function()
+		vim.keymap.set("n", "gf", function()
 			vim.lsp.buf.format({ async = true })
 		end, opts)
 	end,

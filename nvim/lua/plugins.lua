@@ -160,4 +160,7 @@ return require("packer").startup(function()
 
 	-- some nice little git stuffs
 	use("lewis6991/gitsigns.nvim")
+
+  -- blank line indents
+  use "lukas-reineke/indent-blankline.nvim"
 end)
