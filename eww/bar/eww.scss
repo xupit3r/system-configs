@@ -102,6 +102,18 @@ scale trough {
   padding: .15em .5em;
   margin: .25em;
  
+  label {
+    margin: 0 .5em;
+
+    &:first-child {
+      margin-left: 0.25em;
+    }
+
+    &:last-child {
+      margin-right: 0.25em
+    }
+  }
+
   .weather-icon {
     font-family: "JetBrainsMono Nerd Font";
     font-size: 1.1em;

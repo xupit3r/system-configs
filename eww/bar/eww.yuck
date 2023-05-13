@@ -112,11 +112,12 @@
 (defwidget weather []
 	(box 
 		:orientation "h"
-		:class "weather ${wd.conditions}"
+		:class "weather"
+    :space-evenly false
 		:halign "start"
-		:tooltip "${wd.conditions.description}"
-		(label :class "weather-temp" :text "${wd.temperature} ${wd.units}")
-		(label :class "weather-icon" :text "${wd.conditions.icon}")))
+    (label :class "weather-conditions" :text "${wd.conditions.description}")
+		(label :class "weather-icon" :text "${wd.conditions.icon}")
+    (label :class "weather-temp" :text "${wd.temperature} ${wd.units}")))
 (defpoll wd 
   :interval "5s" 
   "scripts/weather.clj")
@@ -142,8 +143,15 @@
     :orientation "h"
     :space-evenly false
     :halign "start"
-    (date)
     (weather)))
+
+;; stuff in the middle
+(defwidget middle []
+  (box
+    :orientation "h"
+    :space-evenly: false
+    :halign "center"
+    (date)))
 
 ;; stuff to the right
 (defwidget end []
@@ -162,6 +170,7 @@
     :vexpand false
     :hexpand false
 (start)
+(middle)
 (end)))
 
 ;; the bar "window"
