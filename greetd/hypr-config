@@ -1,8 +1,0 @@
-misc {
-  disable_hyprland_logo = true
-  disable_splash_rendering = true
-}
-
-monitor=,2256x1504@60Hz,auto,1
-
-exec-once = wlgreet --command Hyprland; killall $(pgrep Hyprland)
