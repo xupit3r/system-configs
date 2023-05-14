@@ -1,7 +1,7 @@
 * {
   font: "Satoshi Medium 13";
 
-  background-color: @bg0;
+  background-color: @bg1;
   text-color: @fg0;
 
   margin: 0px;
@@ -10,11 +10,11 @@
 
   bg0: #1a0b25;
   bg1: #3b4252;
-  bg2: #240f33;
-  bg3: #B4006A;
+  bg2: #3b2b51bf;
+  bg3: #3b3742bf;
   fg0: #d8dee9;
   fg1: #eceff4;
-  fg2: #d8dee9;
+  fg2: #7f7887;
   fg3: #4c566a;
 }
 
@@ -22,7 +22,7 @@ window {
   location: center;
   width: 640px;
   border-radius: 16px;
-  background-color: @bg0;
+  background-color: @bg1;
 }
 
 mainbox {
@@ -30,12 +30,8 @@ mainbox {
 }
 
 inputbar {
-  background-color: @bg0;
-  border-color: @bg3;
-
-  border: 2px;
+  background-color: @bg3;
   border-radius: 8px;
-
   padding: 8px 16px;
   spacing: 8px;
   children: [ entry ];
@@ -46,15 +42,15 @@ prompt {
 }
 
 entry {
-  placeholder: "Search";
-  placeholder-color: @fg3;
+  placeholder: "find yo shit! 💩";
+  placeholder-color: @fg2;
+  background-color: transparent;
 }
 
 message {
   margin: 12px 0 0;
   border-radius: 8px;
-  border-color: @bg2;
-  background-color: @bg2;
+  background-color: @bg3;
 }
 
 textbox {
@@ -77,13 +73,13 @@ element {
 
 element normal active {
   text-color: @bg0;
-  background-color: @bg3;
+  background-color: @bg2;
 }
 
 element selected normal,
 element selected active {
   text-color: @fg1;
-  background-color: @bg3;
+  background-color: @bg2;
 }
 
 element-icon {

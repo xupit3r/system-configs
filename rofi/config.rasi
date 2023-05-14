@@ -7,6 +7,6 @@ configuration {
   combi-hide-mode-prefix: true;
   terminal: "kitty";
   show-icons: true;
-  icon-them: "Sweet Rainbow";
+  icon-theme: "Tela dracula dark";
   steal-focus: true;
 }
