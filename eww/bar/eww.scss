@@ -16,6 +16,25 @@ $magenta: #BB9AF7;
 $cyan: #7DCFFF;
 $white: $foreground;
 
+button {
+  opacity: 1;
+  transition: opacity 500ms;
+
+  &:hover {
+    opacity: .45;
+  }
+}
+
+tooltip {
+  font-family: "Satoshi";
+  font-size: 1em;
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 2em;
+  background-color: $background;
+  color: $foreground;
+}
+
 .eww_bar {
   background-color: $background;
   padding: .4em;
@@ -23,38 +42,46 @@ $white: $foreground;
 }
 
 // Control Panel
-.control {
+.container {
   font-family: "JetBrainsMono Nerd Font";
   font-size: 1em;
-  padding: .33em;
-  margin: .25em;
-  background-color: $black;
+  font-weight: 600;
+  padding: .2em;
+  margin: .2em;
   border-radius: 5px;
 }
 
-.battery {
-  color: $cyan;
-  margin: 0 .5em;
-}
+.control {
+  box {
+    margin: 0 .5em;
+  }
 
-.wifi-icon {
-  color: $magenta;
-  margin: 0 .5em;
-}
+  .battery {
+    color: $cyan;
 
-.brightness-icon {
-  color: $yellow;
-  margin: 0 .5em;
-}
+    .battery-percent {
+      font-family: "Satoshi";
+      font-weight: 600;
+      margin-left: .33em;
+    }
+  }
 
-.volume-icon {
-  color: $blue;
-  margin: 0 .5em;
+  .wifi-icon {
+    color: $magenta;
+  }
+
+  .brightness-icon {
+    color: $yellow;
+  }
+
+  .volume-icon {
+    color: $blue;
+  }
 }
 
 scale trough {
   all: unset;
-  background-color: $background;
+  background-color: $black;
   border-radius: 5px;
   min-height: .5em;
   min-width: 5em;
@@ -74,23 +101,11 @@ scale trough {
 .date {
   font-family: "Satoshi";
   font-weight: 600;
-  font-size: 1em;
-  background-color: $black;
-  color: $white;
-  border-radius: 5px;
-  padding: .15em .5em;
-  margin: .25em;
 }
 
 .weather {
   font-family: "Satoshi";
   font-weight: 600;
-  font-size: 1em;
-  background-color: $black;
-  color: $white;
-  border-radius: 5px;
-  padding: .15em .5em;
-  margin: .25em;
  
   label {
     margin: 0 .5em;
@@ -112,11 +127,7 @@ scale trough {
 }
 
 .powermenu {
-  font-family: "JetBrainsMono Nerd Fonts";
   background-color: $black;
-  border-radius: 5px;
-  padding: .15em .5em;
-  margin: .25em;
 
   button {
     font-size: 1em;
@@ -143,23 +154,4 @@ scale trough {
   .button-lock {
     color: $blue;
   }
-}
-
-button {
-  opacity: 1;
-  transition: opacity 500ms;
-
-  &:hover {
-    opacity: .45;
-  }
-}
-
-tooltip {
-  font-family: "Satoshi";
-  font-size: 1em;
-  font-weight: 600;
-  border-radius: 5px;
-  padding: .25em .5em;
-  background-color: $background;
-  color: $foreground;
 }

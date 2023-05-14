@@ -1,11 +1,12 @@
-;; put path to aesthetic bar config files here ;;
+;; reference to this eww instance
 (defvar eww "/usr/bin/eww -c $HOME/.config/eww/bar")
 
 ;; battery
-(defwidget bat []
+(defwidget battery []
 	(box
     :orientation "h"
     :class "battery control-width"
+    :space-evenly false
     (label :class "battery-icon" :text "${battery}")
     (label :class "battery-percent" :text "${battery-capacity}%")))
 (defpoll battery
@@ -73,7 +74,7 @@
         :duration "550ms"
         (scale 
           :class "volbar"
-          :value (* 100 current-volume)
+          :value current-volume
           :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%"
           :orientation "h"
           :flipped true
@@ -83,7 +84,7 @@
 (defvar volume false)
 (defpoll current-volume
 	:interval "1s"
-	"wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk -v RS='[.0-9]+' '$0=RT'")
+	"scripts/current-volume")
 
 ;; "control panel"
 (defwidget control []
@@ -91,17 +92,17 @@
     :orientation "h"
     :halign "center"
     :space-evenly false
-    :class "control"
-		(wifi)
+    :class "container control"
 		(bright)
 		(volume)
-    (bat)))
+		(wifi)
+    (battery)))
 
 ;; date display
 (defwidget date []
 	(box
     :orientation "h"
-    :class "date"
+    :class "container date"
     :halign "start"
     (label :class "date-str" :text datestr)))
 (defpoll datestr
@@ -112,7 +113,7 @@
 (defwidget weather []
 	(box 
 		:orientation "h"
-		:class "weather"
+		:class "container weather"
     :space-evenly false
 		:halign "start"
     (label :class "weather-conditions" :text "${wd.conditions.description}")
@@ -127,14 +128,18 @@
   (box 
     :orientation "h"
     :space-evenly false
-    :class "powermenu"
+    :class "container powermenu"
     (button :class "button-quit"
+            :tooltip "logout"
             :onclick "hyprctl dispatch exit" "󰍃")
     (button :class "button-lock"
+            :tooltip "lock screen"
             :onclick "scripts/lockscreen" "")
     (button :class "button-reb"
+            :tooltip "reboot"
             :onclick "reboot"	"󰜉")
     (button :class "button-off"
+            :tooltip "poweroff"
             :onclick "shutdown now"	"⏻")))
 
 ;; stuff to the left
