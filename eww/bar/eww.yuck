@@ -84,7 +84,7 @@
 (defvar volume false)
 (defpoll current-volume
 	:interval "1s"
-	"scripts/current-volume")
+	"scripts/volume.clj")
 
 ;; "control panel"
 (defwidget control []
