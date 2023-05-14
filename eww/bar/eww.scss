@@ -1,12 +1,12 @@
 * {
   all: unset;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 $background: #1a0b25;
 $foreground: #A9B1D6;
 
-$black: #35164b;
+$black: #453754;
 $gray: #565F89;
 $red: #F7768E;
 $green: #73DACA;
@@ -16,19 +16,9 @@ $magenta: #BB9AF7;
 $cyan: #7DCFFF;
 $white: $foreground;
 
-tooltip {
-  font-family: "Satoshi";
-  font-size: 1em;
-  font-weight: 600;
-  border-radius: 5px;
-  padding: .25em .5em;
+.eww_bar {
   background-color: $background;
-  color: $foreground;
-}
-
-.eww_bar{
-  background-color: $background;
-  padding: 0 .5em;
+  padding: .4em;
   font-family: "Satoshi";
 }
 
@@ -36,7 +26,7 @@ tooltip {
 .control {
   font-family: "JetBrainsMono Nerd Font";
   font-size: 1em;
-  padding: .15em .5em;
+  padding: .33em;
   margin: .25em;
   background-color: $black;
   border-radius: 5px;
@@ -162,4 +152,14 @@ button {
   &:hover {
     opacity: .45;
   }
+}
+
+tooltip {
+  font-family: "Satoshi";
+  font-size: 1em;
+  font-weight: 600;
+  border-radius: 5px;
+  padding: .25em .5em;
+  background-color: $background;
+  color: $foreground;
 }
