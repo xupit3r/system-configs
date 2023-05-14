@@ -5,13 +5,13 @@
 (defwidget bat []
 	(box
     :orientation "h"
-    :class "bat control-width"
-    :tooltip "Battery: ${battery-cappacity}%"
-    battery))
+    :class "battery control-width"
+    (label :class "battery-icon" :text "${battery}")
+    (label :class "battery-percent" :text "${battery-capacity}%")))
 (defpoll battery
   :interval "1s"
   "scripts/battery icon")
-(defpoll battery-cappacity
+(defpoll battery-capacity
   :interval "1s"
   "scripts/battery percent")
 
@@ -92,10 +92,10 @@
     :halign "center"
     :space-evenly false
     :class "control"
-		(bat)
 		(wifi)
 		(bright)
-		(volume)))
+		(volume)
+    (bat)))
 
 ;; date display
 (defwidget date []
