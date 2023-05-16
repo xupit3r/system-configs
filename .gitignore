@@ -2,4 +2,5 @@
 .DS_Store
 .clj-kondo
 .lsp
+.nrepl-port
 nvim/plugin
