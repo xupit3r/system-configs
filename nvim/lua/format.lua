@@ -78,3 +78,9 @@ augroup YankHighlight
   autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 augroup end
 ]])
+
+-- setup parifiner
+vim.cmd([[
+let g:parinfer_force_balance = 1
+let g:parinfer_filetypes = ["clojure", "schema", "lisp", "racket", "fennel", "yuck"]
+]])

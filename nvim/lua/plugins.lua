@@ -24,13 +24,8 @@ return require("packer").startup(function()
 		as = "catppuccin",
 	})
 
-	-- lisp parens help
-	use({
-		"eraserhd/parinfer-rust",
-		opt = true,
-		rtp = "target/release",
-		run = "cargo build --release",
-	})
+	-- lisp paren support
+	use("gpanders/nvim-parinfer")
 
 	-- yuck (EWW) support
 	use("elkowar/yuck.vim")
@@ -100,12 +95,7 @@ return require("packer").startup(function()
 	})
 
 	-- autopairs!
-	use({
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup({})
-		end,
-	})
+	use("windwp/nvim-autopairs")
 
 	-- highligh other instances of things
 	use("RRethy/vim-illuminate")
@@ -142,7 +132,7 @@ return require("packer").startup(function()
 	-- telescope
 	use({
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.1",
+		branch = "0.1.x",
 		requires = {
 			"nvim-lua/plenary.nvim",
 		},
@@ -176,6 +166,10 @@ return require("packer").startup(function()
 
 	-- blank line indents
 	use("lukas-reineke/indent-blankline.nvim")
+
+	-- clojure support
+	use("Olical/conjure")
+	use("PaterJason/cmp-conjure")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

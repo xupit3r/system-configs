@@ -102,7 +102,6 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
 		{ name = "vsnip" },
-		{ name = "nvim_lsp_signature_help" },
 		{ name = "nvim_lua" },
 	}),
 	window = {
@@ -117,7 +116,6 @@ cmp.setup({
 				nvim_lsp = "",
 				nvim_lua = "",
 				vsnip = "",
-				nvim_lsp_signature_help = "",
 			})[entry.source.name]
 			return vim_item
 		end,
