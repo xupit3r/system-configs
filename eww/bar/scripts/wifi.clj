@@ -1,8 +1,7 @@
 #!/usr/bin/env bb
 
 (require '[clojure.java.shell :refer [sh]]
-         '[clojure.string :as str]
-         '[clojure.edn :as edn]
+         '[clojure.string :as str] 
          '[cheshire.core :as json])
 
 (def OP_DOWN "down")

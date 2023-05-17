@@ -7,14 +7,13 @@
    :orientation "h"
    :class "battery control-width"
    :space-evenly false
-   (label :class "battery-icon" :text "${battery}")
-   (label :class "battery-percent" :text "${battery-capacity}%")))
+   (label :class "battery-icon" 
+          :text "${battery.icon}")
+   (label :class "battery-percent" 
+          :text "${battery.capacity}%")))
 (defpoll battery
   :interval "1s"
-  "scripts/battery icon")
-(defpoll battery-capacity
-  :interval "1s"
-  "scripts/battery percent")
+  "scripts/battery.clj")
 
 ;; wifi
 (defwidget wifi []

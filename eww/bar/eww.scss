@@ -100,12 +100,13 @@ scale trough {
 
 .date {
   font-family: "Satoshi";
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .weather {
   font-family: "Satoshi";
-  font-weight: 600;
+  font-weight: 500;
+  background-color: $black;
  
   label {
     margin: 0 .5em;
