@@ -9,7 +9,8 @@
     (for space in spaces 
       (button 
         :onclick "hyprctl dispatch workspace ${space.index}"
-        :class "workspace ${space.active ? 'active' : ''}")))) 
+        :class "workspace ${space.active ? 'active' : ''}"
+        "${space.index}")))) 
 (defpoll spaces
   :interval ".5s"
   "scripts/workspaces.clj")

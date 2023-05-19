@@ -105,13 +105,13 @@ scale trough {
 
 .workspaces {
   .workspace {
-    min-width: 1.25em;
-    margin: .1em .25em;
+    min-width: 1.35em;
+    margin: 0 .25em;
     background-color: $gray;
     border-radius: 5px;
 
     &.active {
-      background-color: $magenta;
+      border: .1em solid $green;
     }
   }
 }
@@ -120,7 +120,7 @@ scale trough {
   font-family: "Satoshi";
   font-weight: 500;
   background-color: $black;
- 
+
   label {
     margin: 0 .5em;
 
