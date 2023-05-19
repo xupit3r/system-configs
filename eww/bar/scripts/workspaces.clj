@@ -34,6 +34,10 @@
       #(assoc % "active" (= active (get % "workspace"))) 
       wsps)))
 
+(defn index [wsps] 
+  (for [idx (range 0 (count wsps))]
+    (assoc (get wsps idx) "index" (+ 1 idx))))
+
 (defn wspinfo [] 
   (-> (sh "hyprctl" "workspaces") 
       :out
@@ -42,6 +46,7 @@
       (spltgrps)
       (wspobj)
       (active?)
+      (index)
       (json/encode)))
 
 (-> (wspinfo) println)

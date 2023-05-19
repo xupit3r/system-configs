@@ -1,6 +1,19 @@
 ;; reference to this eww instance
 (defvar eww "/usr/bin/eww -c $HOME/.config/eww/bar")
 
+(defwidget workspaces []
+  (box
+    :orientation "h"
+    :class "container workspaces"
+    :space-evenly false
+    (for space in spaces 
+      (button 
+        :onclick "hyprctl dispatch workspace ${space.index}"
+        :class "workspace ${space.active ? 'active' : ''}")))) 
+(defpoll spaces
+  :interval ".5s"
+  "scripts/workspaces.clj")
+
 ;; battery
 (defwidget battery []
   (box
@@ -144,7 +157,8 @@
    :orientation "h"
    :space-evenly false
    :halign "start"
-   (weather)))
+   (weather)
+   (workspaces)))
 
 ;; stuff in the middle
 (defwidget middle []

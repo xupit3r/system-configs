@@ -103,6 +103,19 @@ scale trough {
   font-weight: 500;
 }
 
+.workspaces {
+  .workspace {
+    min-width: 1.25em;
+    margin: .1em .25em;
+    background-color: $gray;
+    border-radius: 5px;
+
+    &.active {
+      background-color: $magenta;
+    }
+  }
+}
+
 .weather {
   font-family: "Satoshi";
   font-weight: 500;
