@@ -81,7 +81,7 @@
   (eventbox
    :class "control-widget"
    :onhover "${eww} update volume=true"
-    :onhoverlost "${eww} update volume=false"
+   :onhoverlost "${eww} update volume=false"
    (box 
     :orientation "h"
     :space-evenly false
@@ -128,14 +128,51 @@
 
 ;; weather
 (defwidget weather []
-  (box 
-   :orientation "h"
-   :class "container weather"
-   :space-evenly false
-   :halign "start"
-   (label :class "weather-conditions" :text "${wd.conditions.description}")
-   (label :class "weather-icon" :text "${wd.conditions.icon}")
-   (label :class "weather-temp" :text "${wd.temperature} ${wd.units}")))
+  (eventbox
+    :class "weather-box"
+    :onhover "${eww} update wf=true"
+    :onhoverlost "${eww} update wf=false"
+    (box 
+     :orientation "h"
+     :class "container weather"
+     :space-evenly false
+     :halign "start"
+     (label 
+       :class "weather-conditions" 
+       :text "${wd.conditions.description}")
+     (label 
+       :class "weather-icon" 
+       :text "${wd.conditions.icon}")
+     (label 
+       :class "weather-temp" 
+       :text "${wd.temperature} ${wd.units}"))))
+
+(defwidget forecast-days []
+ (revealer
+  :transition "slidedown"
+  :duration "500ms"
+  :reveal wf 
+  (box
+    :orientation "h"
+    :class "container forecast-days"
+    :space-evenly false
+    :halign "center"
+    :valign "start"
+    (for day in {wd.forecast}
+      (box
+        :class "forecast-day ${day.precip > 0 ? 'has-precip' : ''}"
+        :orientation "v"
+        :space-evenly false
+        (label 
+          :class "day-time" 
+          :xalign 0 
+          :text "${day.time}")
+        (label 
+          :class "day-temp" 
+          :xalign 0 
+          :text "${day.temp} ${wd.units}")))))) 
+
+(defvar wf false)
 (defpoll wd 
   :interval "5s" 
   "scripts/weather.clj")
@@ -199,10 +236,22 @@
 ;; the bar "window"
 (defwindow bar
   :geometry (geometry 
-             :x "0" 
-             :y "0" 
+             :x "0px" 
+             :y "0px" 
              :height "40px" 
              :width "100%")
   :monitor 0
   :wm-ignore false
  (bar))
+
+;; a simple window to show our 
+;; weather forecast
+(defwindow forecast
+  :geometry (geometry
+              :x "0px"
+              :y "55px"
+              :width "100%")
+  :monitor 0
+  :wm-ignore false
+  (forecast-days))
+

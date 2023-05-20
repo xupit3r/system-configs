@@ -78,6 +78,7 @@ tooltip {
 
 scale trough {
   all: unset;
+  background-color: $gray;
   border-radius: 5px;
   min-height: .5em;
   min-width: 5em;
@@ -96,6 +97,7 @@ scale trough {
 
 .date {
   font-weight: 600;
+  background-color: $background;
 }
 
 .workspaces {
@@ -127,6 +129,27 @@ scale trough {
   .weather-icon {
     font-size: 1.1em;
     color: $blue;
+  }
+}
+
+.forecast {
+  .forecast-days {
+    background: $background;
+    border-radius: 0px;
+
+    .forecast-day {
+      padding: .5em 1em;
+      margin-right: .5em;
+      background: $black;
+
+      .day-time {
+        font-size: .75rem;
+      }
+
+      .day-temp {
+        color: $cyan;
+      }
+    }
   }
 }
 

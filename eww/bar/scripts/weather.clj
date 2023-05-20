@@ -50,8 +50,15 @@
     96  {:description "Thunderstorms with slight hail" :icon ""}
     99  {:description "Thunderstorms with heavy hail" :icon ""}})
 
+(defn round [num]
+  (int (Math/round num)))
+
+(defn timef [datestr]
+  (-> (java.time.format.DateTimeFormatter/ofPattern "h a")
+      (. format (java.time.LocalDateTime/parse datestr))))
+
 (defn pull-temperature [data]
-  (int (Math/floor (:temperature (:current_weather data)))))
+  (round (:temperature (:current_weather data))))
 
 (defn pull-units [data]
   (:temperature_2m (:hourly_units data)))
@@ -61,10 +68,20 @@
        (:weathercode (:current_weather data)) 
        {:description "Conditions unavailable." :icon ""}))
 
+(defn pull-hourly [data]
+  (let [times (:time (:hourly data))
+        temps (:temperature_2m (:hourly data))
+        precip (:precipitation (:hourly data))]
+    (for [idx (range (count times))]
+      {:time (timef (get times idx))
+       :temp (round (get temps idx))
+       :precip (get precip idx)})))
+
 (defn relevant [data] 
   {:temperature (pull-temperature data)
    :units (pull-units data)
-   :conditions (pull-conditions data)})
+   :conditions (pull-conditions data)
+   :forecast (pull-hourly data)})
 
 (->
   API_URL 
