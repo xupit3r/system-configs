@@ -34,9 +34,27 @@
       #(assoc % "active" (= active (get % "workspace"))) 
       wsps)))
 
-(defn index [wsps] 
-  (for [idx (range 0 (count wsps))]
-    (assoc (get wsps idx) "index" (+ 1 idx))))
+(defn eim [workspace]
+  (let [matcher (re-matcher #"ID ([0-9]+).+monitor (.+)$" workspace)]
+    (do 
+      (re-find matcher) 
+      (rest (re-groups matcher)))))
+      
+
+(defn id-monitor [wsps]
+  (mapv 
+    (fn [wsp] 
+      (let [[id monitor] (eim (get wsp "workspace"))]
+        (assoc 
+          wsp 
+          "id" id 
+          "monitor" monitor))) 
+    wsps))
+  
+
+(defn prepare [wsps]
+ { :active (first (filterv #(get % "active") wsps))
+   :all wsps}) 
 
 (defn wspinfo [] 
   (-> (sh "hyprctl" "workspaces") 
@@ -46,7 +64,8 @@
       (spltgrps)
       (wspobj)
       (active?)
-      (index)
+      (id-monitor)
+      (prepare)
       (json/encode)))
 
 (-> (wspinfo) println)

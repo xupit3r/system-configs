@@ -40,7 +40,6 @@ tooltip {
   padding: .5em;
 }
 
-// Control Panel
 .container {
   background-color: $black;
   font-size: 1em;
@@ -100,14 +99,12 @@ scale trough {
 }
 
 .workspaces {
-  .workspace {
-    min-width: 1.35em;
-    margin: 0 .25em;
-    background-color: $gray;
-    border-radius: 5px;
+  .indicators {
+    margin-left: .2em;
 
-    &.active {
-      border: .1em solid $green;
+    .workspace {
+      margin-left: .75em;
+      color: $green;
     }
   }
 }

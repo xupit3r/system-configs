@@ -6,11 +6,18 @@
     :orientation "h"
     :class "container workspaces"
     :space-evenly false
-    (for space in spaces 
-      (button 
-        :onclick "hyprctl dispatch workspace ${space.index}"
-        :class "workspace ${space.active ? 'active' : ''}"
-        "${space.index}")))) 
+    (label 
+      :class "current"
+      :text "workspace ${spaces.active.id}")
+    (box
+      :orientation "h"
+      :class "indicators"
+      :valign "center"
+      :space-evenly false
+      (for space in {spaces.all}
+         (label 
+             :class "workspace ${space.active ? 'active' : ''}"
+             :text "${space.active ? '' : ''}"))))) 
 (defpoll spaces
   :interval ".5s"
   "scripts/workspaces.clj")
