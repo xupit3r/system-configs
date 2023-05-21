@@ -1,3 +1,41 @@
+;; -------------------
+;; V A R I A B L E S
+;; -------------------
+
+
+;; stateful variables used throughout
+;; the widgets
+(defvar volume false)
+(defvar bright false)
+(defvar wf false)
+
+;; polling variables
+(defpoll current-volume
+  :interval "1s"
+  "scripts/volume.clj")
+(defpoll spaces
+  :interval ".5s"
+  "scripts/workspaces.clj")
+(defpoll battery
+  :interval "5s"
+  "scripts/battery.clj")
+(defpoll winfo
+  :interval "1s"
+  "scripts/wifi.clj")
+(defpoll current-brightness
+  :interval "1s"
+  "light")
+(defpoll datestr
+  :interval "1s"
+  "date +'%a, %b %-d, %-l:%M %p'")
+(defpoll wd 
+  :interval "60s" 
+  "scripts/weather.clj")
+
+;; ---------------
+;; W I D G E T S
+;; ---------------
+
 (defwidget workspaces []
   (box
     :orientation "h"
@@ -16,11 +54,7 @@
          (label 
              :class "workspace ${space.active}"
              :text "${space.active ? '' : ''}"))))) 
-(defpoll spaces
-  :interval ".5s"
-  "scripts/workspaces.clj")
 
-;; battery
 (defwidget battery []
   (box
    :orientation "h"
@@ -31,11 +65,7 @@
           :text "${battery.icon}")
    (label :class "battery-percent" 
           :text "${battery.capacity}%")))
-(defpoll battery
-  :interval "5s"
-  "scripts/battery.clj")
 
-;; wifi
 (defwidget wifi []
   (box
    :orientation "h"
@@ -44,11 +74,7 @@
    (button
      :onclick "scripts/popup wifi"
      :class "wifi-icon" "${winfo.state.icon}")))
-(defpoll winfo
-  :interval "1s"
-  "scripts/wifi.clj")
 
-;; brightness
 (defwidget bright []
   (eventbox
     :class "control-widget"
@@ -70,12 +96,7 @@
           :max 101
           :min 0))
       (label :class "brightness-icon" :text "󰃠"))))
-(defpoll current-brightness
-  :interval "1s"
-  "light")
-(defvar bright false)
 
-;; volume
 (defwidget volume []
   (eventbox
    :class "control-widget"
@@ -97,12 +118,7 @@
         :max 101
         :min 0))
     (label :class "volume-icon" :text ""))))
-(defvar volume false)
-(defpoll current-volume
-  :interval "1s"
-  "scripts/volume.clj")
 
-;; "control panel"
 (defwidget control []
   (box
    :orientation "h"
@@ -114,18 +130,13 @@
    (wifi)
    (battery)))
 
-;; date display
 (defwidget date []
   (box
    :orientation "h"
    :class "container date"
    :halign "start"
    (label :class "date-str" :text datestr)))
-(defpoll datestr
-  :interval "1s"
-  "date +'%a, %b %-d, %-l:%M %p'")
 
-;; weather
 (defwidget weather []
   (eventbox
     :class "weather-box"
@@ -172,12 +183,6 @@
           :xalign 0 
           :text "${day.temp} ${wd.units}")))))) 
 
-(defvar wf false)
-(defpoll wd 
-  :interval "60s" 
-  "scripts/weather.clj")
-
-;; powermenu
 (defwidget power []
   (box 
     :orientation "h"
@@ -233,7 +238,11 @@
    (middle)
    (end)))
 
-;; the bar "window"
+;; ---------------
+;; W I N D O W S
+;; ---------------
+
+;; main status bar
 (defwindow bar
   :geometry (geometry 
              :x "0px" 
@@ -245,7 +254,7 @@
  (bar))
 
 ;; a simple window to show our 
-;; weather forecast
+;; weather forecasts
 (defwindow forecast
   :geometry (geometry
               :x "0px"
