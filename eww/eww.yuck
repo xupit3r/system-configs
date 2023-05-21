@@ -178,10 +178,18 @@
           :class "day-time" 
           :xalign 0 
           :text "${day.time}")
-        (label 
-          :class "day-temp" 
-          :xalign 0 
-          :text "${day.temp} ${wd.units}")))))) 
+        (box :class "day-conditions"
+             :orientation "h"
+             :space-evenly false
+          (label 
+            :class "conditions-temp" 
+            :xalign 0 
+            :text "${day.temp} ${wd.units}")
+          (label
+            :class "conditions-icon"
+            :xalign 1
+            :justify "right"
+            :text "${day.conditions.icon}"))))))) 
 
 (defwidget power []
   (box 

@@ -142,12 +142,21 @@ scale trough {
       margin-right: .5em;
       background: $black;
 
-      .day-time {
-        font-size: .75rem;
+      &:last-child {
+        margin-right: 0;
       }
 
-      .day-temp {
-        color: $cyan;
+      .day-time {
+        font-size: .75em;
+        padding-bottom: .25em;
+      }
+
+      .day-conditions {
+        .conditions-icon {
+          color: $blue;
+          font-size: 2em;
+          margin-left: .5em;
+        }
       }
     }
   }
