@@ -1,0 +1,257 @@
+(defwidget workspaces []
+  (box
+    :orientation "h"
+    :class "container workspaces"
+    :space-evenly false
+    :visible {spaces.active != "null" || arraylength(spaces.all) > 0}
+    (label 
+      :class "current"
+      :text "workspace ${spaces.active != "null" ? spaces.active.id : 'n/a' }")
+    (box
+      :orientation "h"
+      :class "indicators"
+      :valign "center"
+      :space-evenly false
+      (for space in {spaces.all}
+         (label 
+             :class "workspace ${space.active}"
+             :text "${space.active ? '' : ''}"))))) 
+(defpoll spaces
+  :interval ".5s"
+  "scripts/workspaces.clj")
+
+;; battery
+(defwidget battery []
+  (box
+   :orientation "h"
+   :class "battery control-width"
+   :space-evenly false
+   :visible {battery != "null"} 
+   (label :class "battery-icon" 
+          :text "${battery.icon}")
+   (label :class "battery-percent" 
+          :text "${battery.capacity}%")))
+(defpoll battery
+  :interval "5s"
+  "scripts/battery.clj")
+
+;; wifi
+(defwidget wifi []
+  (box
+   :orientation "h"
+   :class "control-widget"
+   :visible {winfo != "null"}
+   (button
+     :onclick "scripts/popup wifi"
+     :class "wifi-icon" "${winfo.state.icon}")))
+(defpoll winfo
+  :interval "1s"
+  "scripts/wifi.clj")
+
+;; brightness
+(defwidget bright []
+  (eventbox
+    :class "control-widget"
+    :onhover "${EWW_CMD} update bright=true"
+    :onhoverlost "${EWW_CMD} update bright=false"
+    (box
+      :orientation "h"
+      :space-evenly false
+      (revealer
+        :transition "slideleft"
+        :reveal bright
+        :duration "550ms"
+        (scale
+          :class "bribar"
+          :value current-brightness
+          :onchange "light -S {}%"
+          :orientation "h"
+          :flipped true
+          :max 101
+          :min 0))
+      (label :class "brightness-icon" :text "󰃠"))))
+(defpoll current-brightness
+  :interval "1s"
+  "light")
+(defvar bright false)
+
+;; volume
+(defwidget volume []
+  (eventbox
+   :class "control-widget"
+   :onhover "${EWW_CMD} update volume=true"
+   :onhoverlost "${EWW_CMD} update volume=false"
+   (box 
+    :orientation "h"
+    :space-evenly false
+    (revealer
+      :transition "slideleft"
+      :reveal volume
+      :duration "550ms"
+      (scale 
+        :class "volbar"
+        :value current-volume
+        :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%"
+        :orientation "h"
+        :flipped true
+        :max 101
+        :min 0))
+    (label :class "volume-icon" :text ""))))
+(defvar volume false)
+(defpoll current-volume
+  :interval "1s"
+  "scripts/volume.clj")
+
+;; "control panel"
+(defwidget control []
+  (box
+   :orientation "h"
+   :halign "center"
+   :space-evenly false
+   :class "container control"
+   (bright)
+   (volume)
+   (wifi)
+   (battery)))
+
+;; date display
+(defwidget date []
+  (box
+   :orientation "h"
+   :class "container date"
+   :halign "start"
+   (label :class "date-str" :text datestr)))
+(defpoll datestr
+  :interval "1s"
+  "date +'%a, %b %-d, %-l:%M %p'")
+
+;; weather
+(defwidget weather []
+  (eventbox
+    :class "weather-box"
+    :onhover "${EWW_CMD} update wf=true"
+    :onhoverlost "${EWW_CMD} update wf=false"
+    :visible {wd != "null"} 
+    (box 
+     :orientation "h"
+     :class "container weather"
+     :space-evenly false
+     :halign "start"
+     (label 
+       :class "weather-conditions" 
+       :text "${wd.conditions.description}")
+     (label 
+       :class "weather-icon" 
+       :text "${wd.conditions.icon}")
+     (label 
+       :class "weather-temp" 
+       :text "${wd.temperature} ${wd.units}"))))
+
+(defwidget forecast-days []
+ (revealer
+  :transition "slidedown"
+  :duration "500ms"
+  :reveal wf 
+  (box
+    :orientation "h"
+    :class "container forecast-days"
+    :space-evenly false
+    :halign "center"
+    :valign "start"
+    (for day in {wd.forecast}
+      (box
+        :class "forecast-day ${day.precip > 0 ? 'has-precip' : ''}"
+        :orientation "v"
+        :space-evenly false
+        (label 
+          :class "day-time" 
+          :xalign 0 
+          :text "${day.time}")
+        (label 
+          :class "day-temp" 
+          :xalign 0 
+          :text "${day.temp} ${wd.units}")))))) 
+
+(defvar wf false)
+(defpoll wd 
+  :interval "60s" 
+  "scripts/weather.clj")
+
+;; powermenu
+(defwidget power []
+  (box 
+    :orientation "h"
+    :space-evenly false
+    :class "container powermenu"
+    (button :class "button-quit"
+            :tooltip "logout"
+            :onclick "hyprctl dispatch exit" "󰍃")
+    (button :class "button-lock"
+            :tooltip "lock screen"
+            :onclick "scripts/lockscreen" "")
+    (button :class "button-reb"
+            :tooltip "reboot"
+            :onclick "reboot"  "󰜉")
+    (button :class "button-off"
+            :tooltip "poweroff"
+            :onclick "shutdown now"  "⏻")))
+
+;; stuff to the left
+(defwidget start []
+  (box
+   :orientation "h"
+   :space-evenly false
+   :halign "start"
+   (weather)
+   (workspaces)))
+
+;; stuff in the middle
+(defwidget middle []
+  (box
+    :orientation "h"
+    :space-evenly false
+    :halign "center"
+    (date)))
+
+;; stuff to the right
+(defwidget end []
+  (box 
+   :orientation "h"
+   :space-evenly false
+   :halign "end"
+   (control)
+   (power)))
+
+;; the actual bar widget collection
+(defwidget bar []
+  (box 
+   :class "eww_bar"
+   :orientation "h"
+   :vexpand false
+   :hexpand false
+   (start)
+   (middle)
+   (end)))
+
+;; the bar "window"
+(defwindow bar
+  :geometry (geometry 
+             :x "0px" 
+             :y "0px" 
+             :height "40px" 
+             :width "100%")
+  :monitor 0
+  :wm-ignore false
+ (bar))
+
+;; a simple window to show our 
+;; weather forecast
+(defwindow forecast
+  :geometry (geometry
+              :x "0px"
+              :y "55px"
+              :width "100%")
+  :monitor 0
+  :wm-ignore false
+  (forecast-days))
+

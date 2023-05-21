@@ -36,8 +36,8 @@
 
 (defn eim [workspace]
   (let [matcher (re-matcher #"ID ([0-9]+).+monitor (.+)$" workspace)]
-    (do 
-      (re-find matcher) 
+    (if (nil? (re-find matcher))
+      []
       (rest (re-groups matcher)))))
       
 
@@ -48,16 +48,16 @@
         (assoc 
           wsp 
           "id" id 
-          "monitor" monitor))) 
+          "monitor" monitor)))
     wsps))
   
 
 (defn prepare [wsps]
  { :active (first (filterv #(get % "active") wsps))
-   :all wsps}) 
+    :all wsps})
 
 (defn wspinfo [] 
-  (-> (sh "hyprctl" "workspaces") 
+  (some-> (sh "hyprctl" "workspaces") 
       :out
       (str/trim)
       (str/split #"(?m)^\n")
