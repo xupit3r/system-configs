@@ -1,5 +1,5 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH:/opt/rocm/bin
+# my default PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$HOME/code/joenix/utils/:$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
 
 # enable autocomplete
 autoload -Uz compinit promptinit
@@ -13,6 +13,12 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="zhann"
+
+# terminal truecolor
+set -g default-terminal "screen-256color"
+#set-option -sa terminal-overrides ",xterm-kitty:RGB"
+
+TERM=xterm-kitty
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -74,13 +80,16 @@ HIST_STAMPS="mm/dd/yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker lein node npm python pip ag)
+plugins=(git docker lein node npm python pip ag ripgrep fzf)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# make sure we are using the LTS release of node, by default
+source /usr/share/nvm/init-nvm.sh
+nvm use --lts > /dev/null
 
-export PATH=$PATH:/home/joe/.local/bin
+# some completions stuffs...
+eval "$(op completion zsh)"; compdef _op op
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -98,25 +107,33 @@ export ARCHFLAGS="-arch x86_64"
 # use most as our pager
 export PAGER="most"
 
-function termcolors () {
- for x in {0..8}; do 
-    for i in {30..37}; do 
-        for a in {40..47}; do 
-            echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "
-        done
-        echo
-    done
- done
- echo ""
-}
-
-
-eval "$(op completion zsh)"; compdef _op op
-
-source /usr/share/nvm/init-nvm.sh
-
+# some useful aliases
 alias remove-orphans="sudo pacman -Qtdq | sudo pacman -Rns -"
-
 alias open="xdg-open"
-
 alias battery="acpi -b"
+alias syu="systemctl --user"
+
+# integrate ripgrep into fzf
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+
+# fzf base install
+export FZF_BASE=/usr/share/fzf
+
+# babashka repl stuffs
+export BB_REPL_PORT=5678
+alias brepl="bb --nrepl-server $BB_REPL_PORT"
+
+# babashka tasks autocomplete
+_bb_tasks() {
+    local matches=(`bb tasks |tail -n +3 |cut -f1 -d ' '`)
+    compadd -a matches
+    _files # autocomplete filenames as well
+}
+compdef _bb_tasks bb
+
+# a bunch of perl stuffs....
+PATH="/home/joe/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/joe/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/joe/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/joe/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/joe/perl5"; export PERL_MM_OPT;
