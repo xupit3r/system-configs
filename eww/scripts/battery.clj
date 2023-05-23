@@ -1,8 +1,10 @@
 #!/usr/bin/env bb
 
-(require '[clojure.java.shell :refer [sh]] 
-         '[clojure.string :as str] 
-         '[cheshire.core :as json])
+(ns battery
+  (:require 
+    [clojure.java.shell :refer [sh]] 
+    [clojure.string :as str] 
+    [cheshire.core :as json]))
 
 ;; locations of the battery info we need
 (def BATTERY {:status "/sys/class/power_supply/BAT1/status" 

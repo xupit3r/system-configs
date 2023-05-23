@@ -1,8 +1,9 @@
 #!/usr/bin/env bb
 
-(require 
-  '[babashka.http-client :as http]
-  '[cheshire.core :as json])
+(ns weather
+  (:require
+    [babashka.http-client :as http]
+    [cheshire.core :as json]))
 
 ;; this will retrieve weather data from Open Meteo
 (def API_BASE "https://api.open-meteo.com/v1/forecast")
