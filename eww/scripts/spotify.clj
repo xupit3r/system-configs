@@ -1,9 +1,18 @@
 #!/usr/bin/env bb
 
-(require 
-  '[clojure.java.shell :refer [sh]]
-  '[clojure.string :as str]
-  '[cheshire.core :as json])
+(ns spotify
+  (:require 
+    [clojure.java.shell :refer [sh]]
+    [clojure.string :as str]
+    [cheshire.core :as json]))
+
+(def DBUS_PLAYER_INTERFACE "/org/mpris/MediaPlayer2")
+(def DBUS_PROPERTIES "org.freedesktop.DBus.Properties.Get")
+(def DBUS_PLAYER_PROPS "string:org.mpris.MediaPlayer2.Player")
+(def DBUS_PLAYER_META "string:Metadata")
+
+(def DBUS_GROUPER #"\(([^\)]+)\)")
+(def DBUS_ARRAY #"array \[([^\]]+)\]")
 
 ;; retrieves the spotifyd PID
 (defn spid []
@@ -15,26 +24,38 @@
 (defn sp-instance []
   (str "org.mpris.MediaPlayer2.spotifyd.instance" (spid)))
 
-(defn sp-method [method]
-  (str "org.mpris.MediaPlayer2.Player." method))
+(defn collapse-val [val]
+  (let [matcher (re-matcher DBUS_ARRAY val)
+        results (re-find matcher)]
+    (if (> (count results) 1)
+      (second results)
+      val)))
+ 
+(defn tokenize [grp]
+  (let [[k v] (str/split grp #"variant")]
+    {:key (second (str/split (str/trim k) #":")) 
+     :value (str/trim (collapse-val v))}))
 
-(defn sp-thing [thing]
-  (str "string:spotify:" thing))
+(defn prepare [output]
+  (->>
+    output
+    (re-seq DBUS_GROUPER)
+    (map second)
+    (map tokenize)))
 
-(defn prep-resp [str] 
-  {:message str})
-
-(defn send-dbus [method uri]
+(defn get-track-info []
   (->
     (sh "dbus-send"
-      "--print-reply" 
+      "--print-reply=literal" 
       (str "--dest=" (sp-instance))
-      "/org/mpris/MediaPlayer2"
-      (sp-method method)
-      (sp-thing uri))
+      DBUS_PLAYER_INTERFACE 
+      DBUS_PROPERTIES
+      DBUS_PLAYER_PROPS
+      DBUS_PLAYER_META)
     :out
     (str/trim)
-    (prep-resp)
+    (prepare)
     (json/encode)))
 
-(println (send-dbus "OpenUri" "track:2S6yBUXa5KddBV0CqBkcP1"));
+(println (get-track-info))
+
