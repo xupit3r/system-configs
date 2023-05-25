@@ -1,0 +1,34 @@
+{
+    "layer": "top",
+    "modules-left": [
+      "clock"
+    ],
+    "modules-center": [
+      "hyprland/window"
+    ],
+    "modules-right": [
+      "network",
+      "battery"
+    ],
+    "hyprland/window": {
+      "format": "{}"
+    },
+    "battery": {
+      "format": "{capacity}% {icon}",
+      "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+      "interface": "wlp166s0",
+      "format": "{ifname}",
+      "format-wifi": "{essid} ",
+      "format-ethernet": "{ipaddr}/{cidr} ",
+      "format-disconnected": "", //An empty format will hide the module.
+      "tooltip-format": "{ifname} via {gwaddr} ",
+      "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+      "tooltip-format-ethernet": "{ifname} ",
+      "tooltip-format-disconnected": "Disconnected"
+    },
+    "clock": {
+      "format": "{:%a, %b %d %I:%M %p}"
+    }
+}

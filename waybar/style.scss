@@ -1,0 +1,80 @@
+
+$background: #1a0b25;
+$foreground: #a1b9d6;
+$warning: #ff0000;
+
+$black: #453754;
+$grey: #565F89;
+$red: #F7768E;
+$green: #73DACA;
+$yellow: #E0AF68;
+$blue: #7AA2F7;
+$magenta: #BB9AF7;
+$cyan: #7DCFFF;
+$white: $foreground;
+
+* {
+  font-family: Hack Nerd Font, Arial, sans-serif;
+  min-height: 0;
+}
+
+window#waybar {
+  background: $background;
+  color: $foreground;
+  font-size: 14px;
+}
+
+tooltip {
+  background: $background;
+
+  label {
+    color: $foreground;
+    padding: .5em;
+  }
+}
+
+#clock,
+#network,
+#battery {
+  padding: .5em 1.25em;
+  border-radius: 1em;
+  margin: .5em 0;
+}
+
+#clock {
+  background-color: $black;
+  color: $foreground;
+}
+
+#network {
+  background-color: $black;
+  color: $yellow;
+  margin-right: .5em;
+}
+
+#battery {
+  background-color: $black;
+  color: $cyan;
+
+  &.charging {
+    background-color: $green;
+    color: $background;
+  }
+
+  &.warning:not(.charging) {
+    background: $warning;
+    color: $foreground;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+}
+
+@keyframes blink {
+  to {
+    background-color: $black;
+    color: $cyan;
+  }
+}
