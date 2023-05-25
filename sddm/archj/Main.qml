@@ -95,7 +95,7 @@ Rectangle {
 
                         Keys.onPressed: {
                             if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                                sddm.login(name.text, password.text, session.index)
+                                sddm.login(name.text, password.text, sessionModel.lastIndex)
                                 event.accepted = true
                             }
                         }
@@ -127,11 +127,11 @@ Rectangle {
                             onTriggered: password.forceActiveFocus()
                         }
 
-                        KeyNavigation.backtab: name; KeyNavigation.tab: session
+                        KeyNavigation.backtab: name; KeyNavigation.tab: loginButton
 
                         Keys.onPressed: {
                             if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                                sddm.login(name.text, password.text, session.index)
+                                sddm.login(name.text, password.text, sessionModel.lastIndex)
                                 event.accepted = true
                             }
                         }
@@ -163,7 +163,7 @@ Rectangle {
                         font.pixelSize: archlinux.height / 20
                         color: "#1793d1"
 
-                        onClicked: sddm.login(name.text, password.text, session.index)
+                        onClicked: sddm.login(name.text, password.text, sessionModel.lastIndex)
 
                         KeyNavigation.backtab: layoutBox; KeyNavigation.tab: shutdownButton
                     }
