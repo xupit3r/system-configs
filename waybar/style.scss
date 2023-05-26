@@ -21,7 +21,7 @@ $white: $foreground;
 window#waybar {
   background: $background;
   color: $foreground;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 tooltip {
@@ -34,47 +34,41 @@ tooltip {
 }
 
 #clock,
+#backlight,
+#bluetooth,
 #network,
 #battery {
   padding: .5em 1.25em;
-  border-radius: 1em;
+  border-radius: .5em;
   margin: .5em 0;
-}
-
-#clock {
   background-color: $black;
   color: $foreground;
 }
 
+#backlight,
+#bluetooth,
 #network {
-  background-color: $black;
-  color: $yellow;
   margin-right: .5em;
 }
 
 #battery {
-  background-color: $black;
-  color: $cyan;
+  &.charging,
+  &.warning {
+    animation: 4s linear 0s infinite alternate blink;
+    color: $background;
+  }
 
   &.charging {
     background-color: $green;
-    color: $background;
   }
 
   &.warning:not(.charging) {
     background: $warning;
-    color: $foreground;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
   }
 }
 
 @keyframes blink {
   to {
     background-color: $black;
-    color: $cyan;
   }
 }

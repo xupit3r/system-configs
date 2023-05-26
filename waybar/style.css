@@ -6,7 +6,7 @@
 window#waybar {
   background: #1a0b25;
   color: #a1b9d6;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 tooltip {
@@ -18,45 +18,36 @@ tooltip label {
 }
 
 #clock,
+#backlight,
+#bluetooth,
 #network,
 #battery {
   padding: 0.5em 1.25em;
-  border-radius: 1em;
+  border-radius: 0.5em;
   margin: 0.5em 0;
-}
-
-#clock {
   background-color: #453754;
   color: #a1b9d6;
 }
 
+#backlight,
+#bluetooth,
 #network {
-  background-color: #453754;
-  color: #E0AF68;
   margin-right: 0.5em;
 }
 
-#battery {
-  background-color: #453754;
-  color: #7DCFFF;
+#battery.charging, #battery.warning {
+  animation: 4s linear 0s infinite alternate blink;
+  color: #1a0b25;
 }
 #battery.charging {
   background-color: #73DACA;
-  color: #1a0b25;
 }
 #battery.warning:not(.charging) {
   background: #ff0000;
-  color: #a1b9d6;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
 }
 
 @keyframes blink {
   to {
     background-color: #453754;
-    color: #7DCFFF;
   }
 }

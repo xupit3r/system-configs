@@ -7,28 +7,59 @@
       "hyprland/window"
     ],
     "modules-right": [
+      "bluetooth",
+      "backlight",
       "network",
       "battery"
     ],
     "hyprland/window": {
       "format": "{}"
     },
+    "backlight": {
+      "device": "intel_backlight",
+      "format": "{percent}% <span color='#e0af68'><big>{icon}</big></span>",
+      "format-icons": ["󰃠"]
+    },
     "battery": {
-      "format": "{capacity}% {icon}",
+      "format": "{capacity}% <big>{icon}</big>",
       "format-icons": ["", "", "", "", ""]
     },
     "network": {
       "interface": "wlp166s0",
       "format": "{ifname}",
-      "format-wifi": "{essid} ",
+      "format-wifi": "{essid} <span color='#bb9af7'><big></big></span>",
       "format-ethernet": "{ipaddr}/{cidr} ",
       "format-disconnected": "", //An empty format will hide the module.
       "tooltip-format": "{ifname} via {gwaddr} ",
-      "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+      "tooltip-format-wifi": "{essid} ({signalStrength}%) <span color='#bb9af7'><big></big></span>",
       "tooltip-format-ethernet": "{ifname} ",
       "tooltip-format-disconnected": "Disconnected"
     },
     "clock": {
-      "format": "{:%a, %b %d %I:%M %p}"
+      "format": "<b>{:%OI:%M %p}</b>",
+      "format-alt": "<b>{:%a, %b %d %OI:%M %p}</b>",
+      "tooltip-format": "<tt>{calendar}</tt>",
+      "calendar": {
+        "mode": "month",
+        "on-scroll": 1,
+        "on-click-right": "mode",
+        "format": {
+          "months": "<span color='#7dcfff'><b>{}</b></span>",
+          "days": "<span color='#e0af68'><b>{}</b></span>",
+          "weeks": "<span color='#7dcfff'><b>W{}</b></span>",
+          "weekdays": "<span color='#bb9af7'><b>{}</b></span>",
+          "today": "<span color='#f7768e'><b><u>{}</u></b></span>"
+        }
+      }
+    },
+    "bluetooth": {
+      "controller": "bluetoothctl",
+      "format": "{status} <span color='#7aa2f7'><big></big></span>",
+      "format-disabled": "",
+      "format-connected": "{num_connections} connected <span color='#7aa2f7'><big></big></span>",
+      "tooltip-format": "{controller_alias}\t{controller_address}",
+      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+      "on-click": "blueberry"
     }
 }
