@@ -113,6 +113,12 @@ alias open="xdg-open"
 alias battery="acpi -b"
 alias syu="systemctl --user"
 
+# some helpful stuff for editing/updating waybar
+WAYBAR_CONF=$HOME/.config/waybar
+alias waysass="sass -w -c --no-source-map $WAYBAR_CONF/style.scss $WAYBAR_CONF/style.css"
+alias waychok="chokidar \"$WAYBAR_CONF/config\" \"$WAYBAR_CONF/style.css\" -c \"killall waybar; waybar\""
+alias waywatch="{ waysass & waychok; }"
+
 # integrate ripgrep into fzf
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 
