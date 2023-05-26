@@ -17,6 +17,7 @@ tooltip label {
   padding: 0.5em;
 }
 
+#custom-weather,
 #clock,
 #backlight,
 #bluetooth,
@@ -29,6 +30,7 @@ tooltip label {
   color: #a1b9d6;
 }
 
+#clock,
 #backlight,
 #bluetooth,
 #network {
