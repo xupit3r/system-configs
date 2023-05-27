@@ -1,5 +1,5 @@
 * {
-  font: "Satoshi Medium 13";
+  font: "Hack Nerd Font 12";
 
   background-color: @bg0;
   text-color: @fg0;
