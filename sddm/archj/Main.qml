@@ -65,6 +65,7 @@ Rectangle {
             width: height * 1.8
             anchors.verticalCenterOffset: height * 2 / 3
             color: "#453764"
+            radius: 10
 
             Column {
                 id: mainColumn
@@ -78,7 +79,7 @@ Rectangle {
                     Text {
                         id: lblName
                         width: parent.width * 0.20; height: archlinux.height / 9
-                        color: "white"
+                        color: "#a1b9d6"
                         text: textConstants.userName
                         verticalAlignment: Text.AlignVCenter
                         font.bold: true
@@ -90,6 +91,8 @@ Rectangle {
                         width: parent.width * 0.8; height: archlinux.height / 9
                         text: userModel.lastUser
                         font.pixelSize: archlinux.height / 20
+                        color: "#a1b9d6"
+                        radius: 10
 
                         KeyNavigation.backtab: rebootButton; KeyNavigation.tab: password
 
@@ -108,7 +111,7 @@ Rectangle {
                     Text {
                         id: lblPassword
                         width: parent.width * 0.2; height: archlinux.height / 9
-                        color: "white"
+                        color: "#a1b9d6"
                         text: textConstants.password
                         verticalAlignment: Text.AlignVCenter
                         font.bold: true
@@ -119,8 +122,10 @@ Rectangle {
                         id: password
                         width: parent.width * 0.8; height: archlinux.height / 9
                         font.pixelSize: archlinux.height / 20
-                        tooltipBG: "lightgrey"
+                        color: "#a1b9d6"
                         focus: true
+                        radius: 10
+
                         Timer {
                             interval: 200
                             running: true
@@ -144,7 +149,7 @@ Rectangle {
                         id: errorMessage
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: textConstants.prompt
-                        color: "white"
+                        color: "#a1b9d6"
                         font.pixelSize: archlinux.height / 22.5
                     }
                 }
@@ -161,6 +166,7 @@ Rectangle {
                         width: parent.btnWidth
                         height: archlinux.height / 9
                         font.pixelSize: archlinux.height / 20
+                        radius: 10
                         color: "#1793d1"
 
                         onClicked: sddm.login(name.text, password.text, sessionModel.lastIndex)
@@ -174,6 +180,7 @@ Rectangle {
                         width: parent.btnWidth
                         height: archlinux.height / 9
                         font.pixelSize: archlinux.height / 20
+                        radius: 10
                         color: "#1793d1"
 
                         onClicked: sddm.powerOff()
@@ -187,6 +194,7 @@ Rectangle {
                         width: parent.btnWidth
                         height: archlinux.height / 9
                         font.pixelSize: archlinux.height / 20
+                        radius: 10
                         color: "#1793d1"
 
                         onClicked: sddm.reboot()
