@@ -17,7 +17,9 @@ tooltip label {
   padding: 0.5em;
 }
 
+#custom-spotify,
 #custom-weather,
+#pulseaudio,
 #clock,
 #backlight,
 #bluetooth,
@@ -30,7 +32,9 @@ tooltip label {
   color: #a1b9d6;
 }
 
+#custom-spotify,
 #clock,
+#pulseaudio,
 #backlight,
 #bluetooth,
 #network {
