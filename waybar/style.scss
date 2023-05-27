@@ -1,9 +1,10 @@
 
-$background: #1a0b25;
+$background: #453754;
 $foreground: #a1b9d6;
+
 $warning: #ff0000;
 
-$black: #453754;
+$black: #1a0b25;
 $grey: #565F89;
 $red: #F7768E;
 $green: #73DACA;
@@ -13,23 +14,23 @@ $magenta: #BB9AF7;
 $cyan: #7DCFFF;
 $white: $foreground;
 
-* {
-  font-family: Hack Nerd Font, Arial, sans-serif;
-  min-height: 0;
-}
-
-window#waybar {
+#waybar {
+  font-family: Hack Nerd Font;
   background: $background;
   color: $foreground;
   font-size: 15px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 tooltip {
-  background: $background;
+  background: $white;
 
   label {
-    color: $foreground;
-    padding: .5em;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: $black;
+    padding: .6em;
   }
 }
 
@@ -48,13 +49,12 @@ tooltip {
   color: $foreground;
 }
 
-#custom-spotify,
-#clock,
-#pulseaudio,
-#backlight,
-#bluetooth,
-#network {
-  margin-right: .5em;
+#clock {
+  margin-left: 8px;
+}
+
+#battery {
+  margin-right: 8px;
 }
 
 #battery {

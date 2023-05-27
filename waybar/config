@@ -1,5 +1,6 @@
 {
     "layer": "top",
+    "spacing": 8,
     "modules-left": [
       "clock",
       "custom/weather"

@@ -1,20 +1,20 @@
-* {
-  font-family: Hack Nerd Font, Arial, sans-serif;
-  min-height: 0;
-}
-
-window#waybar {
-  background: #1a0b25;
+#waybar {
+  font-family: Hack Nerd Font;
+  background: #453754;
   color: #a1b9d6;
   font-size: 15px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 tooltip {
-  background: #1a0b25;
+  background: #a1b9d6;
 }
 tooltip label {
-  color: #a1b9d6;
-  padding: 0.5em;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #1a0b25;
+  padding: 0.6em;
 }
 
 #custom-spotify,
@@ -28,22 +28,21 @@ tooltip label {
   padding: 0.5em 1.25em;
   border-radius: 0.5em;
   margin: 0.5em 0;
-  background-color: #453754;
+  background-color: #1a0b25;
   color: #a1b9d6;
 }
 
-#custom-spotify,
-#clock,
-#pulseaudio,
-#backlight,
-#bluetooth,
-#network {
-  margin-right: 0.5em;
+#clock {
+  margin-left: 8px;
+}
+
+#battery {
+  margin-right: 8px;
 }
 
 #battery.charging, #battery.warning {
   animation: 4s linear 0s infinite alternate blink;
-  color: #1a0b25;
+  color: #453754;
 }
 #battery.charging {
   background-color: #73DACA;
@@ -54,6 +53,6 @@ tooltip label {
 
 @keyframes blink {
   to {
-    background-color: #453754;
+    background-color: #1a0b25;
   }
 }
