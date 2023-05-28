@@ -8,9 +8,9 @@
   padding: 0px;
   spacing: 0px;
 
-  bg0: #30233A;
-  bg1: #3b3742cc;
-  bg2: #928b9e26;
+  bg0: #452754;
+  bg1: #1a0b25;
+  bg2: #1a0b2554;
   fg0: #d8dee9;
   fg1: #eceff4;
   fg2: #7f7887;
@@ -22,6 +22,8 @@ window {
   width: 640px;
   border-radius: 16px;
   background-color: @bg1;
+  border-color: @bg2;
+  border: 1px solid;
 }
 
 mainbox {
