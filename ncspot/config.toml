@@ -1,0 +1,25 @@
+initial_screen = "library"
+use_nerdfont = true
+repeat = "playlist"
+library_tabs = [
+  "playlists"
+]
+
+
+[theme]
+background = "#1a0b25"
+primary = "#a1b9d6"
+secondary = "#dcdcdc"
+title = "#7dcfff"
+playing = "#1a0b25"
+playing_selected = "#1a0b25"
+playing_bg = "#7dcfff"
+highlight = "#1a0b25"
+highlight_bg = "#e0af68"
+error = "#1a0b25"
+error_bg = "#f7768e"
+statusbar = "#1a0b25"
+statusbar_progress = "#73daca"
+statusbar_bg = "#73daca"
+cmdline = "#a1b9d6"
+cmdline_bg = "#453754"
