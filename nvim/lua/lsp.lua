@@ -1,23 +1,14 @@
 local servers = {
-	"awk_ls",
-	"bashls",
-	"clangd",
-	"cmake",
 	"cssls",
 	"clojure_lsp",
-	"dockerls",
 	"emmet_ls",
 	"jsonls",
 	"lua_ls",
 	"marksman",
-	"intelephense",
-	"pyright",
-	"ruby_ls",
 	"rust_analyzer",
 	"sqlls",
 	"tsserver",
 	"volar",
-	"yamlls",
 }
 
 -- Mason Setup
@@ -101,6 +92,7 @@ cmp.setup({
 	-- Installed sources:
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
+		{ name = "conjure" },
 		{ name = "vsnip" },
 		{ name = "nvim_lua" },
 	}),
@@ -114,6 +106,7 @@ cmp.setup({
 			vim_item.kind = kind_icons[vim_item.kind]
 			vim_item.menu = ({
 				nvim_lsp = "",
+				conjure = "",
 				nvim_lua = "",
 				vsnip = "",
 			})[entry.source.name]
@@ -168,59 +161,75 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Activate LSPs
--- All LSPs in this list need to be manually installed via NPM/PNPM/whatevs
 local lspconfig = require("lspconfig")
-for _, lsp in pairs(servers) do
-	if lsp == "emmet_ls" then
-		lspconfig.emmet_ls.setup({
-			capabilities = capabilities,
-			filetypes = {
-				"css",
-				"html",
-				"less",
-				"sass",
-				"scss",
-				"pug",
-			},
-		})
-	elseif lsp == "lua_ls" then
-		lspconfig.lua_ls.setup({
-			capabilities = capabilities,
-			settings = {
-				Lua = {
-					diagnostics = {
-						globals = {
-							"vim",
-							"require",
-							"use",
-						},
-					},
-				},
-				workspace = {
-					library = vim.api.nvim_get_runtime_file("", true),
-				},
-				telementry = {
-					enable = false,
-				},
-			},
-		})
-	elseif lsp == "volar" then
-		lspconfig.volar.setup({
-			capabilities = capabilities,
-			filetypes = {
-				"javascript",
-				"javascriptreact",
-				"vue",
-				"json",
-			},
-		})
-	else
-		lspconfig[lsp].setup({
-			capabilities = capabilities,
-		})
-	end
-end
 
+lspconfig.cssls.setup({
+	capabilities = capabilities,
+})
+
+lspconfig.jsonls.setup({
+	capabilities = capabilities,
+})
+
+lspconfig.marksman.setup({
+	capabilities = capabilities,
+})
+
+lspconfig.tsserver.setup({
+	capabilities = capabilities,
+})
+
+lspconfig.sqlls.setup({
+	capabilities = capabilities,
+})
+
+lspconfig.lua_ls.setup({
+	capabilities = capabilities,
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = {
+					"vim",
+					"require",
+					"use",
+				},
+			},
+		},
+		workspace = {
+			library = vim.api.nvim_get_runtime_file("", true),
+		},
+		telementry = {
+			enable = false,
+		},
+	},
+})
+
+lspconfig.volar.setup({
+	capabilities = capabilities,
+	filetypes = {
+		"javascript",
+		"javascriptreact",
+		"vue",
+		"json",
+	},
+})
+
+lspconfig.emmet_ls.setup({
+	capabilities = capabilities,
+	filetypes = {
+		"css",
+		"html",
+		"less",
+		"sass",
+		"scss",
+		"pug",
+	},
+})
+
+lspconfig.clojure_lsp.setup({
+	cmd = { "/usr/bin/clojure-lsp" },
+	capabilities = capabilities,
+})
 -- setup rust tools
 local rt = require("rust-tools")
 
