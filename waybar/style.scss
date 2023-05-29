@@ -25,13 +25,14 @@ $charging: $green;
 }
 
 tooltip {
-  background: $white;
+  background: $black;
+  border: 2px solid rgba($magenta, .7);
 
   label {
     font-size: 1.1em;
     font-weight: 700;
-    color: $black;
-    padding: .6em;
+    color: $foreground;
+    padding: .75em;
   }
 }
 

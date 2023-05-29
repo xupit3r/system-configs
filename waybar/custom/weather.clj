@@ -3,7 +3,8 @@
 (ns weather
   (:require
     [babashka.http-client :as http]
-    [cheshire.core :as json]))
+    [cheshire.core :as json]
+    [clojure.string :as str]))
 
 ;; this will retrieve weather data from Open Meteo
 (def API_BASE "https://api.open-meteo.com/v1/forecast")
@@ -54,7 +55,6 @@
     96  {:description "thunderstorms with slight hail" :icon ""}
     99  {:description "thunderstorms with heavy hail" :icon ""}})
 
-
 (defn round [num]
   (int (Math/round num)))
 
@@ -62,8 +62,29 @@
   (java.time.LocalDateTime/parse datestr))
 
 (defn timef [datetime]
-  (-> (java.time.format.DateTimeFormatter/ofPattern "LLL d, ha")
+  (-> (java.time.format.DateTimeFormatter/ofPattern "ha")
       (.format datetime)))
+
+(defn from-now [forecast]
+  (let [now (java.time.LocalDateTime/now)]
+    (filterv 
+      (fn [day] (.isAfter (:datetime day) now)) 
+      forecast)))
+
+(defn encode-dt [forecast]
+  (mapv 
+    #(assoc % :datetime (.toString (:datetime %))) 
+    forecast))
+
+(defn to-lines [forecast]
+  (str/join 
+    "\n"
+    (mapv 
+      #(format 
+        "%s\t<span color='#7aa2f7'><big>%s</big></span>  %s"
+        (:time %) 
+        (:icon (:conditions %)) 
+        (:temp %)) forecast)))
 
 (defn pull-temperature [data]
   (round (:temperature (:current_weather data))))
@@ -80,45 +101,35 @@
   (let [times (:time (:hourly data))
         temps (:temperature_2m (:hourly data))
         precip (:precipitation_probability (:hourly data))
-        codes (:weathercode (:hourly data))]
+        codes (:weathercode (:hourly data))
+        units (pull-units data)]
     (for [idx (range (count times))]
       (let [datetime (get-datetime (get times idx))]
         {:time (timef datetime)
          :datetime datetime
-         :temp (round (get temps idx))
+         :temp (format "%d %s" (round (get temps idx)) units)
          :precip (get precip idx)
          :conditions (get WMO (get codes idx))}))))
 
-(defn from-now [forecast]
-  (let [now (java.time.LocalDateTime/now)]
-    (filterv 
-      (fn [day] (.isAfter (:datetime day) now)) 
-      forecast)))
+(defn pull-tooltip [data] 
+  (-> data
+      (pull-hourly)
+      (from-now)
+      (subvec 0 FORECAST_HOURS)
+      (to-lines)))
 
-(defn encode-dt [forecast]
-  (mapv 
-    #(assoc % :datetime (.toString (:datetime %))) 
-    forecast))
-
-(defn relevant [data] 
-  {:temperature (pull-temperature data)
-   :units (pull-units data)
-   :conditions (pull-conditions data)
-   :forecast (-> (pull-hourly data)
-                 (from-now)
-                 (subvec 0 FORECAST_HOURS)
-                 (encode-dt))})
 
 (defn waybar-fmt [data]
   (let [conditions (pull-conditions data)
         temperature (pull-temperature data)
-        units (pull-units data)] 
+        units (pull-units data)
+        tooltip (pull-tooltip data)] 
     {:text (format 
             "<span color='#7aa2f7'><big>%s</big></span>  %s %s" 
             (:icon conditions)
             temperature 
             units) 
-     :tooltip (:description conditions)
+     :tooltip tooltip
      :class "weather"}))
 
 (->

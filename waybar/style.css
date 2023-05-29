@@ -8,13 +8,14 @@
 }
 
 tooltip {
-  background: #a1b9d6;
+  background: #1a0b25;
+  border: 2px solid rgba(187, 154, 247, 0.7);
 }
 tooltip label {
   font-size: 1.1em;
   font-weight: 700;
-  color: #1a0b25;
-  padding: 0.6em;
+  color: #a1b9d6;
+  padding: 0.75em;
 }
 
 #custom-spotify,
