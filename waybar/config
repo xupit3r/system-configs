@@ -15,14 +15,14 @@
       "battery"
     ],
     "include": [
-      "includes/backlight.json",  
-      "includes/battery.json", 
-      "includes/bluetooth.json",
-      "includes/cava.json",
-      "includes/clock.json",
-      "includes/network.json",
-      "includes/pulseaudio.json",
-      "includes/spotify.json",
-      "includes/weather.json"
+      "$HOME/.config/waybar/includes/backlight.json",
+      "$HOME/.config/waybar/includes/battery.json",
+      "$HOME/.config/waybar/includes/bluetooth.json",
+      "$HOME/.config/waybar/includes/cava.json",
+      "$HOME/.config/waybar/includes/clock.json",
+      "$HOME/.config/waybar/includes/network.json",
+      "$HOME/.config/waybar/includes/pulseaudio.json",
+      "$HOME/.config/waybar/includes/spotify.json",
+      "$HOME/.config/waybar/includes/weather.json"
     ]
 }
