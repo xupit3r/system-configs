@@ -1,0 +1,10 @@
+{
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "<span color='#e0af68'><big>{icon}</big></span>  {percent}%",
+    "format-icons": [
+      "󰃠"
+    ],
+    "tooltip": false
+  }
+}

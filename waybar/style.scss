@@ -2,8 +2,6 @@
 $background: #453754;
 $foreground: #a1b9d6;
 
-$warning: #ff0000;
-
 $black: #1a0b25;
 $grey: #565F89;
 $red: #F7768E;
@@ -13,6 +11,9 @@ $blue: #7AA2F7;
 $magenta: #BB9AF7;
 $cyan: #7DCFFF;
 $white: $foreground;
+
+$warning: $red;
+$charging: $green;
 
 #waybar {
   font-family: Hack Nerd Font;
@@ -60,21 +61,14 @@ tooltip {
 #battery {
   &.charging,
   &.warning {
-    animation: 4s linear 0s infinite alternate blink;
-    color: $background;
+    color: $black;
   }
 
   &.charging {
-    background-color: $green;
+    background: $charging;
   }
 
   &.warning:not(.charging) {
     background: $warning;
-  }
-}
-
-@keyframes blink {
-  to {
-    background-color: $black;
   }
 }

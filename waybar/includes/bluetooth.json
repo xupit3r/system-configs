@@ -1,0 +1,20 @@
+{
+  "bluetooth": {
+    "controller": "bluetoothctl",
+    "format": "<span color='#7aa2f7'><big>{icon}</big></span>",
+    "format-icons": {
+      "on": "󰂯",
+      "off": "󰂲",
+      "disabled": "󰂲",
+      "connected": "󰂱",
+      "discoverable": "󰂰",
+      "discovering": "󰂳",
+      "pairable": "󰂱"
+    },
+    "format-connected": "<span color='#7aa2f7'><big>{icon}</big></span>  {num_connections} connected",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "blueberry"
+  }
+}

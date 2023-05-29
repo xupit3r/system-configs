@@ -114,10 +114,10 @@
         temperature (pull-temperature data)
         units (pull-units data)] 
     {:text (format 
-            "%s %s <big>%s</big>" 
+            "<span color='#7aa2f7'><big>%s</big></span>  %s %s" 
+            (:icon conditions)
             temperature 
-            units 
-            (:icon conditions))
+            units) 
      :tooltip (:description conditions)
      :class "weather"}))
 

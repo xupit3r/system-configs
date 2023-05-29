@@ -1,0 +1,10 @@
+{
+  "custom/spotify": {
+    "format": "<span color='#73daca'><big></big></span>  {}",
+    "return-type": "json",
+    "max-length": 50,
+    "interval": 1,
+    "exec": "$HOME/.config/waybar/custom/spotify.clj",
+    "exec-if": "pgrep ncspot"
+  }
+}

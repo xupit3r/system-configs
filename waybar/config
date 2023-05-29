@@ -8,118 +8,21 @@
     "modules-center": [],
     "modules-right": [
       "custom/spotify",
-      "bluetooth",
       "backlight",
       "pulseaudio",
+      "bluetooth",
       "network",
       "battery"
     ],
-    "hyprland/window": {
-      "format": "{}"
-    },
-    "backlight": {
-      "device": "intel_backlight",
-      "format": "{percent}% <span color='#e0af68'><big>{icon}</big></span>",
-      "format-icons": ["󰃠"],
-      "tooltip": false
-    },
-    "battery": {
-      "format": "{capacity}% <big>{icon}</big>",
-      "format-icons": ["", "", "", "", ""]
-    },
-    "network": {
-      "interface": "wlp166s0",
-      "format": "{ifname}",
-      "format-wifi": "{essid} <span color='#bb9af7'><big>{icon}</big></span>",
-      "format-icons": { 
-        "wifi": ["󰢿", "󰢼", "󰢽", "󰢾"]
-      },
-      "format-ethernet": "{ipaddr}/{cidr} <<span color='#bb9af7'><big>{icon}</big></span>",
-      "format-disconnected": "no interwebs <span color='#F7768E'><big>󱃞</big></span>",
-      "tooltip-format": "{ifname} via {gwaddr} <span color='#bb9af7'><big></big></span>",
-      "tooltip-format-wifi": "{essid} ({signalStrength}%) <span color='#bb9af7'><big>{icon}</big></span>",
-      "tooltip-format-ethernet": "{ifname} <span color='#bb9af7'><big></big></span>",
-      "tooltip-format-disconnected": "wifi/ethernet disconnected",
-      "on-click": "networkmanager_dmenu"
-    },
-    "clock": {
-      "format": "<b>{:%OI:%M %p}</b>",
-      "format-alt": "<b>{:%a, %b %d %OI:%M %p}</b>",
-      "tooltip-format": "<tt><big>{calendar}</big></tt>",
-      "calendar": {
-        "mode": "month",
-        "on-scroll": 1,
-        "on-click-right": "mode",
-        "format": {
-          "months": "<span color='#7dcfff'><b>{}</b></span>",
-          "days": "<span color='#e0af68'><b>{}</b></span>",
-          "weeks": "<span color='#7dcfff'><b>W{}</b></span>",
-          "weekdays": "<span color='#bb9af7'><b>{}</b></span>",
-          "today": "<span color='#f7768e'><b><u>{}</u></b></span>"
-        }
-      }
-    },
-    "bluetooth": {
-      "controller": "bluetoothctl",
-      "format": "{status} <span color='#7aa2f7'><big></big></span>",
-      "format-disabled": "",
-      "format-connected": "{num_connections} connected <span color='#7aa2f7'><big></big></span>",
-      "tooltip-format": "{controller_alias}\t{controller_address}",
-      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-      "on-click": "blueberry"
-    },
-    "custom/weather": {
-      "exec": "$HOME/.config/waybar/custom/weather.clj",
-      "return-type": "json",
-      "format": "{}",
-      "interval": 3600
-    },
-    "pulseaudio": {
-      "format": "{volume}% <big>{icon}</big>",
-      "format-bluetooth": "{volume}% <big>{icon}</big>",
-      "format-muted": "",
-      "format-icons": {
-        "headphone": "",
-        "hands-free": "",
-        "headset": "",
-        "phone": "",
-        "portable": "",
-        "car": "",
-        "default": ["", ""]
-      },
-      "scroll-step": 1,
-      "on-click": "pavucontrol",
-      "ignored-sinks": ["Easy Effects Sink"]
-    },
-    "custom/spotify": {
-      "format": "<span color='#73daca'><big></big></span>  {}",
-      "return-type": "json",
-      "max-length": 50,
-      "interval": 1,
-      "exec": "$HOME/.config/waybar/custom/spotify.clj",
-      "exec-if": "pgrep ncspot"
-    },
-    "cava": {
-      "cava_config": "$HOME/.config/cava/config",
-      "framerate": 60,
-      "autosens": 1,
-      "sensitivity": 100,
-      "bars": 14,
-      "lower_cutoff_freq": 50,
-      "higher_cutoff_freq": 10000,
-      "method": "pulse",
-      "source": "auto",
-      "stereo": true,
-      "reverse": false,
-      "bar_delimiter": 0,
-      "monstercat": false,
-      "waves": false,
-      "noise_reduction": 0.77,
-      "input_delay": 2,
-      "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
-      "actions": {
-        "on-click-right": "mode"
-      }
-    },
+    "include": [
+      "includes/backlight.json",  
+      "includes/battery.json", 
+      "includes/bluetooth.json",
+      "includes/cava.json",
+      "includes/clock.json",
+      "includes/network.json",
+      "includes/pulseaudio.json",
+      "includes/spotify.json",
+      "includes/weather.json"
+    ]
 }

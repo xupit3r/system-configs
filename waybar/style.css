@@ -41,18 +41,11 @@ tooltip label {
 }
 
 #battery.charging, #battery.warning {
-  animation: 4s linear 0s infinite alternate blink;
-  color: #453754;
+  color: #1a0b25;
 }
 #battery.charging {
-  background-color: #73DACA;
+  background: #73DACA;
 }
 #battery.warning:not(.charging) {
-  background: #ff0000;
-}
-
-@keyframes blink {
-  to {
-    background-color: #1a0b25;
-  }
+  background: #F7768E;
 }
