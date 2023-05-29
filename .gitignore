@@ -5,3 +5,4 @@
 .nrepl-port
 nvim/plugin
 *.cbor
+cava/shaders
