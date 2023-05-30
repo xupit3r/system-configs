@@ -4,7 +4,7 @@
     "return-type": "json",
     "max-length": 50,
     "interval": 1,
-    "exec": "$HOME/.config/waybar/custom/spotify.clj",
+    "exec": "$HOME/.config/waybar/scripts/spotify.clj",
     "exec-if": "pgrep ncspot"
   }
 }

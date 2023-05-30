@@ -1,6 +1,6 @@
 {
   "custom/weather": {
-    "exec": "$HOME/.config/waybar/custom/weather.clj",
+    "exec": "$HOME/.config/waybar/scripts/weather.clj",
     "return-type": "json",
     "format": "{}",
     "interval": 3600
