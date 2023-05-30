@@ -1,9 +1,6 @@
 local null_ls = require("null-ls")
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
--- autowrite content
-vim.o.autowriteall = true
-
 -- Show the line numbers
 vim.wo.number = true
 
@@ -52,6 +49,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.black,
 		null_ls.builtins.formatting.qmlformat,
 		null_ls.builtins.formatting.jq,
+		null_ls.builtins.formatting.cljstyle,
 	},
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
@@ -84,5 +82,5 @@ augroup end
 -- setup parifiner
 vim.cmd([[
 let g:parinfer_force_balance = 1
-let g:parinfer_filetypes = ["clojure", "schema", "lisp", "racket", "fennel", "yuck"]
+let g:parinfer_filetypes = ["clojure", "schema", "lisp", "yuck"]
 ]])
