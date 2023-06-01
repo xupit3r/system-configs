@@ -50,6 +50,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.qmlformat,
 		null_ls.builtins.formatting.jq,
 		null_ls.builtins.formatting.cljstyle,
+		null_ls.builtins.formatting.prettierd,
 	},
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
