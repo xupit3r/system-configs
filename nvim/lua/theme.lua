@@ -1,16 +1,42 @@
 -- setup the tokyonight theme
 require("tokyonight").setup({
-	-- your configuration comes here
-	-- or leave it empty to use the default settings
-	style = "storm",
+	style = "night",
 	terminal_colors = true,
 	styles = {
 		comments = { italic = true },
-		keywords = { italic = true },
+		keywords = { bold = true },
+		functions = { italic = true },
 		sidebars = "dark",
 		floats = "dark",
 	},
 	sidebars = { "qf", "help", "packer" },
+	on_colors = function(colors)
+		colors.bg_dark = "#000000"
+		colors.bg = "#000000"
+	end,
+	on_highlights = function(hl, c)
+		hl.DiagnosticUnnecessary = {
+			fg = "#187687",
+		}
+		hl.TelescopeNormal = {
+			bg = c.bg_dark,
+		}
+		hl.TelescopePromptNormal = {
+			bg = c.bg_dark,
+		}
+		hl.TelescopePromptBorder = {
+			bg = c.b_dark,
+		}
+		hl.TelescopePromptTitle = {
+			bg = c.bg_dark,
+		}
+		hl.TelescopePreviewTitle = {
+			bg = c.bg_dark,
+		}
+		hl.TelescopeResultsTitle = {
+			bg = c.bg_dark,
+		}
+	end,
 })
 
 -- setup/alter catpuccin theme
@@ -44,4 +70,28 @@ require("catppuccin").setup({
 	},
 })
 
-vim.cmd([[ colorscheme catppuccin ]])
+require("gruvbox").setup({
+	undercurl = true,
+	underline = true,
+	bold = true,
+	italic = {
+		strings = true,
+		comments = true,
+		conditionals = true,
+		operators = false,
+		folds = true,
+	},
+	strikethrough = true,
+	invert_selection = false,
+	invert_signs = false,
+	invert_tabline = false,
+	invert_intend_guides = false,
+	inverse = true,
+	contrast = "hard",
+	palette_overrides = {},
+	overrides = {},
+	dim_inactive = false,
+	transparent_mode = false,
+})
+
+vim.cmd([[ colorscheme tokyonight ]])

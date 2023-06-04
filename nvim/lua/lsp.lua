@@ -133,6 +133,10 @@ cmp.setup.cmdline(":", {
 	}),
 })
 
+-- work better with autopairs
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
 -- attach
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
@@ -157,8 +161,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- Capabilities required for the visualstudio lsps (css, html, etc)
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- disable this, cause the snippets get reeeaaallll annoying and
+-- are only marginally useful IMO...
+capabilities.textDocument.completion.completionItem.snippetSupport = false
 
 -- Activate LSPs
 local lspconfig = require("lspconfig")

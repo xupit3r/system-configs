@@ -1,7 +1,7 @@
 -- lualine
 require("lualine").setup({
 	options = {
-		theme = "catppuccin",
+		theme = "auto",
 	},
 	sections = {
 		lualine_c = {
@@ -13,21 +13,15 @@ require("lualine").setup({
 
 -- color highlighting
 require("colorizer").setup({
-	filetypes = { "*" },
+	filetypes = {
+		"css",
+		"javascript",
+	},
 	user_default_options = {
-		RGB = true,
-		RRGGBB = true,
-		names = true,
-		RRGGBBAA = false,
-		AARRGGBB = false,
-		rgb_fn = false,
-		hsl_fn = false,
-		css = false,
-		css_fn = false,
 		mode = "background",
-		tailwind = false,
+		css = true,
 		sass = {
-			enable = false,
+			enable = true,
 			parsers = { "css" },
 		},
 		virtualtext = "■",

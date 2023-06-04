@@ -23,6 +23,7 @@ return require("packer").startup(function()
 		"catppuccin/nvim",
 		as = "catppuccin",
 	})
+	use({ "ellisonleao/gruvbox.nvim" })
 
 	-- lisp paren support
 	use("gpanders/nvim-parinfer")
