@@ -10,10 +10,6 @@ require("tokyonight").setup({
 		floats = "dark",
 	},
 	sidebars = { "qf", "help", "packer" },
-	on_colors = function(colors)
-		colors.bg_dark = "#000000"
-		colors.bg = "#000000"
-	end,
 	on_highlights = function(hl, c)
 		hl.DiagnosticUnnecessary = {
 			fg = "#187687",
