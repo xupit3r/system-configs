@@ -91,9 +91,24 @@ cmp.setup({
 	},
 	-- Installed sources:
 	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
+		{
+			name = "nvim_lsp",
+			entry_filter = function(entry, ctx)
+				-- filter out any possible snippets
+				if entry:get_kind() == 15 then
+					return false
+				end
+				return true
+			end,
+		},
 		{ name = "conjure" },
-		{ name = "vsnip" },
+		{
+			name = "vsnip",
+			entry_filter = function(entry, ctx)
+				-- don't show these little shits
+				return false
+			end,
+		},
 		{ name = "nvim_lua" },
 	}),
 	window = {
