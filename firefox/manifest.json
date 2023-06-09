@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "version": "1.0",
-  "name": "hyprjoe",
+  "name": "joe",
   "theme": {
     "images": {
       "additional_backgrounds": [
@@ -17,18 +17,18 @@
       ]
     },
     "colors": {
-      "toolbar": "rgb(86, 95, 137)",
+      "toolbar": "rgb(52, 52, 52)",
       "toolbar_text": "rgb(255, 255, 255)",
       "frame": "rgb(0, 0, 0)",
       "tab_background_text": "rgb(255, 255, 255)",
       "toolbar_field": "rgb(0, 0, 0)",
       "toolbar_field_text": "rgb(255, 255, 255)",
-      "tab_line": "rgb(86, 95, 137)",
+      "tab_line": "rgb(52, 52, 52)",
       "popup": "rgb(0, 0, 0)",
       "popup_text": "rgb(255, 255, 255)",
       "ntp_background": "rgb(0, 0, 0)",
-      "popup_highlight": "rgb(86, 95, 137)",
-      "tab_loading": "rgb(86, 95, 137)"
+      "popup_highlight": "rgb(52, 52, 52)",
+      "tab_loading": "rgb(52, 52, 52)"
     }
   }
 }
