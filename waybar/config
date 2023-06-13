@@ -8,9 +8,9 @@
     "modules-center": [],
     "modules-right": [
       "custom/spotify",
-      "backlight",
-      "pulseaudio",
       "bluetooth",
+      "backlight",
+      "pulseaudio", 
       "network",
       "battery"
     ],

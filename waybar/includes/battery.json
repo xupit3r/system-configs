@@ -1,6 +1,6 @@
 {
   "battery": {
-    "format": "<big>{icon}</big>    {capacity}%",
+    "format": "<big>{icon}</big>      {capacity}%",
     "format-icons": ["", "", "", "", ""]
   }
 }

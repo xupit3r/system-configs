@@ -1,7 +1,7 @@
 {
   "pulseaudio": {
-    "format": "<span color='#7aa2f7'><big>{icon}</big></span>  {volume}%",
-    "format-bluetooth": "<span color='#7aa2f7'><big>{icon}</big></span>  {volume}%",
+    "format": "<span color='#7aa2f7'><big>{icon}</big></span>    {volume}%",
+    "format-bluetooth": "<span color='#7aa2f7'><big>{icon}</big></span>    {volume}%",
     "format-muted": "",
     "format-icons": {
       "headphone": "",
@@ -10,15 +10,10 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": [
-        "",
-        ""
-      ]
+      "default": ["", ""]
     },
     "scroll-step": 1,
     "on-click": "pavucontrol",
-    "ignored-sinks": [
-      "Easy Effects Sink"
-    ]
+    "ignored-sinks": ["Easy Effects Sink"]
   }
 }

@@ -28,13 +28,13 @@ tooltip label {
 #network,
 #battery {
   font-family: Satoshi Medium;
-  font-weight: 600;
+  font-weight: 700;
   padding: 0.5em 1.5em;
   border-radius: 0.5em;
   margin: 0.5em 0;
   background-color: #000000;
   color: #ededed;
-  border: 1px solid #ededed;
+  border: 2px solid #ededed;
 }
 
 #clock {

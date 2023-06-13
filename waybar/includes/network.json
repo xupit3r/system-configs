@@ -2,20 +2,15 @@
   "network": {
     "interface": "wlp166s0",
     "format": "{ifname}",
-    "format-wifi": "<span color='#bb9af7'><big>{icon}</big></span>  {essid}",
+    "format-wifi": "<span color='#bb9af7'><big>{icon}</big></span>    {essid}",
     "format-icons": {
-      "wifi": [
-        "󰢿",
-        "󰢼",
-        "󰢽",
-        "󰢾"
-      ]
+      "wifi": ["󰢿", "󰢼", "󰢽", "󰢾"]
     },
-    "format-ethernet": "<span color='#bb9af7'><big>{icon}</big></span>  {ipaddr}/{cidr}",
-    "format-disconnected": "<span color='#F7768E'><big>󱃞</big></span> no interwebs",
-    "tooltip-format": "<span color='#bb9af7'><big></big></span>  {ifname} via {gwaddr}",
-    "tooltip-format-wifi": "<span color='#bb9af7'><big>{icon}</big></span>  {essid} ({signalStrength}%)",
-    "tooltip-format-ethernet": "<span color='#bb9af7'><big></big></span>  {ifname}",
+    "format-ethernet": "<span color='#bb9af7'><big>{icon}</big></span>    {ipaddr}/{cidr}",
+    "format-disconnected": "<span color='#F7768E'><big>󱃞</big></span>    no interwebs",
+    "tooltip-format": "<span color='#bb9af7'><big></big></span>    {ifname} via {gwaddr}",
+    "tooltip-format-wifi": "<span color='#bb9af7'><big>{icon}</big></span>    {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "<span color='#bb9af7'><big></big></span>    {ifname}",
     "tooltip-format-disconnected": "wifi/ethernet disconnected",
     "on-click": "networkmanager_dmenu"
   }
