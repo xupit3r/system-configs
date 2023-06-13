@@ -8,8 +8,8 @@
 
 
 ;; some formats for our output strings
-(def MAIN_FORMAT "<span color='#7aa2f7'><big>%s</big></span>  %s<sup><big>°</big></sup>")
-(def FORECAST_FORMAT "%s\t<span color='#7aa2f7'><big>%s</big></span>  %d<sup><big>°</big></sup>")
+(def MAIN_FORMAT "<span color='#7aa2f7'><big>%s</big></span>%6s<sup><big>°</big></sup>")
+(def FORECAST_FORMAT "%s \t<span color='#7aa2f7'><big>%s</big></span>%6s<sup><big>°</big></sup>")
 
 
 ;; this will retrieve weather data from Open Meteo
@@ -84,7 +84,7 @@
 (defn timef
   "prepares/formats datetime for display"
   [datetime]
-  (-> (java.time.format.DateTimeFormatter/ofPattern "h'<small>'a'</small>'")
+  (-> (java.time.format.DateTimeFormatter/ofPattern "pph'<small>'a'</small>'")
       (.format datetime)
       (.toLowerCase)))
 

@@ -1,21 +1,22 @@
 #waybar {
-  font-family: Hack Nerd Font;
-  background: #453754;
-  color: #a1b9d6;
-  font-size: 15px;
+  font-family: Satoshi Medium, Hack Nerd Font;
+  background: transparent;
+  color: #ededed;
+  font-size: 16px;
   padding-left: 8px;
   padding-right: 8px;
 }
 
 tooltip {
-  background: #1a0b25;
-  border: 2px solid rgba(187, 154, 247, 0.7);
+  font-family: Satoshi Medium;
+  background: #000000;
+  border: 2px solid #ededed;
 }
 tooltip label {
-  font-size: 1.1em;
+  font-size: 0.95em;
   font-weight: 700;
-  color: #a1b9d6;
-  padding: 0.75em;
+  color: #ededed;
+  padding: 1em;
 }
 
 #custom-spotify,
@@ -26,11 +27,14 @@ tooltip label {
 #bluetooth,
 #network,
 #battery {
-  padding: 0.5em 1.25em;
+  font-family: Satoshi Medium;
+  font-weight: 600;
+  padding: 0.5em 1.5em;
   border-radius: 0.5em;
   margin: 0.5em 0;
-  background-color: #1a0b25;
-  color: #a1b9d6;
+  background-color: #000000;
+  color: #ededed;
+  border: 1px solid #ededed;
 }
 
 #clock {
@@ -42,11 +46,11 @@ tooltip label {
 }
 
 #battery.charging, #battery.warning {
-  color: #1a0b25;
+  color: #000000;
 }
 #battery.charging {
-  background: #73DACA;
+  background: #73daca;
 }
 #battery.warning:not(.charging) {
-  background: #F7768E;
+  background: #f7768e;
 }

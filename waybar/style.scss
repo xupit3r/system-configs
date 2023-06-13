@@ -1,38 +1,38 @@
+$background: transparent;
+$foreground: #ededed;
 
-$background: #453754;
-$foreground: #a1b9d6;
-
-$black: #1a0b25;
-$grey: #565F89;
-$red: #F7768E;
-$green: #73DACA;
-$yellow: #E0AF68;
-$blue: #7AA2F7;
-$magenta: #BB9AF7;
-$cyan: #7DCFFF;
+$black: #000000;
+$grey: #565f89;
+$red: #f7768e;
+$green: #73daca;
+$yellow: #e0af68;
+$blue: #7aa2f7;
+$magenta: #bb9af7;
+$cyan: #7dcfff;
 $white: $foreground;
 
 $warning: $red;
 $charging: $green;
 
 #waybar {
-  font-family: Hack Nerd Font;
+  font-family: Satoshi Medium, Hack Nerd Font;
   background: $background;
   color: $foreground;
-  font-size: 15px;
+  font-size: 16px;
   padding-left: 8px;
   padding-right: 8px;
 }
 
 tooltip {
+  font-family: Satoshi Medium;
   background: $black;
-  border: 2px solid rgba($magenta, .7);
+  border: 2px solid $foreground;
 
   label {
-    font-size: 1.1em;
+    font-size: 0.95em;
     font-weight: 700;
     color: $foreground;
-    padding: .75em;
+    padding: 1em;
   }
 }
 
@@ -44,11 +44,14 @@ tooltip {
 #bluetooth,
 #network,
 #battery {
-  padding: .5em 1.25em;
-  border-radius: .5em;
-  margin: .5em 0;
+  font-family: Satoshi Medium;
+  font-weight: 600;
+  padding: 0.5em 1.5em;
+  border-radius: 0.5em;
+  margin: 0.5em 0;
   background-color: $black;
   color: $foreground;
+  border: 1px solid $foreground;
 }
 
 #clock {
