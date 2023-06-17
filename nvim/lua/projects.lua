@@ -1,4 +1,10 @@
-require("project_nvim").setup({
+local project = require("project_nvim")
+local tree = require("nvim-tree")
+local telescope = require("telescope")
+
+project.setup()
+
+tree.setup({
 	sync_root_with_cwd = true,
 	respect_buf_cwd = true,
 	update_focused_file = {
@@ -8,5 +14,4 @@ require("project_nvim").setup({
 })
 
 -- add projects support to telescope
-local telescope = require("telescope")
 telescope.load_extension("projects")

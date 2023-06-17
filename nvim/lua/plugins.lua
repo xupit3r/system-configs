@@ -139,11 +139,22 @@ return require("packer").startup(function()
 		},
 	})
 
+	-- trouble viewer
+	use("folke/trouble.nvim")
+
 	-- comment assist plugin
 	use("numToStr/Comment.nvim")
 
+	-- bring todo comments n'at forward
+	use("folke/todo-comments.nvim")
+
 	-- project management
 	use("ahmedkhalf/project.nvim")
+
+	-- tree view / filesystem browser
+	use("nvim-tree/nvim-tree.lua", {
+		"nvim-tree/nvim-web-devicons",
+	})
 
 	-- file browser
 	use({
