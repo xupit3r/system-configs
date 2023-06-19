@@ -1,5 +1,5 @@
 * {
-  font: "Hack Nerd Font 13";
+  font: "Satoshi Medium 13";
 
   background-color: @colorBackground;
   text-color: @colorText;
@@ -18,7 +18,7 @@
 
 window {
   location: center;
-  width: 640px;
+  width: 720px;
   border-radius: 16px;
   background-color: transparent;
   border-color: @colorBorder;
@@ -45,7 +45,7 @@ prompt {
 }
 
 entry {
-  placeholder: "type some shit... 💩";
+  placeholder: "type some 💩";
   placeholder-color: @colorTextSubtle;
   background-color: transparent;
 }

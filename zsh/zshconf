@@ -112,11 +112,12 @@ alias remove-orphans="sudo pacman -Qtdq | sudo pacman -Rns -"
 alias open="xdg-open"
 alias battery="acpi -b"
 alias syu="systemctl --user"
+alias icat="kitty +kitten icat"
 
 # some helpful stuff for editing/updating waybar
 WAYBAR_CONF=$HOME/.config/waybar
 alias waysass="sass -w -c --no-source-map $WAYBAR_CONF/style.scss $WAYBAR_CONF/style.css"
-alias waychok="chokidar \"$WAYBAR_CONF/**\" -c \"killall waybar; waybar\""
+alias waychok="chokidar -d 750 --initial \"$WAYBAR_CONF/**\" -c \"killall waybar; waybar\""
 alias waywatch="(trap 'kill 0' SIGINT; waysass & waychok)"
 
 
@@ -144,3 +145,7 @@ PERL5LIB="/home/joe/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/joe/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/joe/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/joe/perl5"; export PERL_MM_OPT;
+
+
+
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock

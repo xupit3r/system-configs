@@ -1,7 +1,7 @@
 @theme "/home/joe/.config/rofi/theme/joe.rasi"
 
 configuration {
-  font: "Hack Nerd Font 14";
+  font: "Satoshi Medium 14";
   modes: "drun,emoji";
   combi-modi: "drun,emoji";
   combi-hide-mode-prefix: true;
