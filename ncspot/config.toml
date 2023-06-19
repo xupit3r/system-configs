@@ -1,26 +1,36 @@
 initial_screen = "library"
+hide_display_name = true
+notify = true
 use_nerdfont = true
 repeat = "playlist"
 library_tabs = [
   "playlists"
 ]
 
-
 [theme]
-background = "#000000"
-primary = "#F5F5F5"
-secondary = "#DCDCDC"
-title = "#F5F5F5"
-playing = "#EFC11A"
-playing_selected = "#EFC11A"
-playing_bg = "#1E1E1E"
-highlight = "#73DACA"
-highlight_bg = "#000000"
-error = "#1E1E1E"
-error_bg = "#F97E72"
-statusbar = "#000000"
-statusbar_progress = "#F5F5F5"
-statusbar_bg = "#DCDCDC"
-cmdline = "#F5F5F5"
-cmdline_bg = "#222222"
+background = "#1a1b26"
+primary = "#9aa5ce"
+secondary = "#414868"
+title = "#9ece6a"
+playing = "#7aa2f7"
+playing_selected = "#bb9af7"
+playing_bg = "#24283b"
+highlight = "#c0caf5"
+highlight_bg = "#24283b"
+error = "#414868"
+error_bg = "#f7768e"
+statusbar = "#ff9e64"
+statusbar_progress = "#7aa2f7"
+statusbar_bg = "#1a1b26"
+cmdline = "#c0caf5"
+cmdline_bg = "#24283b"
+search_match = "#f7768e"
 
+[track_format]
+left = "%artists - %title"
+center = "%album"
+right = "%duration"
+
+[notification_format]
+title = "%title"
+body = "%artists"
