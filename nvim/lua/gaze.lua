@@ -12,12 +12,4 @@ vim.keymap.set("v", "<leader>gs", builtin.grep_string, {})
 vim.keymap.set("n", "<leader>b", builtin.buffers, {})
 
 -- initialize telescope
-telescope.setup({
-	extensions = {
-		file_browser = {
-			hijack_netrw = true,
-		},
-	},
-})
-
-telescope.load_extension("file_browser")
+telescope.setup()

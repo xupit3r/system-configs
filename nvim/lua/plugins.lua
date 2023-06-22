@@ -24,6 +24,7 @@ return require("packer").startup(function()
 		as = "catppuccin",
 	})
 	use({ "ellisonleao/gruvbox.nvim" })
+	use({ "rose-pine/neovim", as = "rose-pine" })
 
 	-- lisp paren support
 	use("gpanders/nvim-parinfer")
