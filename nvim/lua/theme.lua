@@ -1,6 +1,6 @@
 -- setup the tokyonight theme
 require("tokyonight").setup({
-	style = "night",
+	style = "storm",
 	terminal_colors = true,
 	styles = {
 		comments = { italic = true },
@@ -140,4 +140,4 @@ require("rose-pine").setup({
 	},
 })
 
-vim.cmd([[ colorscheme rose-pine ]])
+vim.cmd([[ colorscheme tokyonight ]])

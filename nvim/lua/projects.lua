@@ -1,5 +1,6 @@
 local project = require("project_nvim")
 local tree = require("nvim-tree")
+local treeApi = require("nvim-tree.api")
 local telescope = require("telescope")
 
 project.setup()
@@ -11,6 +12,9 @@ tree.setup({
 		enable = true,
 		update_root = true,
 	},
+	on_attach = function(_desc)
+		vim.keymap.set("n", "<C-t>", treeApi.tree.toggle)
+	end,
 })
 
 -- add projects support to telescope
