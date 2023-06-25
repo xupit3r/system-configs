@@ -12,12 +12,12 @@ set $mod Mod4
 # default applications
 set $term kitty
 set $browser firefox
-set $launcher bemenu -ni -l 6 -M 2 --fn "pango:IBM Plex Mono 16"
+set $launcher /home/joe/.local/bin/launcher
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu j4-dmenu-desktop --dmenu='$launcher' | xargs swaymsg exec --
+set $menu j4-dmenu-desktop --dmenu="$launcher" | xargs swaymsg exec --
 
 ### Appearance
 font pango:IBM Plex Sans 14
@@ -28,6 +28,7 @@ hide_edge_borders smart
 
 smart_gaps on
 gaps inner 5
+gaps outer 5
 
 # window corner radius in px
 corner_radius 10
@@ -53,7 +54,7 @@ scratchpad_minimize disable
 
 ### Output configuration
 
-output * bg /home/joe/.backgrounds/neon-dark-purple.jpg fill
+output * bg /home/joe/.backgrounds/gradient.png fill
 output eDP-1 res 2256x1504 pos 0,0 scale 1
 
 ### Idle configuration
