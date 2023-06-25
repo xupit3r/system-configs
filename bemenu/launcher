@@ -1,0 +1,32 @@
+#!/bin/bash
+
+show=6
+prompt=">"
+font=
+background="#222436"
+foreground="#c8d3f5"
+highlight_background="#2d3f76"
+highlight_foreground="#4fd6b3"
+
+bemenu --no-overlap \
+       --ignorecase \
+       --no-cursor \
+       --list $show \
+       --prompt $prompt \
+       --ab $background \
+       --af $foreground \
+       --sb $background \
+       --sf $foreground \
+       --fbb $background \
+       --fbf $foreground \
+       --tb $background \
+       --tf $foreground \
+       --fb $background \
+       --ff $foreground \
+       --cb $background \
+       --cf $background \
+       --nb $background \
+       --nf $foreground \
+       --hb $highlight_background \
+       --hf $highlight_foreground \
+       --fn "pango:IBM Plex Mono 18"
