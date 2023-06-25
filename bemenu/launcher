@@ -1,16 +1,19 @@
-#!/bin/bash
+#!/bin/zsh
 
-show=6
+show=10
+font="JetBrainsMono NF Medium"
+font_size=18
+(( line_height=$font_size * 2 ))
 prompt=">"
-font=
-background="#222436"
+background="#2d3f76"
 foreground="#c8d3f5"
-highlight_background="#2d3f76"
+highlight_background=$background
 highlight_foreground="#4fd6b3"
 
 bemenu --no-overlap \
        --ignorecase \
        --no-cursor \
+       --line-height $line_height \
        --list $show \
        --prompt $prompt \
        --ab $background \
@@ -29,4 +32,4 @@ bemenu --no-overlap \
        --nf $foreground \
        --hb $highlight_background \
        --hf $highlight_foreground \
-       --fn "pango:IBM Plex Mono 18"
+       --fn "$font $font_size"
