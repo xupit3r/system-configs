@@ -34,7 +34,7 @@ gaps outer 5
 corner_radius 10
 
 # Window background blur
-blur on
+blur off
 blur_xray off
 blur_passes 2
 blur_radius 5
@@ -55,7 +55,12 @@ scratchpad_minimize disable
 ### Output configuration
 
 output * bg /home/joe/.backgrounds/gradient.png fill
+
+# framwork monitor
 output eDP-1 res 2256x1504 pos 0,0 scale 1
+
+# work monitor
+output DP-1 res 3840x2160 pos 0,0 scale 1.25
 
 ### Idle configuration
 #
@@ -81,6 +86,11 @@ input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
   click_method clickfinger
   scroll_method two_finger
   scroll_factor 1.1
+}
+
+# set natural scrolling for the logitech bluetooth mouse
+input "1133:45098:Logitech_Signature_M650_L_Mouse" {
+  natural_scroll enabled
 }
 
 ### Key bindings
