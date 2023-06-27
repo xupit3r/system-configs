@@ -6,7 +6,8 @@
 
 ### Variables
 #
-# Logo key. Use Mod1 for Alt.
+# Use Mod4 for Logo
+# Use Mod1 for Alr
 set $mod Mod4
 
 # default applications
@@ -51,6 +52,11 @@ dim_inactive_colors.urgent #900000FF
 
 # Move minimized windows into Scratchpad (enable|disable)
 scratchpad_minimize disable
+
+### window specific stuffs
+
+for_window [class="1Password"] floating enable
+for_window [class="Mailspring"] floating enable
 
 ### Output configuration
 
