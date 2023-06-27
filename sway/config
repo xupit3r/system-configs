@@ -20,12 +20,22 @@ set $launcher /home/joe/.local/bin/launcher
 # on the original workspace that the command was run on.
 set $menu j4-dmenu-desktop --dmenu="$launcher" | xargs swaymsg exec --
 
+exec 1password
+exec mailspring -b
+
 ### Appearance
-font pango:IBM Plex Sans 14
+font IBM Plex Sans 16
 
 default_border pixel 4
 default_floating_border normal
 hide_edge_borders smart
+
+# set border colors
+client.focused              #0a0b16 #2f343f #4477ff #4477ff   #4477ff
+client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f   #2f343f
+client.unfocused            #2f343f #2f343f #d8dee8 #2f343f   #2f343f
+client.urgent               #2f343f #2f343f #d8dee8 #2f343f   #2f343f
+client.placeholder          #2f343f #2f343f #d8dee8 #2f343f   #2f343f
 
 smart_gaps on
 gaps inner 5
@@ -56,11 +66,10 @@ scratchpad_minimize disable
 ### window specific stuffs
 
 for_window [class="1Password"] floating enable
-for_window [class="Mailspring"] floating enable
 
 ### Output configuration
 
-output * bg /home/joe/.backgrounds/gradient.png fill
+output * bg /home/joe/.backgrounds/dark.png fill
 
 # framwork monitor
 output eDP-1 res 2256x1504 pos 0,0 scale 1
@@ -241,10 +250,5 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+Shift+r mode "resize"
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
 
 include /etc/sway/config.d/*
