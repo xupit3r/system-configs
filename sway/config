@@ -20,6 +20,7 @@ set $launcher /home/joe/.local/bin/launcher
 # on the original workspace that the command was run on.
 set $menu j4-dmenu-desktop --dmenu="$launcher" | xargs swaymsg exec --
 
+exec mako
 exec 1password
 exec mailspring -b
 
@@ -31,7 +32,7 @@ default_floating_border normal
 hide_edge_borders smart
 
 # set border colors
-client.focused              #0a0b16 #2f343f #4477ff #4477ff   #4477ff
+client.focused              #0a0b16 #2f343f #4fd6be #4fd6be  #4fd6be
 client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f   #2f343f
 client.unfocused            #2f343f #2f343f #d8dee8 #2f343f   #2f343f
 client.urgent               #2f343f #2f343f #d8dee8 #2f343f   #2f343f
@@ -66,6 +67,7 @@ scratchpad_minimize disable
 ### window specific stuffs
 
 for_window [class="1Password"] floating enable
+for_window [instance="teamworkchat"] floating enable
 
 ### Output configuration
 
@@ -128,8 +130,8 @@ input "1133:45098:Logitech_Signature_M650_L_Mouse" {
     bindsym Control+Shift+Space exec makoctl dismiss --all
 
     # volume controls
-    bindsym --locked XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume --limit 100% @DEFAULT_AUDIO_SINK@ 5%+
-    bindsym --locked XF86AudioLowerVolume exec --no-startup-id wpctl set-volume --limit 0% @DEFAULT_AUDIO_SINK@ 5%-
+    bindsym --locked XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ 5%+
+    bindsym --locked XF86AudioLowerVolume exec --no-startup-id wpctl set-volume --limit 0 @DEFAULT_AUDIO_SINK@ 5%-
     bindsym --locked XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
     # playback controls
