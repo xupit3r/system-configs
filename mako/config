@@ -1,11 +1,11 @@
-font=IBM Plex Sans Medium 16
+font=IBM Plex Sans Medium 14
 width=450
 background-color=#222436
 text-color=#4fd6be
-padding=16
+padding=14
 outer-margin=8
 border-size=2
 border-color=#82aaff
-border-radius=5
+border-radius=10
 icons=1
 
