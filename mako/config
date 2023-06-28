@@ -1,9 +1,11 @@
-font=Satoshi Medium 16
+font=IBM Plex Sans Medium 16
 width=450
-background-color=#1A1B26F2
-text-color=#A9B1D6
-padding=32,24
+background-color=#222436
+text-color=#4fd6be
+padding=16
 outer-margin=8
-border-size=1
-border-color=#1A1B26FF
-border-radius=4
+border-size=2
+border-color=#82aaff
+border-radius=5
+icons=1
+
