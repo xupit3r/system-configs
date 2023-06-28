@@ -25,7 +25,7 @@ exec 1password
 exec mailspring -b
 
 ### Appearance
-font IBM Plex Sans 16
+font IBM Plex Sans 18
 
 default_border pixel 4
 default_floating_border normal
@@ -62,7 +62,7 @@ dim_inactive_colors.unfocused #000000FF
 dim_inactive_colors.urgent #900000FF
 
 # Move minimized windows into Scratchpad (enable|disable)
-scratchpad_minimize disable
+scratchpad_minimize enable
 
 ### window specific stuffs
 
@@ -71,13 +71,14 @@ for_window [instance="teamworkchat"] floating enable
 
 ### Output configuration
 
+# wallpaper!!
 output * bg /home/joe/.backgrounds/dark.png fill
 
 # framwork monitor
 output eDP-1 res 2256x1504 pos 0,0 scale 1
 
 # work monitor
-output DP-1 res 3840x2160 pos 0,0 scale 1.25
+output DP-1 res 3840x2160 pos 0,0 scale 1.1
 
 ### Idle configuration
 #
