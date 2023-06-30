@@ -152,11 +152,6 @@ return require("packer").startup(function()
 	-- project management
 	use("ahmedkhalf/project.nvim")
 
-	-- tree view / filesystem browser
-	use("nvim-tree/nvim-tree.lua", {
-		"nvim-tree/nvim-web-devicons",
-	})
-
 	-- file browser
 	use({
 		"nvim-telescope/telescope-file-browser.nvim",

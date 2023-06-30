@@ -11,9 +11,21 @@
 set $mod Mod4
 
 # default applications
-set $term kitty
+set $term kitty 
 set $browser firefox
 set $launcher /home/joe/.local/bin/launcher
+
+# set up some of the gtk settings
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+  gsettings set $gnome-schema gtk-theme 'Matcha-dark-sea'
+  gsettings set $gnome-schema icon-theme 'Flatery-Teal-Dark'
+  gsettings set $gnome-schema cursor-theme 'Adwaita'
+  gsettings set $gnome-schema font-name 'IBM Plex Sans Medium 14'
+}
+
+exec_always import-gsettings
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -25,9 +37,9 @@ exec 1password
 exec mailspring -b
 
 ### Appearance
-font IBM Plex Sans 18
+font IBM Plex Sans 14
 
-default_border pixel 4
+default_border pixel 3
 default_floating_border normal
 hide_edge_borders smart
 
@@ -39,8 +51,8 @@ client.urgent               #2f343f #2f343f #d8dee8 #2f343f   #2f343f
 client.placeholder          #2f343f #2f343f #d8dee8 #2f343f   #2f343f
 
 smart_gaps on
-gaps inner 5
-gaps outer 5
+gaps inner 6
+gaps outer 6
 
 # window corner radius in px
 corner_radius 10
@@ -57,7 +69,7 @@ shadow_blur_radius 20
 shadow_color #0000007F
 
 # inactive window fade amount. 0.0 = no dimming, 1.0 = fully dimmed
-default_dim_inactive 0.0
+default_dim_inactive 0.05
 dim_inactive_colors.unfocused #000000FF
 dim_inactive_colors.urgent #900000FF
 
@@ -68,6 +80,7 @@ scratchpad_minimize enable
 
 for_window [class="1Password"] floating enable
 for_window [instance="teamworkchat"] floating enable
+for_window [instance="mailspring"] floating enable
 
 ### Output configuration
 
@@ -106,8 +119,15 @@ input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
   scroll_factor 1.1
 }
 
-# set natural scrolling for the logitech bluetooth mouse
+# set natural scrolling for my mice
+
+# white logitech M650
 input "1133:45098:Logitech_Signature_M650_L_Mouse" {
+  natural_scroll enabled
+}
+
+# blue logitech M650
+input "1133:45098:Logi_M650_L" {
   natural_scroll enabled
 }
 
@@ -211,8 +231,8 @@ input "1133:45098:Logitech_Signature_M650_L_Mouse" {
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+d layout tabbed
+    #bindsym $mod+s layout stacking
+    #bindsym $mod+d layout tabbed
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
