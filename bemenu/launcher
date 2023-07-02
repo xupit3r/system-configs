@@ -1,14 +1,14 @@
 #!/bin/zsh
 
 show=10
-font="JetBrainsMono NF Medium"
-font_size=18
-(( line_height=$font_size * 2 ))
-prompt=">"
-background="#2d3f76"
+font="Jost"
+font_size=16
+(( line_height=$font_size * 2.1 ))
+prompt=""
+background="#2c2c2c"
 foreground="#c8d3f5"
 highlight_background=$background
-highlight_foreground="#4fd6b3"
+highlight_foreground="#ba68cb"
 
 bemenu --no-overlap \
        --ignorecase \
