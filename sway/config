@@ -13,19 +13,17 @@ set $mod Mod4
 # default applications
 set $term kitty 
 set $browser firefox
+set $mail mailspring
 set $launcher /home/joe/.local/bin/launcher
 
 # set up some of the gtk settings
 set $gnome-schema org.gnome.desktop.interface
-
 exec_always {
-  gsettings set $gnome-schema gtk-theme 'Matcha-dark-sea'
+  gsettings set $gnome-schema gtk-theme 'Orchis-Teal-Dark'
   gsettings set $gnome-schema icon-theme 'Flatery-Teal-Dark'
   gsettings set $gnome-schema cursor-theme 'Adwaita'
-  gsettings set $gnome-schema font-name 'IBM Plex Sans Medium 14'
+  gsettings set $gnome-schema font-name 'Jost 14'
 }
-
-exec_always import-gsettings
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -37,41 +35,41 @@ exec 1password
 exec mailspring -b
 
 ### Appearance
-font IBM Plex Sans 14
+font Jost 14
 
-default_border pixel 3
-default_floating_border normal
+default_border pixel 2
+default_floating_border pixel 2
 hide_edge_borders smart
 
 # set border colors
-client.focused              #0a0b16 #2f343f #4fd6be #4fd6be  #4fd6be
-client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f   #2f343f
-client.unfocused            #2f343f #2f343f #d8dee8 #2f343f   #2f343f
-client.urgent               #2f343f #2f343f #d8dee8 #2f343f   #2f343f
-client.placeholder          #2f343f #2f343f #d8dee8 #2f343f   #2f343f
+client.focused              #ba68c8 #2c2c2c #c8d3f5 #ba68c8 #ba68c8
+client.focused_inactive     #595959 #2c2c2c #c8d3f5 #595959 #595959
+client.unfocused            #595959 #2c2c2c #c8d3f5 #595959 #595959
+client.urgent               #595959 #2c2c2c #c8d3f5 #595959 #595959
+client.placeholder          #595959 #2c2c2c #c8d3f5 #595959 #595959
 
 smart_gaps on
-gaps inner 6
-gaps outer 6
+gaps inner 2
+gaps outer 2
 
 # window corner radius in px
 corner_radius 10
 
 # Window background blur
-blur off
-blur_xray off
+blur on
+blur_xray on
 blur_passes 2
 blur_radius 5
 
 shadows on
-shadows_on_csd off
+shadows_on_csd on
 shadow_blur_radius 20
-shadow_color #0000007F
+shadow_color #828bb854
 
 # inactive window fade amount. 0.0 = no dimming, 1.0 = fully dimmed
-default_dim_inactive 0.05
-dim_inactive_colors.unfocused #000000FF
-dim_inactive_colors.urgent #900000FF
+default_dim_inactive 0.35
+dim_inactive_colors.unfocused #2f334de6
+dim_inactive_colors.urgent #c53b53ed
 
 # Move minimized windows into Scratchpad (enable|disable)
 scratchpad_minimize enable
@@ -81,11 +79,19 @@ scratchpad_minimize enable
 for_window [class="1Password"] floating enable
 for_window [instance="teamworkchat"] floating enable
 for_window [instance="mailspring"] floating enable
+for_window [app_id="nemo"] floating enable
+for_window [title="ncspot"] floating enable
+for_window [title="Messages for web"] floating enable
+for_window [app_id="blueberry.py"] floating enable
+for_window [app_id="zoom"] floating enable
+
+# this is just when kitty settings are open...hopefully!
+for_window [title="kitty"] floating enable
 
 ### Output configuration
 
 # wallpaper!!
-output * bg /home/joe/.backgrounds/dark.png fill
+output * bg /home/joe/.backgrounds/gradient1.png fill
 
 # framwork monitor
 output eDP-1 res 2256x1504 pos 0,0 scale 1
@@ -119,6 +125,10 @@ input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
   scroll_factor 1.1
 }
 
+# when i have a touchpad, swiping can move between workspaces
+bindgesture swipe:right workspace prev
+bindgesture swipe:left workspace next
+
 # set natural scrolling for my mice
 
 # white logitech M650
@@ -135,18 +145,16 @@ input "1133:45098:Logi_M650_L" {
 #
 # Basics:
 #
-    # Start a terminal
+    # bindings for launching some apps
     bindsym $mod+t exec $term
-
-    # Kill focused window
+    bindsym $mod+r exec $menu
+    bindsym $mod+b exec $browser
+    bindsym $mod+m exec $mail
+ 
+    # kill current window
     bindsym $mod+w kill
 
-    # Start your launcher
-    bindsym $mod+r exec $menu
-
-    bindsym $mod+b exec $browser
-
-    # Notifications
+    # notifications
     bindsym Control+Space exec makoctl dismiss
     bindsym Control+Shift+Space exec makoctl dismiss --all
 
@@ -264,9 +272,9 @@ input "1133:45098:Logi_M650_L" {
 mode "resize" {
     # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
     bindsym Right resize grow width 10px
+    bindsym Up resize grow height 10px
+    bindsym Down resize shrink height 10px
 
     # Return to default mode
     bindsym Return mode "default"
