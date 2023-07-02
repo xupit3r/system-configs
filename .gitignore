@@ -6,3 +6,4 @@
 nvim/plugin
 *.cbor
 cava/shaders
+fontconfig/conf.d
