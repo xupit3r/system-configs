@@ -1,23 +1,14 @@
 # my default PATH
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$HOME/code/joenix/utils/:$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
 
-# enable autocomplete
-autoload -Uz compinit promptinit
-compinit
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="zhann"
-
 # terminal truecolor
 set -g default-terminal "screen-256color"
-#set-option -sa terminal-overrides ",xterm-kitty:RGB"
+zmodload zsh/nearcolor
 
+# kitty kitty kitty cat! meeeeoooow!
 TERM=xterm-kitty
 
 # Set list of themes to pick from when loading at random
@@ -82,7 +73,30 @@ HIST_STAMPS="mm/dd/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git docker lein node npm python pip ag ripgrep fzf)
 
+# load oh-my-zsh (and don't use any omz themes)
+ZSH_THEME=""
 source $ZSH/oh-my-zsh.sh
+
+# setup Pure theme (https://github.com/sindresorhus/pure#getting-started)
+
+autoload -U promptinit; promptinit
+
+# optionally define some options
+PURE_CMD_MAX_EXEC_TIME=10
+
+# change the path color
+zstyle :prompt:pure:path color '#ff6ac1'
+
+# change the color for both `prompt:success` and `prompt:error`
+zstyle :prompt:pure:prompt:success color '#5af78e'
+zstyle :prompt:pure:prompt:error color '#ff5c57'
+
+
+# turn on git stash status
+zstyle :prompt:pure:git:stash show yes
+
+# load the pure prompt
+prompt pure
 
 # make sure we are using the LTS release of node, by default
 source /usr/share/nvm/init-nvm.sh
@@ -96,7 +110,7 @@ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='nvim'
+   export EDITOR='nano'
  else
    export EDITOR='nvim'
  fi
@@ -113,13 +127,7 @@ alias open="xdg-open"
 alias battery="acpi -b"
 alias syu="systemctl --user"
 alias icat="kitty +kitten icat"
-
-# some helpful stuff for editing/updating waybar
-WAYBAR_CONF=$HOME/.config/waybar
-alias waysass="sass -w -c --no-source-map $WAYBAR_CONF/style.scss $WAYBAR_CONF/style.css"
-alias waychok="chokidar -d 750 --initial \"$WAYBAR_CONF/**\" -c \"killall waybar; waybar\""
-alias waywatch="(trap 'kill 0' SIGINT; waysass & waychok)"
-
+alias list-fonts="fc-list : family | sort | uniq"
 
 # integrate ripgrep into fzf
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
@@ -146,6 +154,11 @@ PERL_LOCAL_LIB_ROOT="/home/joe/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROO
 PERL_MB_OPT="--install_base \"/home/joe/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/joe/perl5"; export PERL_MM_OPT;
 
-
-
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+
+# have to add the stupid fucking snap shit...
+PATH=$PATH:/var/lib/snapd/snap/bin
+
+# prompt syntax highlighting!
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
