@@ -19,12 +19,19 @@ return require("packer").startup(function()
 
 	-- some themes
 	use("folke/tokyonight.nvim")
+	use("ellisonleao/gruvbox.nvim")
+	use("navarasu/onedark.nvim")
+	use("EdenEast/nightfox.nvim")
+	use("rebelot/kanagawa.nvim")
+	use({ "rose-pine/neovim", as = "rose-pine" })
+	use({
+		"bluz71/vim-moonfly-colors",
+		as = "moonfly",
+	})
 	use({
 		"catppuccin/nvim",
 		as = "catppuccin",
 	})
-	use({ "ellisonleao/gruvbox.nvim" })
-	use({ "rose-pine/neovim", as = "rose-pine" })
 
 	-- lisp paren support
 	use("gpanders/nvim-parinfer")

@@ -140,4 +140,9 @@ require("rose-pine").setup({
 	},
 })
 
-vim.cmd([[ colorscheme tokyonight ]])
+-- onedark theme
+require("onedark").setup({
+	style = "darker",
+})
+
+vim.cmd("colorscheme onedark")
