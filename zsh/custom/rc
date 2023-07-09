@@ -22,8 +22,11 @@ export EDITOR='nvim'
 export ARCHFLAGS="-arch x86_64"
 
 # use most as our pager
-export PAGER="most"
-export MANPAGER="most"
+#export PAGER="most"
+#export MANPAGER="most"
+COLOR_PAGER="sh -c 'col -bx | bat -l man -p'"
+export PAGER=COLOR_PAGER
+export MANPAGER=COLOR_PAGER
 
 # some useful aliases
 alias remove-orphans="sudo pacman -Qtdq | sudo pacman -Rns -"

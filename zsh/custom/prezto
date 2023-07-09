@@ -30,26 +30,23 @@ zstyle ':prezto:*:*' color 'yes'
 # Set the Prezto modules to load (browse modules).
 # The order matters.
 zstyle ':prezto:load' pmodule \
-  'environment' \
-  'syntax-highlighting' \
+  'spectrum' \
   'editor' \
   'history' \
   'directory' \
-  'spectrum' \
   'utility' \
-  'completion' \
-  'history-substring-search' \
-  'autosuggestions' \
   'git' \
   'node' \
   'pacman' \
+  'syntax-highlighting' \
+  'completion' \
+  'history-substring-search' \
+  'autosuggestions' \
   'prompt' \
 
 #
 # Autosuggestions
 #
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#282a36,bg=#57c7ff,bold,underline"
 
 # Set the query found color.
 zstyle ':prezto:module:autosuggestions:color' found '#5af78e'
@@ -195,19 +192,19 @@ zstyle ':prezto:module:ssh:load' identities 'id_rsa'
 
 # Set syntax highlighters.
 # By default, only the main highlighter is enabled.
-#zstyle ':prezto:module:syntax-highlighting' highlighters \
-#   'main' \
-#   'brackets' \
-#   'pattern' \
-#   'line' \
-#   'cursor' \
-#   'root'
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+   'main' \
+   'brackets' \
+   'pattern' \
+   'line' \
+   'cursor' \
+   'root'
 ##
 # Set syntax highlighting styles.
-# zstyle ':prezto:module:syntax-highlighting' styles \
-#   'builtin' 'bg=blue' \
-#   'command' 'bg=blue' \
-#   'function' 'bg=blue'
+zstyle ':prezto:module:syntax-highlighting' styles \
+   'builtin' 'fg=#ff97d4' \
+   'command' 'fg=#ff97d4' \
+   'function' 'fg=#ff97d4'
 #
 # Set syntax pattern styles.
 # zstyle ':prezto:module:syntax-highlighting' pattern \
