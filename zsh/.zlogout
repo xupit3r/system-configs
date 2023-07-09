@@ -1,0 +1,1 @@
+/home/joe/.config/zsh/.zprezto/runcoms/zlogout
