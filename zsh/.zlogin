@@ -1,1 +1,0 @@
-/home/joe/.config/zsh/.zprezto/runcoms/zlogin
