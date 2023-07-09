@@ -1,18 +1,20 @@
 # my default PATH
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$HOME/code/joenix/utils/:$HOME/.local/share/gem/ruby/3.0.0/bin:/var/lib/snapd/snap/bin:$PATH
+STANDARD_LOCATIONS=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/bin
+MY_UTILS=$HOME/code/joenix/utils/
+RUBY_BINARIES=$HOME/.local/share/gem/ruby/3.0.0/bin
+SNAP_BINARIES=/var/lib/snapd/snap/bin
+
+export PATH=$STANDARD_LOCATIONS:$MY_UTILS:$RUBY_BINARIES:$SNAP_BINARIES:$PATH
 
 # kitty kitty kitty cat! meeeeoooow!
-TERM=xterm-kitty
+export TERM=xterm-kitty
 
 # make sure we are using the LTS release of node, by default
 source /usr/share/nvm/init-nvm.sh
 nvm use --lts > /dev/null
 
-# some completions stuffs...
-eval "$(op completion zsh)"; compdef _op op
-
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
+export LANG="en_US.UTF-8"
 
 # set visual editor
 export VISUAL='nvim'
@@ -22,11 +24,8 @@ export EDITOR='nvim'
 export ARCHFLAGS="-arch x86_64"
 
 # use most as our pager
-#export PAGER="most"
-#export MANPAGER="most"
-COLOR_PAGER="sh -c 'col -bx | bat -l man -p'"
-export PAGER=COLOR_PAGER
-export MANPAGER=COLOR_PAGER
+export PAGER="most"
+export MANPAGER="most"
 
 # some useful aliases
 alias remove-orphans="sudo pacman -Qtdq | sudo pacman -Rns -"
@@ -36,10 +35,8 @@ alias syu="systemctl --user"
 alias icat="kitty +kitten icat"
 alias list-fonts="fc-list : family | sort | uniq"
 
-# integrate ripgrep into fzf
+# ripgrep + fzf configurations
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-
-# fzf base install
 export FZF_BASE=/usr/share/fzf
 
 # babashka repl stuffs
