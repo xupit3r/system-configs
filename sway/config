@@ -1,8 +1,6 @@
-# Default config for sway
 #
-# Copy this to ~/.config/sway/config and edit it to your liking.
+# slowly evolving sway config...
 #
-# Read `man 5 sway` for a complete reference.
 
 ### Variables
 #
@@ -21,6 +19,10 @@ set $mixer easyeffects
 set $password_manager 1password
 set $reader = feeds
 set $launcher /home/joe/.local/bin/launcher
+
+# some default configs
+set $bg_fallback #bbbcb6
+
 
 # set up some of the gtk settings
 set $gnome-schema org.gnome.desktop.interface
@@ -116,23 +118,22 @@ for_window [app_id="zoom" title="Settings"] floating enable, floating_minimum_si
 
 ### Output configuration
 
-# wallpaper!!
-output DP-1 bg /home/joe/.backgrounds/gradient-large.png fill
-output eDP-1 bg /home/joe/.backgrounds/gradient-medium.png fill
 
-# framework    -> eDP-1, 2256x1504, 1
-# work monitor -> DP-1, 3840x2160, 1.1
-#set $display eDP-1
-#set $display_width 2256
-#set $display_height 1504
-#set $display_scale 1
+# configuration for LG monitors
+output DP-1 {
+  res 3840x2160 
+  pos 0,0 
+  scale 1
+  bg $HOME/.backgrounds/lg/gradient.png fill $bg_fallback
+}
 
-# setup our monitor
-#output $display res $display_widthx$display_height pos 0,0 scale $display_scale
-
-# dual monitor: work + framework
-output DP-1 res 3840x2160 pos 0,0 scale 1
-output eDP-1 res 2256x1504 pos 3840,0 scale 1
+# configuration for framework display
+output eDP-1 {
+  res 2256x1504 
+  pos 3840,0 
+  scale 1
+  bg $HOME/.backgrounds/framework/gradient.png fill $bg_fallback
+}
 
 # set some sane sizes for floating windows
 floating_minimum_size 500 x 250
