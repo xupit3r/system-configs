@@ -1,16 +1,20 @@
 #!/bin/zsh
 
 show=10
-font="Jost"
-font_size=16
-(( line_height=$font_size * 2.1 ))
+font="Manrope Semi-Bold"
+font_size=20
+(( line_height=$font_size * 2.25 ))
 prompt=""
-background="#2c2c2c"
-foreground="#c8d3f5"
-highlight_background=$background
-highlight_foreground="#ba68cb"
+background="#261447f2"
+foreground="#fffbfcf2"
+highlight_background="#261447f2"
+highlight_foreground="#ff3864f2"
+title_color="#5af78ef2"
 
-bemenu --no-overlap \
+bemenu --width-factor 0.75 \
+       --margin 100 \
+       --grab \
+       --no-overlap \
        --ignorecase \
        --no-cursor \
        --line-height $line_height \
@@ -23,7 +27,7 @@ bemenu --no-overlap \
        --fbb $background \
        --fbf $foreground \
        --tb $background \
-       --tf $foreground \
+       --tf $title_color \
        --fb $background \
        --ff $foreground \
        --cb $background \
