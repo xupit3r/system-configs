@@ -23,7 +23,6 @@ set $launcher /home/joe/.local/bin/launcher
 # some default configs
 set $bg_fallback #bbbcb6
 
-
 # set up some of the gtk settings
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
@@ -87,33 +86,77 @@ scratchpad_minimize enable
 ### window specific stuffs
 
 # some workspace assignments
-for_window [class="teamworkchat"] workspace "comm"
-for_window [instance="mailspring"] workspace "comm"
-for_window [app_id="org.gambus.gfeeds"] workspace "comm"
-for_window [app_id="com.github.wwmm.easyeffects"] workspace "comm", floating enable
-for_window [title="ncspot"] workspace "comm', floating enable, floating_minimum_size 400 x 600, floating_maxium_size 500 x 800
+for_window [class="teamworkchat"] {
+  workspace $workspace_3
+}
+
+for_window [instance="mailspring"] {
+  workspace $workspace_3
+}
+
+for_window [app_id="org.gambus.gfeeds"] {
+  workspace $workspace_3
+}
+
+for_window [app_id="com.github.wwmm.easyeffects"] {
+  workspace $workspace_3, floating enable
+}
+
+for_window [title="ncspot"] {
+  workspace $workspace_3
+  floating enable,
+  floating_minimum_size 400 x 600,
+  floating_maxium_size 500 x 800
+}
 
 # float these fellas...
-for_window [class="1Password"] floating enable
-for_window [app_id="nemo"] floating enable
-for_window [app_id="blueberry.py"] floating enable
-for_window [app_id="Cisco AnyConnect Secure Mobility Client"] floating enable
+for_window [class="1Password"] {
+  floating enable
+}
+
+for_window [app_id="nemo"] {
+  floating enable
+}
+
+for_window [app_id="blueberry.py"] {
+  floating enable
+}
+
+for_window [app_id="Cisco AnyConnect Secure Mobility Client"] {
+  floating enable
+}
 
 
 # Zoom Meeting App
 
-# send zoom to the "zoom" workspace
-for_window [app_id="zoom"] workspace "zoom"
+# send zoom to the workspace 4 (i.e. "zoom" workspace)
+for_window [app_id="zoom"] {
+  workspace $workspace_4
+}
 
 # Default for all windows is non-floating.
 # 
 # For pop up notification windows that don't use notifications api
-for_window [app_id="zoom" title="^zoom$"] border none, floating enable
+for_window [app_id="zoom" title="^zoom$"] {
+  border none
+  floating enable
+}
 
 # For specific Zoom windows
-for_window [app_id="zoom" title="^(Zoom|About)$"] border none, floating enable
-for_window [app_id="zoom" title="as_toolbar"] border none, floating enable
-for_window [app_id="zoom" title="Settings"] floating enable, floating_minimum_size 960 x 700
+for_window [app_id="zoom" title="^(Zoom|About)$"] {
+  border none
+  floating enable
+}
+
+for_window [app_id="zoom" title="as_toolbar"] {
+  border none
+  floating enable
+}
+
+for_window [app_id="zoom" title="Settings"] {
+  floating enable
+  floating_minimum_size 960 x 700
+}
 
 
 ### Output configuration
@@ -248,26 +291,31 @@ input "1133:45098:Logi_M650_L" {
 # Workspaces:
 #
 
+    set $workspace_1 = "main"
+    set $workspace_2 = "secondary"
+    set $workspace_3 = "whatever"
+    set $workspace_4 = "zoom"
+
     # assign workspaces to monitors
     # comm -> DP-1 (communications stuffs)
     # main -> DP-1 (development, browsing, etc...focus)
     # 2 -> eDP-1 (secondary attention stuffs)
-    workspace "comm" output DP-1
-    workspace "main" output DP-1
-    workspace "zoom" output eDP-1
-    workspace "aux" output eDP-1
+    workspace $workspace_1 output DP-1
+    workspace $workspace_3 output DP-1
+    workspace $workspace_2 output eDP-1
+    workspace $workspace_4 output eDP-1
     
     # Switch to workspace
-    bindsym $mod+1 workspace "main"
-    bindsym $mod+Backspace workspace "comm"
-    bindsym $mod+2 workspace "aux"
-    bindsym $mod+z workspace "zoom"
+    bindsym $mod+1 workspace $workspace_1
+    bindsym $mod+Backspace workspace $workspace_3
+    bindsym $mod+2 workspace $workspace_2
+    bindsym $mod+z workspace $workspace_4
 
     # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace "main"
-    bindsym $mod+Shift+Backspace move container to workspace "comm"
-    bindsym $mod+Shift+z move container to workspace "zoom"
-    bindsym $mod+Shift+2 move container to workspace "aux"
+    bindsym $mod+Shift+1 move container to workspace $workspace_1
+    bindsym $mod+Shift+Backspace move container to workspace $workspace_3
+    bindsym $mod+Shift+2 move container to workspace $workspace_2
+    bindsym $mod+Shift+z move container to workspace $workspace_4
 
 #
 # Layout stuff:
