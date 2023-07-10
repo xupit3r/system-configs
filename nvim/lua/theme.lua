@@ -146,7 +146,7 @@ require("onedark").setup({
 	code_style = {
 		comments = "italic",
 		keywords = "bold",
-		functions = "bold,italic",
+		functions = "italic",
 		strings = "none",
 		variables = "none",
 	},

@@ -15,4 +15,5 @@ todos.setup()
 -- setup autopairs to use treesitter
 npairs.setup({
 	check_ts = true,
+	fast_wrap = {},
 })
