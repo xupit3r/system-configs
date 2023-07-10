@@ -133,7 +133,7 @@ zstyle ':prezto:module:pacman' frontend 'paru'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'pure'
+zstyle ':prezto:module:prompt' theme 'sorin'
 
 # Set the working directory prompt display length.
 zstyle ':prezto:module:prompt' pwd-length 'short'
@@ -141,16 +141,6 @@ zstyle ':prezto:module:prompt' pwd-length 'short'
 # Set the prompt to display the return code along with an indicator for non-zero
 # return codes. This is not supported by all prompts.
 zstyle ':prezto:module:prompt' show-return-val 'no'
-
-# change the path color
-zstyle ':prompt:pure:path' color '#ff6ac1'
-
-# change the color of the prompt
-zstyle ':prompt:pure:prompt:success' color '#5af78e'
-zstyle ':prompt:pure:prompt:error' color '#ff5c57'
-
-# turn on git stash status
-zstyle ':prompt:pure:git:stash' show 'yes'
 
 #
 # Python
@@ -249,4 +239,6 @@ zstyle ':prezto:module:syntax-highlighting' styles \
 # Enabled safe options. This aliases cp, ln, mv and rm so that they prompt
 # before deleting or overwriting files. Set to 'no' to disable this safer
 # behavior.
-# zstyle ':prezto:module:utility' safe-ops 'yes'
+#
+# NOTE: turning this off cause it is real annoying, espcially for many files...
+zstyle ':prezto:module:utility' safe-ops 'no'
