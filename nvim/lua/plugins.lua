@@ -52,7 +52,7 @@ return require("packer").startup(function()
 	use("cakebaker/scss-syntax.vim")
 
 	-- show hex colors in editor
-	use("NvChad/nvim-colorizer.lua")
+	use("norcalli/nvim-colorizer.lua")
 
 	-- LSP Client
 	use("neovim/nvim-lspconfig")

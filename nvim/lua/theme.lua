@@ -143,6 +143,13 @@ require("rose-pine").setup({
 -- onedark theme
 require("onedark").setup({
 	style = "darker",
+	code_style = {
+		comments = "italic",
+		keywords = "bold",
+		functions = "bold,italic",
+		strings = "none",
+		variables = "none",
+	},
 })
 
 vim.cmd("colorscheme onedark")

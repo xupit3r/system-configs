@@ -28,3 +28,6 @@ require("colorizer").setup({
 		always_update = false,
 	},
 })
+
+-- provide shortcut for colorizer toggle
+vim.keymap.set("n", "<leader>c", ":ColorizerToggle<CR>", { silent = true })
