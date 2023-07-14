@@ -1,6 +1,6 @@
 -- setup the tokyonight theme
 require("tokyonight").setup({
-	style = "storm",
+	style = "night",
 	terminal_colors = true,
 	styles = {
 		comments = { italic = true },
@@ -10,39 +10,17 @@ require("tokyonight").setup({
 		floats = "dark",
 	},
 	sidebars = { "qf", "help", "packer" },
-	on_highlights = function(hl, c)
-		hl.DiagnosticUnnecessary = {
-			fg = "#187687",
-		}
-		hl.TelescopeNormal = {
-			bg = c.bg_dark,
-		}
-		hl.TelescopePromptNormal = {
-			bg = c.bg_dark,
-		}
-		hl.TelescopePromptBorder = {
-			bg = c.b_dark,
-		}
-		hl.TelescopePromptTitle = {
-			bg = c.bg_dark,
-		}
-		hl.TelescopePreviewTitle = {
-			bg = c.bg_dark,
-		}
-		hl.TelescopeResultsTitle = {
-			bg = c.bg_dark,
-		}
-	end,
+	lualine_bold = "bold",
 })
 
--- setup/alter catpuccin theme
+-- setup/alter catppuccin theme
 require("catppuccin").setup({
-	flavour = "mocha",
+	flavour = "frappe",
 	color_overrides = {
-		mocha = {
-			base = "#222222",
-			mantle = "#222222",
-			crust = "#222222",
+		frappe = {
+			base = "#111111",
+			mantle = "#111111",
+			crust = "#111111",
 		},
 	},
 	styles = {
@@ -53,10 +31,7 @@ require("catppuccin").setup({
 	},
 	custom_highlights = function(colors)
 		return {
-			TabLineSel = {
-				bg = colors.peach,
-				fg = colors.surface2,
-			},
+			Comment = { fg = colors.flamingo },
 		}
 	end,
 	integrations = {
@@ -142,13 +117,41 @@ require("rose-pine").setup({
 
 -- onedark theme
 require("onedark").setup({
-	style = "darker",
+	style = "deep",
 	code_style = {
 		comments = "italic",
 		keywords = "bold",
 		functions = "italic",
 		strings = "none",
 		variables = "none",
+	},
+	colors = {
+		black = "#151515",
+		bg0 = "#131313",
+		bg1 = "#111111",
+		bg2 = "#0f0f0f",
+		bg3 = "#0d0d0d",
+		bg_d = "#0a0a0a",
+		bg_blue = "#09618d",
+		bg_yellow = "#fed989",
+		fg = "#d1efed",
+		purple = "#c75ae8",
+		green = "#3be528",
+		orange = "#ff901f",
+		blue = "#41a7fc",
+		yellow = "#f8f030",
+		cyan = "#03fff0",
+		red = "#ff2975",
+		grey = "#4f4789",
+		light_grey = "#a19ccb",
+		dark_cyan = "#008179",
+		dark_red = "#940035",
+		dark_yellow = "#8f8a05",
+		dark_purple = "#71148d",
+		diff_add = "#27341c",
+		diff_delete = "#331c1e",
+		diff_change = "#102b40",
+		diff_text = "#1c4a6e",
 	},
 })
 
