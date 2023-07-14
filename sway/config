@@ -9,10 +9,11 @@
 set $mod Mod4
 
 # default applications
-set $term kitty 
+set $term kitty
 set $browser firefox
 set $mail mailspring
 set $mail_startup mailspring -b
+set $notifcations mako
 set $emoji emote
 set $filemanager nemo
 set $mixer easyeffects
@@ -23,6 +24,12 @@ set $screencap grim -g "$(slurp)" - | wl-copy
 
 # some default configs
 set $bg_fallback #bbbcb6
+
+# workspaces n'at
+set $workspace_1 = "main"
+set $workspace_2 = "secondary"
+set $workspace_3 = "whatever"
+set $workspace_4 = "zoom"
 
 # set up some of the gtk settings
 set $gnome-schema org.gnome.desktop.interface
@@ -49,9 +56,11 @@ exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 # make sure some environment variables are available to system services
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
-exec mako
+# some shit that should always be started
+exec $notifications
 exec $password_manager
 exec $mail_startup
+exec $mixer
 
 ### Appearance
 default_border pixel 0
@@ -94,29 +103,36 @@ scratchpad_minimize enable
 ### window specific stuffs
 
 # some workspace assignments
-for_window [class="teamworkchat"] {
+for_window [instance="teamworkchat"] {
   floating enable
+  resize set 1500 1400
+  move container to workspace $workspace_3
 }
 
 for_window [instance="mailspring"] {
   floating enable
+  resize set 1400 1050
+  move container to workspace $workspace_3
 }
 
 for_window [app_id="org.gambus.gfeeds"] {
   floating enable
+  move container to workspace $workspace_3
 }
 
 for_window [app_id="com.github.wwmm.easyeffects"] {
   floating enable
+  resize set 1400 850 
+  move container to workspace $workspace_3
 }
 
 for_window [app_id="kitty" title="ncspot"] {
   floating enable
-  floating_minimum_size 400 x 600,
-  floating_maxium_size 500 x 800
+  resize set 800 1000
+  move container to workspace $workspace_3
 }
 
-# float these fellas...
+# float these fellas.. anywhere i currently am...
 for_window [class="1Password"] {
   floating enable
 }
@@ -136,17 +152,26 @@ for_window [app_id="Cisco AnyConnect Secure Mobility Client"] {
 
 # Zoom Meeting App
 
-# Default for all windows is non-floating.
-# For pop up notification windows that don't use notifications api
+# open all zoom windows on the zoom workspace
+for_window [app_id="zoom"] {
+  move container to workspace $workspace_4
+}
+
 for_window [app_id="zoom" title="^zoom$"] {
   border none
   floating enable
+  resize set 600 200
 }
 
 # For specific Zoom windows
 for_window [app_id="zoom" title="^(Zoom|About)$"] {
   border none
   floating enable
+  resize set 800 600
+}
+
+for_window [title="Zoom Meeting"] {
+  resize set 1920 1080
 }
 
 for_window [app_id="zoom" title="as_toolbar"] {
@@ -156,7 +181,7 @@ for_window [app_id="zoom" title="as_toolbar"] {
 
 for_window [app_id="zoom" title="Settings"] {
   floating enable
-  floating_minimum_size 960 x 700
+  resize set 1000 800
 }
 
 
@@ -178,10 +203,6 @@ output eDP-1 {
   scale 1
   bg $HOME/.backgrounds/framework/gradient.png fill $bg_fallback
 }
-
-# set some sane sizes for floating windows
-floating_minimum_size 800 x 400
-floating_maximum_size 1800 x 1400
 
 ### Idle configuration
 #
@@ -293,10 +314,6 @@ input "1133:45098:Logi_M650_L" {
 # Workspaces:
 #
 
-    set $workspace_1 = "main"
-    set $workspace_2 = "secondary"
-    set $workspace_3 = "whatever"
-    set $workspace_4 = "zoom"
 
     # assign workspaces to monitors
     # comm -> DP-1 (communications stuffs)
