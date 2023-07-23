@@ -16,7 +16,9 @@ set $mail_startup mailspring -b
 set $notifcations mako
 set $emoji emote
 set $filemanager nemo
-set $mixer easyeffects
+set $mixer pavucontrol
+set $music ncspot
+set $messenger teamworkchat
 set $password_manager 1password
 set $reader feeds
 set $launcher /home/joe/.local/bin/launcher
@@ -30,6 +32,7 @@ set $workspace_1 = "main"
 set $workspace_2 = "secondary"
 set $workspace_3 = "whatever"
 set $workspace_4 = "zoom"
+set $workspace_5 = "touchscreen"
 
 # set up some of the gtk settings
 set $gnome-schema org.gnome.desktop.interface
@@ -40,8 +43,8 @@ exec_always {
   gsettings set $gnome-schema font-antialiasing 'grayscale'
   gsettings set $gnome-schema font-hinting 'full'
   gsettings set $gnome-schema font-name 'Jost* 14'
-  gsettings set $gnome-schema monospace-font-name 'Iosevka Term 16'
-  gsettings set $gnome-schema document-font-name 'Jost* 16'
+  gsettings set $gnome-schema monospace-font-name 'JetBrainsMono NF 14'
+  gsettings set $gnome-schema document-font-name 'Jost* 14'
 }
 
 # Your preferred application launcher
@@ -60,7 +63,9 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec $notifications
 exec $password_manager
 exec $mail_startup
+exec $messenger
 exec $mixer
+exec $music
 
 ### Appearance
 default_border pixel 0
@@ -104,30 +109,25 @@ scratchpad_minimize enable
 
 # some workspace assignments
 for_window [instance="teamworkchat"] {
-  floating enable
   resize set 1500 1400
   move container to workspace $workspace_3
 }
 
 for_window [instance="mailspring"] {
-  floating enable
   resize set 1400 1050
   move container to workspace $workspace_3
 }
 
 for_window [app_id="org.gambus.gfeeds"] {
-  floating enable
   move container to workspace $workspace_3
 }
 
 for_window [app_id="com.github.wwmm.easyeffects"] {
-  floating enable
   resize set 1400 850 
   move container to workspace $workspace_3
 }
 
 for_window [app_id="kitty" title="ncspot"] {
-  floating enable
   resize set 800 1000
   move container to workspace $workspace_3
 }
@@ -202,6 +202,14 @@ output eDP-1 {
   pos 3840,0 
   scale 1
   bg $HOME/.backgrounds/framework/gradient.png fill $bg_fallback
+}
+
+# Ametek touchscreen
+output DP-2 {
+  res 1280x720
+  pos 6096,0
+  scale 1
+  bg $HOME/Downloads/1280_800.png center $bg_fallback
 }
 
 ### Idle configuration
@@ -319,10 +327,21 @@ input "1133:45098:Logi_M650_L" {
     # comm -> DP-1 (communications stuffs)
     # main -> DP-1 (development, browsing, etc...focus)
     # 2 -> eDP-1 (secondary attention stuffs)
-    workspace $workspace_1 output DP-1
-    workspace $workspace_3 output DP-1
-    workspace $workspace_2 output eDP-1
-    workspace $workspace_4 output eDP-1
+    workspace $workspace_1 {
+ 			output DP-1
+		}
+
+    workspace $workspace_3 {
+ 			output DP-1
+		}
+
+    workspace $workspace_2 {
+ 			output eDP-1
+		}
+
+    workspace $workspace_4 {
+ 			output eDP-1
+		}
     
     # Switch to workspace
     bindsym $mod+1 workspace $workspace_1

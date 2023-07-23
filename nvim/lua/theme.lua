@@ -115,26 +115,20 @@ require("rose-pine").setup({
 	},
 })
 
--- onedark theme
-require("onedark").setup({
-	style = "deep",
-	code_style = {
-		comments = "italic",
-		keywords = "bold",
-		functions = "italic",
-		strings = "none",
-		variables = "none",
-	},
-	colors = {
-		black = "#151515",
-		bg0 = "#18151b",
-		bg1 = "#2f2b35",
-		bg2 = "#474050",
-		bg3 = "#5f566b",
-		bg_d = "#0a0a0a",
+-- some vivid synthwave-y type of colors
+-- currently have a definition for onedark
+-- maybe add others?
+local synthy = {
+	ondark = {
+		black = "#051521",
+		bg0 = "#01182e",
+		bg1 = "#0b2f4a",
+		bg2 = "#0e3c5e",
+		bg3 = "#114973",
+		bg_d = "#04111d",
 		bg_blue = "#09618d",
 		bg_yellow = "#fed989",
-		fg = "#d1efed",
+		fg = "#fff5fe",
 		purple = "#c75ae8",
 		green = "#3be528",
 		orange = "#ff901f",
@@ -142,17 +136,30 @@ require("onedark").setup({
 		yellow = "#f8f030",
 		cyan = "#03fff0",
 		red = "#ff2975",
-		grey = "#4f4789",
-		light_grey = "#a19ccb",
+		grey = "#686868",
+		light_grey = "#b3b3b3",
 		dark_cyan = "#008179",
 		dark_red = "#940035",
 		dark_yellow = "#8f8a05",
 		dark_purple = "#71148d",
-		diff_add = "#27341c",
-		diff_delete = "#331c1e",
-		diff_change = "#102b40",
-		diff_text = "#1c4a6e",
+		diff_add = "#5b7a42",
+		diff_delete = "#794247",
+		diff_change = "#256596",
+		diff_text = "#2f7cb8",
 	},
+}
+
+-- onedark theme
+require("onedark").setup({
+	style = "deep",
+	code_style = {
+		comments = "italic",
+		keywords = "bold",
+		functions = "bold,italic",
+		strings = "italic",
+		variables = "none",
+	},
+	colors = synthy.ondark,
 })
 
 vim.cmd("colorscheme onedark")
