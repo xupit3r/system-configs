@@ -36,7 +36,7 @@ alias battery="acpi -b"
 alias syu="systemctl --user"
 alias icat="kitty +kitten icat"
 alias list-fonts="fc-list : family | sort | uniq"
-alias lx="exa --icons"
+alias ls="exa --icons"
 
 # ripgrep + fzf configurations
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"

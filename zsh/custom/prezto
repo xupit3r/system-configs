@@ -50,7 +50,7 @@ zstyle ':prezto:load' pmodule \
 #
 
 # Set the query found color.
-zstyle ':prezto:module:autosuggestions:color' found '#5af78e'
+zstyle ':prezto:module:autosuggestions:color' found '#b35af7'
 
 #
 # Completions
@@ -65,7 +65,7 @@ zstyle ':prezto:module:autosuggestions:color' found '#5af78e'
 #
 
 # Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':prezto:module:editor' key-bindings 'vi'
+zstyle ':prezto:module:editor' key-bindings 'emacs'
 
 # Auto convert .... to ../..
 zstyle ':prezto:module:editor' dot-expansion 'yes'
@@ -105,7 +105,7 @@ zstyle ':prezto:module:history' savehist 10000
 #
 
 # Set the query found color.
-zstyle ':prezto:module:history-substring-search:color' found '#5af78e'
+zstyle ':prezto:module:history-substring-search:color' found '#b35af7'
 
 # Set the query not found color.
 zstyle ':prezto:module:history-substring-search:color' not-found '#ff5c57'
@@ -133,8 +133,8 @@ zstyle ':prezto:module:pacman' frontend 'paru'
 
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
-# Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'spaceship'
+# Auto set to 'off' on dumb terminals
+zstyle ':prezto:module:prompt' theme 'sorin'
 
 # Set the working directory prompt display length.
 zstyle ':prezto:module:prompt' pwd-length 'short'
@@ -240,6 +240,4 @@ zstyle ':prezto:module:syntax-highlighting' styles \
 # Enabled safe options. This aliases cp, ln, mv and rm so that they prompt
 # before deleting or overwriting files. Set to 'no' to disable this safer
 # behavior.
-#
-# NOTE: turning this off cause it is real annoying, espcially for many files...
-zstyle ':prezto:module:utility' safe-ops 'no'
+# zstyle ':prezto:module:utility' safe-ops 'yes'
