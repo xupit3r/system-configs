@@ -1,0 +1,18 @@
+import = [
+    "~/.config/alacritty/themes/themes/monokai_charcoal.toml"
+]
+
+[window]
+padding = { x = 10, y = 10 }
+decorations = "none"
+class = { instance = "Alacritty", general = "Alacritty" }
+
+[font]
+normal = { family = "MonoLisa", style = "Light" }
+bold = { family = "MonoLisa", style = "Bold" }
+italic = { family = "CaskaydiaCove Nerd Font Mono", style = "Light Italic" }
+bold_italic = { family = "CaskaydiaCove Nerd Font Mono", style = "Semibold Italic" }
+size = 11.5
+
+[cursor]
+style = { shape = "Beam", blinking = "on" }
