@@ -5,6 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -14,45 +17,51 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git node npm pip ripgrep fzf dnf systemd zsh-autosuggestions zsh-syntax-highlighting zsh-completions zsh-vi-mode zsh-nvm zsh-bat)
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+# my plugins!
+plugins=(
+  git
+  archlinux
+  lein
+  systemd
+  colored-man-pages
+  zsh-completions
+  zsh-autosuggestions
+  zsh-nvm
+  zsh-bat
+  fzf-tab
+  zsh-syntax-highlighting
+)
+
+# need to make sure this is in the proper place in the function pat
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
+# environment variables
 export MANPATH="/usr/local/man:$MANPATH"
-export PATH="/home/joe/.cargo/bin:$PATH"
-
-# You may need to manually set your language environment
 export LANG=en_US.UTF-8
-
-# editor stuffs
-export EDITOR='code'
-export VISUAL='code'
-export SUDO_EDITOR='nvim'
-
-# Compilation flags
 export ARCHFLAGS="-arch x86_64"
+export EDITOR="nvim"
+export VISUAL="code"
+export SUDO_EDITOR="nvim"
+export GIT_EDITOR="nvim"
+export PAGER="most"
 
-# some fun aliases!
+# aliases
 alias zshconfig="code ~/.zshrc"
 alias ohmyzsh="code ~/.oh-my-zsh"
-alias ls="eza --icons"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion`
-
-# 1password CLI completions
-eval "$(op completion zsh)"; compdef _op op
-
-# give me some of that ripgrep action in fzf
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+alias ls="eza --icons=always"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
