@@ -62,10 +62,16 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
 
 
 # install neovim language bindings
+pip3 install neovim --upgrade
 gem install neovim
-npm install -g neovim
+npm install -g neovim \
+               emmet \
+               typescript-language-server \
+               typescript \
+               @volar/vue-language-server
 
-# setup ohmyzsh
+# get that sweet sweet zsh going w/ ohmyzsh
+setup ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # install zsh plugins
