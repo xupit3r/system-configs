@@ -24,7 +24,7 @@ cd ~
 paru -S --noconfirm --skipreview --sudoloop --needed \
     luarocks \
     ruby \
-    golang \
+    go \
     python \
     python-pip \
     nodejs \
@@ -54,15 +54,23 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
     visual-studio-code-bin \
     1password-cli \
     mpv \
-    morgen-bin \
     kaccounts-providers \
+    extension-manager \
+    papirus-icon-theme \
+    fprintd \
+    cava \ 
+    github-cli \
+    copilot \
+    claude-code \
+    google-chrome \
+    linux-headers
+
 
 # install some additional fonts (e.g. Monolisa)
 # TODO: add Monolisa to the list
 
 
 # install neovim language bindings
-pip3 install neovim --upgrade
 gem install neovim
 npm install -g neovim \
                emmet \
@@ -71,5 +79,4 @@ npm install -g neovim \
                @volar/vue-language-server
 
 # get that sweet sweet zsh going w/ ohmyzsh
-setup ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
