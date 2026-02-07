@@ -1,9 +1,9 @@
 # install rust (needed for paru)
 sudo pacman -Syu --noconfirm rustup \
-                             git \
-                             base-devel \
-                             curl \
-                             wget
+  git \
+  base-devel \
+  curl \
+  wget
 rustup install stable
 mkdir -p ~/packages
 
@@ -22,61 +22,61 @@ cd ~
 
 # install some necessary packages
 paru -S --noconfirm --skipreview --sudoloop --needed \
-    luarocks \
-    ruby \
-    go \
-    python \
-    python-pip \
-    nodejs \
-    npm \
-    jdk-openjdk \
-    clojure \
-    babashka \
-    leiningen \
-    neovim \
-    python-pynvim \
-    imagemagick \
-    ripgrep \
-    fzf \
-    eza \
-    most \
-    bat \
-    fd \
-    zsh \
-    kitty \
-    hyfetch \
-    ttf-meslo-nerd \
-    ttf-iosevka-nerd \
-    ttf-iosevkaterm-nerd \
-    ttf-ubuntu-nerd \
-    ttf-ubuntu-mono-nerd \
-    ttf-victor-mono-nerd-font \
-    visual-studio-code-bin \
-    1password-cli \
-    mpv \
-    kaccounts-providers \
-    extension-manager \
-    papirus-icon-theme \
-    fprintd \
-    cava \ 
-    github-cli \
-    copilot \
-    claude-code \
-    google-chrome \
-    linux-headers
-
+  luarocks \
+  ruby \
+  go \
+  python \
+  python-pip \
+  nodejs \
+  npm \
+  jdk-openjdk \
+  clojure \
+  babashka \
+  leiningen \
+  neovim \
+  python-pynvim \
+  imagemagick \
+  ripgrep \
+  fzf \
+  eza \
+  most \
+  bat \
+  fd \
+  zsh \
+  kitty \
+  hyfetch \
+  ttf-meslo-nerd \
+  ttf-iosevka-nerd \
+  ttf-iosevkaterm-nerd \
+  ttf-ubuntu-nerd \
+  ttf-ubuntu-mono-nerd \
+  ttf-victor-mono-nerd-font \
+  visual-studio-code-bin \
+  1password-cli \
+  mpv \
+  kaccounts-providers \
+  extension-manager \
+  papirus-icon-theme \
+  fprintd \
+  cava \ 
+github-cli \
+  copilot \
+  claude-code \
+  google-chrome \
+  linux-headers \
+  docker \
+  docker-compose
 
 # install some additional fonts (e.g. Monolisa)
 # TODO: add Monolisa to the list
 
-
 # install neovim language bindings
 gem install neovim
 npm install -g neovim \
-               emmet \
-               typescript-language-server \
-               typescript \
-               @volar/vue-language-server
+  emmet \
+  typescript-language-server \
+  typescript \
+  @volar/vue-language-server
 
 # get that sweet sweet zsh going w/ ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
