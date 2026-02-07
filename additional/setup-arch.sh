@@ -1,5 +1,6 @@
 # install rust (needed for paru)
-sudo pacman -Syu --noconfirm rustup \
+sudo pacman -Syu --noconfirm \
+  rustup \
   git \
   base-devel \
   curl \
@@ -58,8 +59,8 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   extension-manager \
   papirus-icon-theme \
   fprintd \
-  cava \ 
-github-cli \
+  cava \
+  github-cli \
   copilot \
   claude-code \
   google-chrome \
@@ -67,16 +68,13 @@ github-cli \
   docker \
   docker-compose
 
-# install some additional fonts (e.g. Monolisa)
-# TODO: add Monolisa to the list
+# make sure permissions are good and docker is enabled and running
+systemctl enable --now docker
+sudo usermod -aG docker $USER
 
 # install neovim language bindings
 gem install neovim
-npm install -g neovim \
-  emmet \
-  typescript-language-server \
-  typescript \
-  @volar/vue-language-server
+npm install -g neovim
 
 # get that sweet sweet zsh going w/ ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
