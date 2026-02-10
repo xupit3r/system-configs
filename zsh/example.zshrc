@@ -74,6 +74,8 @@ alias zshconfig="code ~/.zshrc"
 alias ohmyzsh="code ~/.oh-my-zsh"
 alias ls="eza --icons=always"
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # this will autoload the appropriate node runtime
 # based on the .nvmrc in a directory
@@ -96,9 +98,3 @@ load-nvmrc() {
     nvm use default
   fi
 }
-
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
