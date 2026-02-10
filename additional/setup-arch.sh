@@ -66,7 +66,8 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   google-chrome \
   linux-headers \
   docker \
-  docker-compose
+  docker-compose \
+  bridge-utils
 
 # make sure permissions are good and docker is enabled and running
 systemctl enable --now docker
