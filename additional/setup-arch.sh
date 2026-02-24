@@ -34,6 +34,7 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   clojure \
   babashka \
   leiningen \
+  clojure-lsp-bin \
   neovim \
   python-pynvim \
   imagemagick \
@@ -67,7 +68,8 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   linux-headers \
   docker \
   docker-compose \
-  bridge-utils
+  bridge-utils \
+  dysk
 
 # make sure permissions are good and docker is enabled and running
 systemctl enable --now docker
