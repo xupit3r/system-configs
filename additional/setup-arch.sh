@@ -30,10 +30,11 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   python-pip \
   nodejs \
   npm \
-  jdk-openjdk \
+  jdk25-openjdk \
   clojure \
   babashka \
   leiningen \
+  clojure-lsp-bin \
   neovim \
   python-pynvim \
   imagemagick \
@@ -67,15 +68,19 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   linux-zen-headers \
   docker \
   docker-compose \
-  bridge-utils
+  bridge-utils \
+  dysk
 
 # make sure permissions are good and docker is enabled and running
-systemctl enable --now docker
 sudo usermod -aG docker $USER
+systemctl enable --now docker
 
 # install neovim language bindings
 gem install neovim
 npm install -g neovim
+
+# set the java version to jdk25-openjdk
+sudo archlinux-java set java-25-openjdk
 
 # get that sweet sweet zsh going w/ ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
