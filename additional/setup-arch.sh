@@ -64,7 +64,7 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   copilot \
   claude-code \
   google-chrome \
-  linux-headers \
+  linux-zen-headers \
   docker \
   docker-compose \
   bridge-utils
