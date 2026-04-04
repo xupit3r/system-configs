@@ -21,6 +21,9 @@ cd ~/packages/1password
 makepkg -si
 cd ~
 
+# it sometimes gets installed and then fucks up my audio
+paru -Rns pulseaudio
+
 # install some necessary packages
 paru -S --noconfirm --skipreview --sudoloop --needed \
   luarocks \
@@ -58,6 +61,7 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   mpv \
   extension-manager \
   papirus-icon-theme \
+  pipewire-pulse \
   fprintd \
   cava \
   linux-zen-headers \
