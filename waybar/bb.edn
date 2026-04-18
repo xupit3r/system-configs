@@ -1,2 +1,2 @@
 {:paths ["scripts"]
- :desp {mvxcvi/cljstyle {:mvn/version "0.15.0"}}}
+ :deps {mvxcvi/cljstyle {:mvn/version "0.15.0"}}}

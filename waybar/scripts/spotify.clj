@@ -34,7 +34,7 @@
   "retrieves track information from ncspot and prepares it for waybar"
   []
   (->
-    (sh "nc" "-W" "1" "-U" "/home/joe/.cache/ncspot/ncspot.sock")
+    (sh "nc" "-W" "1" "-U" (str (System/getenv "HOME") "/.cache/ncspot/ncspot.sock"))
     :out
     (json/decode true)
     :playable

@@ -2,41 +2,39 @@
 
 (ns weather
   (:require
-    [babashka.http-client :as http]
-    [cheshire.core :as json]
-    [clojure.string :as str]))
-
+   [babashka.fs :as fs]
+   [babashka.http-client :as http]
+   [cheshire.core :as json]
+   [clojure.string :as str]))
 
 ;; some formats for our output strings
 (def MAIN_FORMAT "<span color='#7aa2f7'><big>%s</big></span>%6s<sup><big>°</big></sup>")
 (def FORECAST_FORMAT "%s \t<span color='#7aa2f7'><big>%s</big></span>%6s<sup><big>°</big></sup>")
 
-
 ;; this will retrieve weather data from Open Meteo
 (def API_BASE "https://api.open-meteo.com/v1/forecast")
 
+(def FORECAST_DATA
+  (str (System/getenv "HOME") "/.cache/waybar/forecast.data.json"))
 
-;; mateo API query for my current location
+;; Open-Meteo API query for my current location
 (def API_QUERY
   (str
-    "?latitude=40.43"
-    "&longitude=-79.93"
-    "&hourly=temperature_2m,precipitation_probability,weathercode"
-    "&current_weather=true"
-    "&temperature_unit=fahrenheit"
-    "&windspeed_unit=mph"
-    "&precipitation_unit=inch"
-    "&timezone=America/New_York"
-    "&forecast_days=2"))
+   "?latitude=40.43"
+   "&longitude=-79.93"
+   "&hourly=temperature_2m,precipitation_probability,weather_code"
+   "&current=temperature_2m,weather_code"
+   "&temperature_unit=fahrenheit"
+   "&windspeed_unit=mph"
+   "&precipitation_unit=inch"
+   "&timezone=America/New_York"
+   "&forecast_days=2"))
 
-
-;; full url base mateo domain/endpoint and query
+;; full url Open-Meteo domain/endpoint and query
 (def API_URL (str API_BASE API_QUERY))
-
 
 ;; number of hours to send back for forecasts
 (def FORECAST_HOURS 12)
-
 
 (def WMO
   {0   {:description "clear sky" :icon "󰖙"}
@@ -68,18 +66,15 @@
    96  {:description "thunderstorms with slight hail" :icon ""}
    99  {:description "thunderstorms with heavy hail" :icon ""}})
 
-
 (defn round
   "rounds a number and returns result as an int"
   [num]
   (int (Math/round num)))
 
-
 (defn get-datetime
   "parses date string and returns a LocalDateTime object refernce"
   [datestr]
   (java.time.LocalDateTime/parse datestr))
-
 
 (defn timef
   "prepares/formats datetime for display"
@@ -88,43 +83,38 @@
       (.format datetime)
       (.toLowerCase)))
 
-
 (defn from-now
   "filters down forecast days to those that are later than now"
   [forecast]
   (let [now (java.time.LocalDateTime/now)]
     (filterv
-      (fn [day] (.isAfter (:datetime day) now))
-      forecast)))
-
+     (fn [day] (.isAfter (:datetime day) now))
+     forecast)))
 
 (defn to-lines
   "converts forecast to lines for display in the waybar tooltip"
   [forecast]
   (str/join
-    "\n"
-    (mapv
-      #(format
-         FORECAST_FORMAT
-         (:time %)
-         (:icon (:conditions %))
-         (:temp %))
-      forecast)))
-
+   "\n"
+   (mapv
+    #(format
+      FORECAST_FORMAT
+      (:time %)
+      (:icon (:conditions %))
+      (:temp %))
+    forecast)))
 
 (defn pull-temperature
   "extracts current weather temperature"
   [data]
-  (round (:temperature (:current_weather data))))
-
+  (round (:temperature_2m (:current data))))
 
 (defn pull-conditions
   "retrieves the current conditions"
   [data]
   (get WMO
-       (:weathercode (:current_weather data))
+       (:weather_code (:current data))
        {:description "Conditions unavailable." :icon ""}))
-
 
 (defn pull-hourly
   "extracs the hourly forecast as a sequence of forecast objects"
@@ -132,7 +122,7 @@
   (let [times (:time (:hourly data))
         temps (:temperature_2m (:hourly data))
         precip (:precipitation_probability (:hourly data))
-        codes (:weathercode (:hourly data))]
+        codes (:weather_code (:hourly data))]
     (for [idx (range (count times))]
       (let [datetime (get-datetime (get times idx))]
         {:time (timef datetime)
@@ -140,7 +130,6 @@
          :temp (round (get temps idx))
          :precip (get precip idx)
          :conditions (get WMO (get codes idx))}))))
-
 
 (defn pull-tooltip
   "extracts and prepares the tooltip (forecase) data for waybar"
@@ -151,7 +140,6 @@
       (subvec 0 FORECAST_HOURS)
       (to-lines)))
 
-
 (defn waybar-fmt
   "formats weather data for use in waybar"
   [data]
@@ -159,18 +147,27 @@
         temperature (pull-temperature data)
         tooltip (pull-tooltip data)]
     {:text (format
-             MAIN_FORMAT
-             (:icon conditions)
-             temperature)
+            MAIN_FORMAT
+            (:icon conditions)
+            temperature)
      :tooltip tooltip
      :class "weather"}))
 
+(defn save-forecast
+  "saves the forecast data"
+  [forecast]
+  (fs/create-dirs (fs/parent FORECAST_DATA))
+  (spit FORECAST_DATA forecast)
+  forecast)
 
-(->
-  API_URL
-  http/get
-  :body
-  (json/decode true)
-  waybar-fmt
-  json/encode
-  println)
+(try
+  (->
+   API_URL
+   http/get
+   :body
+   (json/decode true)
+   waybar-fmt
+   json/encode
+   save-forecast
+   println)
+  (catch Exception _e (println (slurp FORECAST_DATA))))

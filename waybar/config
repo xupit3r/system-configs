@@ -10,7 +10,7 @@
       "custom/spotify",
       "bluetooth",
       "backlight",
-      "pulseaudio", 
+      "wireplumber", 
       "network",
       "battery"
     ],
@@ -18,10 +18,9 @@
       "$HOME/.config/waybar/includes/backlight.json",
       "$HOME/.config/waybar/includes/battery.json",
       "$HOME/.config/waybar/includes/bluetooth.json",
-      "$HOME/.config/waybar/includes/cava.json",
       "$HOME/.config/waybar/includes/clock.json",
       "$HOME/.config/waybar/includes/network.json",
-      "$HOME/.config/waybar/includes/pulseaudio.json",
+      "$HOME/.config/waybar/includes/wireplumber.json",
       "$HOME/.config/waybar/includes/spotify.json",
       "$HOME/.config/waybar/includes/weather.json"
     ]

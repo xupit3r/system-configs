@@ -1,6 +1,5 @@
 {
   "bluetooth": {
-    "controller": "bluetoothctl",
     "format": "<span color='#7aa2f7'><big>{icon}</big></span>",
     "format-icons": {
       "on": "󰂯",
