@@ -1,8 +1,11 @@
 {
   "wireplumber": {
     "format": "<span color='#7aa2f7'><big>{icon}</big></span>    {volume}%",
-    "format-muted": "",
-    "format-icons": ["", ""],
+    "format-muted": "",
+    "format-icons": [
+      "",
+      ""
+    ],
     "scroll-step": 1,
     "on-click": "pavucontrol",
     "max-volume": 150

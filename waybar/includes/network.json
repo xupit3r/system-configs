@@ -1,10 +1,14 @@
 {
   "network": {
-    "interface": "wlp166s0",
     "format": "{ifname}",
     "format-wifi": "<span color='#bb9af7'><big>{icon}</big></span>    {essid}",
     "format-icons": {
-      "wifi": ["󰢿", "󰢼", "󰢽", "󰢾"]
+      "wifi": [
+        "󰢿",
+        "󰢼",
+        "󰢽",
+        "󰢾"
+      ]
     },
     "format-ethernet": "<span color='#bb9af7'><big>{icon}</big></span>    {ipaddr}/{cidr}",
     "format-disconnected": "<span color='#F7768E'><big>󱃞</big></span>    no interwebs",
