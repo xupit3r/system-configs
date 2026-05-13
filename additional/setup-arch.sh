@@ -68,7 +68,10 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   docker \
   docker-compose \
   bridge-utils \
-  dysk
+  dysk \
+  glow \
+  llmfit \
+  uv
 
 # make sure permissions are good and docker is enabled and running
 sudo usermod -aG docker $USER
