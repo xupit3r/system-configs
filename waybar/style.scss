@@ -36,7 +36,7 @@ tooltip {
   }
 }
 
-#custom-spotify,
+#mpris,
 #custom-weather,
 #wireplumber,
 #clock,
@@ -75,4 +75,19 @@ tooltip {
   &.warning:not(.charging) {
     background: $warning;
   }
+}
+
+#custom-cava {
+  font-family: Satoshi Medium;
+  padding: 0.5em 1em;
+  margin: 0.5em 0;
+  color: $green;
+  background-color: $black;
+  border-radius: 0.5em 0 0 0.5em;
+  border: 2px solid $foreground;
+  border-right: none;
+}
+
+#mpris {
+  border-radius: 0 0.5em 0.5em 0;
 }

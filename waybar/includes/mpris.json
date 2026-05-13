@@ -1,0 +1,20 @@
+{
+  "mpris": {
+    "format": "{player_icon}  {artist} - {title}",
+    "format-paused": "{status_icon}  {artist} - {title}",
+    "format-stopped": "",
+    "player-icons": {
+      "youtube-music": "",
+      "default": ""
+    },
+    "status-icons": {
+      "paused": "",
+      "stopped": ""
+    },
+    "max-length": 50,
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "tooltip-format": "{artist} - {title} ({album})"
+  }
+}

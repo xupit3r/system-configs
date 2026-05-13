@@ -52,7 +52,9 @@ install_config() {
 
   info "Installing scripts"
   cp "$SCRIPT_DIR"/scripts/*.clj "$TARGET_DIR/scripts/"
-  chmod +x "$TARGET_DIR"/scripts/*.clj
+  cp "$SCRIPT_DIR"/scripts/*.sh "$TARGET_DIR/scripts/"
+  cp "$SCRIPT_DIR"/scripts/*.conf "$TARGET_DIR/scripts/"
+  chmod +x "$TARGET_DIR"/scripts/*.clj "$TARGET_DIR"/scripts/*.sh
 
   info "Installing SCSS source"
   cp "$SCRIPT_DIR/style.scss" "$TARGET_DIR/style.scss"

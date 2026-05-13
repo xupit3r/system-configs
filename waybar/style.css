@@ -19,7 +19,7 @@ tooltip label {
   padding: 1em;
 }
 
-#custom-spotify,
+#mpris,
 #custom-weather,
 #wireplumber,
 #clock,
@@ -53,4 +53,19 @@ tooltip label {
 }
 #battery.warning:not(.charging) {
   background: #f7768e;
+}
+
+#custom-cava {
+  font-family: Satoshi Medium;
+  padding: 0.5em 1em;
+  margin: 0.5em 0;
+  color: #73daca;
+  background-color: #000000;
+  border-radius: 0.5em 0 0 0.5em;
+  border: 2px solid #ededed;
+  border-right: none;
+}
+
+#mpris {
+  border-radius: 0 0.5em 0.5em 0;
 }
