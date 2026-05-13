@@ -14,16 +14,6 @@ cd ~/packages/paru
 makepkg -si
 cd ~
 
-# install 1password
-curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
-git clone https://aur.archlinux.org/1password.git ~/packages/1password
-cd ~/packages/1password
-makepkg -si
-cd ~
-
-# it sometimes gets installed and then fucks up my audio
-paru -Rns pulseaudio
-
 # install some necessary packages
 paru -S --noconfirm --skipreview --sudoloop --needed \
   luarocks \
@@ -33,6 +23,7 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   python-pip \
   nodejs \
   npm \
+  uv \
   jdk25-openjdk \
   clojure \
   babashka \
@@ -48,7 +39,6 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   bat \
   fd \
   zsh \
-  kitty \
   hyfetch \
   btop \
   ttf-meslo-nerd \
@@ -56,12 +46,7 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   ttf-iosevkaterm-nerd \
   ttf-ubuntu-nerd \
   ttf-ubuntu-mono-nerd \
-  visual-studio-code-bin \
   1password-cli \
-  mpv \
-  extension-manager \
-  papirus-icon-theme \
-  pipewire-pulse \
   fprintd \
   cava \
   linux-zen-headers \
