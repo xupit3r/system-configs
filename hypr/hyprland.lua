@@ -355,7 +355,7 @@ hl.window_rule({
 	float = true,
 })
 
-h1.window_rule({
+hl.window_rule({
 	name = "obsidian-window",
 	match = { class = "^{obsidian}$" },
 	float = true,
