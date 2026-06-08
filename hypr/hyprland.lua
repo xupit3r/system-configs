@@ -12,9 +12,23 @@
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
-	output = "",
-	mode = "highres",
-	position = "auto",
+	output = "eDP-1",
+	mode = "2256x1504@60.00",
+	position = "3840x0",
+	scale = 1.3333,
+})
+
+hl.monitor({
+	output = "DP-3",
+	mode = "3840x2160@30.00",
+	position = "0x0",
+	scale = 1.3333,
+})
+
+hl.monitor({
+	output = "DP-1",
+	mode = "3840x2160@30.00",
+	position = "0x0",
 	scale = 1.3333,
 })
 
@@ -209,7 +223,6 @@ hl.config({
 		kb_rules = "",
 
 		follow_mouse = 1,
-
 		sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
 		natural_scroll = true,
@@ -313,6 +326,26 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
+hl.workspace_rule({
+	workspace = "1",
+	monitor = "eDP-1",
+})
+
+hl.workspace_rule({
+	workspace = "3",
+	monitor = "eDP-1",
+})
+
+hl.workspace_rule({
+	workspace = "2",
+	monitor = "DP-1",
+})
+
+hl.workspace_rule({
+	workspace = "4",
+	monitor = "DP-1",
+})
+
 -- Example window rules that are useful
 
 hl.window_rule({
@@ -342,7 +375,6 @@ hl.window_rule({
 hl.window_rule({
 	name = "move-hyprland-run",
 	match = { class = "hyprland-run" },
-
 	move = "20 monitor_h-120",
 	float = true,
 })

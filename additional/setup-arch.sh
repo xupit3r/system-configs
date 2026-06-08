@@ -51,6 +51,7 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   kitty \
   hyfetch \
   btop \
+  ttf-victor-mono-nrd \
   ttf-meslo-nerd \
   ttf-iosevka-nerd \
   ttf-iosevkaterm-nerd \
