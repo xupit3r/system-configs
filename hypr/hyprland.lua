@@ -20,14 +20,14 @@ hl.monitor({
 
 hl.monitor({
 	output = "DP-3",
-	mode = "3840x2160@30.00",
+	mode = "3840x2160@60.00",
 	position = "0x0",
 	scale = 1.3333,
 })
 
 hl.monitor({
 	output = "DP-1",
-	mode = "3840x2160@30.00",
+	mode = "3840x2160@60.00",
 	position = "0x0",
 	scale = 1.3333,
 })
@@ -51,8 +51,6 @@ local fileManager = "dolphin"
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprpaper")
-	hl.exec_cmd("waybar")
-	hl.exec_cmd(pass_gui)
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("wl-paste --type text --watch cliphist store")
 	hl.exec_cmd("wl-paste --type image --watch cliphist store")
@@ -249,7 +247,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("$1pass_rofi"))
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("1password"))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("killall -SIGUSR1 waybar"))
 hl.bind(
@@ -265,7 +263,7 @@ hl.bind(
 	hl.dsp.exec_cmd("cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy")
 )
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("hyprctl dismissnotify"))
+hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("hyprctl dismissnotify"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
@@ -329,11 +327,15 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"
 hl.workspace_rule({
 	workspace = "1",
 	monitor = "eDP-1",
+	no_border = true,
+	no_rounding = true,
 })
 
 hl.workspace_rule({
 	workspace = "3",
 	monitor = "eDP-1",
+	no_border = true,
+	no_rounding = true,
 })
 
 hl.workspace_rule({
@@ -383,12 +385,11 @@ hl.window_rule({
 hl.window_rule({
 	name = "1password-window",
 	match = { class = "^(1password)$" },
-
 	float = true,
 })
 
 hl.window_rule({
 	name = "obsidian-window",
-	match = { class = "^{obsidian}$" },
+	match = { class = "^(obsidian)$" },
 	float = true,
 })
