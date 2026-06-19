@@ -90,8 +90,8 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
 	general = {
-		gaps_in = 5,
-		gaps_out = 10,
+		gaps_in = 3,
+		gaps_out = 2,
 
 		border_size = 2,
 
@@ -316,6 +316,11 @@ hl.bind(
 -- Brightness up/down
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
+
+-- alter the splits
+hl.bind(mainMod .. "+ U", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. "+ P", hl.dsp.layout("swapsplit"))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.layout("rotatesplit"))
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
