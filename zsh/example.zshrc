@@ -14,11 +14,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # make vscode use wayland compositor...hopefully
 export ELECTRON_OZONE_PLATFORM_HINT=auto
 
-# make sure tools know where cuda is
-export CUDA_DIR=/opt/cuda
-export CUDA_HOME="/opt/cuda"
-export PATH=/opt/cuda/bin:$PATH
-
 # vibrant LD library support
 export LD_LIBRARY_PATH=/home/joe/code/vibrant/build/cuda:/opt/cuda/lib64:$LD_LIBRARY_PATH
 
@@ -70,12 +65,12 @@ export GIT_EDITOR="nvim"
 export PAGER="most"
 
 # aliases
-alias zshconfig="code ~/.zshrc"
-alias ohmyzsh="code ~/.oh-my-zsh"
+alias zshconfig="nvim ~/.zshrc"
+alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias ls="eza --icons=always"
+alias charge="upower -i /org/freedesktop/UPower/devices/battery_BAT1"
+alias ssh="kitty +kitten ssh"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # this will autoload the appropriate node runtime
 # based on the .nvmrc in a directory
@@ -98,3 +93,8 @@ load-nvmrc() {
     nvm use default
   fi
 }
+
+. "$HOME/.local/bin/env"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

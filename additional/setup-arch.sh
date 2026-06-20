@@ -71,8 +71,8 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   bridge-utils \
   dysk \
   glow \
-  llmfit \
-  uv
+  uv \
+  terminfo-kitty
 
 # make sure permissions are good and docker is enabled and running
 sudo usermod -aG docker $USER
