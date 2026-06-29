@@ -1,3 +1,5 @@
+# this assumes Hyprland + ly installed
+
 # install rust (needed for paru)
 sudo pacman -Syu --noconfirm \
   rustup \
@@ -60,8 +62,6 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   visual-studio-code-bin \
   1password-cli \
   mpv \
-  extension-manager \
-  papirus-icon-theme \
   pipewire-pulse \
   fprintd \
   cava \
@@ -72,7 +72,17 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   dysk \
   glow \
   uv \
-  terminfo-kitty
+  terminfo-kitty \
+  grim \
+  firefox \
+  rofi \
+  rofi-emoji \
+  noto-fonts-emoji \
+  trash-cli \
+  hyprlock \
+  hyprpaper \
+  hypridle
+
 
 # make sure permissions are good and docker is enabled and running
 sudo usermod -aG docker $USER
@@ -84,6 +94,13 @@ npm install -g neovim
 
 # set the java version to jdk25-openjdk
 sudo archlinux-java set java-25-openjdk
+
+# copy over config files
+pushd ..
+mkdir -p ~/.local/bin
+cp scripts/*.clj ~/.local/bin/
+cp -r rofi hypr kitty hyfetch/hyfetch.json btop  ~/.config
+popd
 
 # get that sweet sweet zsh going w/ ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
