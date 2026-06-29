@@ -57,10 +57,14 @@
      :capacity capacity 
      :icon (icon? status capacity)}))
 
+(defn formatted [bat-info]
+  (println (:icon bat-info)
+           (:capacity bat-info)
+           (:status bat-info)))
+
 ;; retrieve info, check status, and send json back
 (-> (get-infos) 
     (notify?) 
-    (json/encode) 
-    println)
+    (formatted))
 
 

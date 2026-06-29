@@ -81,7 +81,8 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   trash-cli \
   hyprlock \
   hyprpaper \
-  hypridle
+  hypridle \
+  obsidian
 
 
 # make sure permissions are good and docker is enabled and running
