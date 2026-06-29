@@ -108,13 +108,15 @@
                  (from-now)
                  (subvec 0 FORECAST_HOURS)
                  (encode-dt))})
-              
 
+(defn formatted [wthr]
+  (println (:icon (:conditions wthr)) 
+           (:temperature wthr) (:units wthr)))
+              
 (->
   API_URL 
   http/get 
   :body
   (json/decode true)
   relevant
-  json/encode
-  println)
+  (formatted))
