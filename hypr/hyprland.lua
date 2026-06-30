@@ -15,21 +15,28 @@ hl.monitor({
 	output = "eDP-1",
 	mode = "2256x1504@60.00",
 	position = "3840x0",
-	scale = 1.3333,
-})
-
-hl.monitor({
-	output = "DP-3",
-	mode = "3840x2160@60.00",
-	position = "0x0",
-	scale = 1.3333,
+	scale = 1.33,
 })
 
 hl.monitor({
 	output = "DP-1",
 	mode = "3840x2160@60.00",
 	position = "0x0",
-	scale = 1.3333,
+	scale = 1.33,
+})
+
+hl.monitor({
+	output = "DP-2",
+	mode = "3840x2160@60.00",
+	position = "0x0",
+	scale = 1.33,
+})
+
+hl.monitor({
+	output = "DP-3",
+	mode = "3840x2160@60.00",
+	position = "0x0",
+	scale = 1.33,
 })
 
 ---------------------
@@ -40,7 +47,7 @@ hl.monitor({
 local terminal = "kitty"
 local pass_gui = "1password"
 local browser = "firefox"
-local fileManager = "dolphin"
+local fileManager = "nemo"
 
 -------------------
 ---- AUTOSTART ----
@@ -93,7 +100,7 @@ hl.config({
 		gaps_in = 3,
 		gaps_out = 2,
 
-		border_size = 2,
+		border_size = 0,
 
 		-- https://wiki.hypr.land/Configuring/Basics/Variables/#variable-types for info about colors
 		col = {
@@ -247,7 +254,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("1password"))
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(pass_gui))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("killall -SIGUSR1 waybar"))
 hl.bind(
@@ -257,7 +264,7 @@ hl.bind(
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("rofi -show combi"))
-hl.bind(mainMod .. " + G", hl.dsp.exec_cmd('grim -g "$(slurp)"'))
+hl.bind(mainMod .. " + G", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
 hl.bind(
 	mainMod .. " + V",
 	hl.dsp.exec_cmd("cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy")
@@ -273,7 +280,7 @@ hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
-for i = 1, 10 do
+for i = 1, 4 do
 	local key = i % 10 -- 10 maps to key 0
 	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
 	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
@@ -332,6 +339,7 @@ hl.bind(mainMod .. " + SHIFT + P", hl.dsp.layout("rotatesplit"))
 hl.workspace_rule({
 	workspace = "1",
 	monitor = "eDP-1",
+	default = true,
 	no_border = true,
 	no_rounding = true,
 })
@@ -339,18 +347,25 @@ hl.workspace_rule({
 hl.workspace_rule({
 	workspace = "3",
 	monitor = "eDP-1",
+	default = true,
 	no_border = true,
 	no_rounding = true,
 })
 
 hl.workspace_rule({
 	workspace = "2",
-	monitor = "DP-1",
+	monitor = "DP-2",
+	default = true,
+	no_border = true,
+	no_rounding = true,
 })
 
 hl.workspace_rule({
 	workspace = "4",
-	monitor = "DP-1",
+	monitor = "DP-2",
+	default = true,
+	no_border = true,
+	no_rounding = true,
 })
 
 -- Example window rules that are useful
@@ -396,5 +411,17 @@ hl.window_rule({
 hl.window_rule({
 	name = "obsidian-window",
 	match = { class = "^(obsidian)$" },
+	float = true,
+})
+
+hl.window_rule({
+	name = "nemo-window",
+	match = { class = "^(nemo)$" },
+	float = true,
+})
+
+hl.window_rule({
+	name = "blueberry-window",
+	match = { class = "^(blueberry.py)$" },
 	float = true,
 })

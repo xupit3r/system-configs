@@ -24,7 +24,7 @@ makepkg -si
 cd ~
 
 # it sometimes gets installed and then fucks up my audio
-paru -Rns pulseaudio
+paru -Rns pulseaudio dolphin
 
 # install some necessary packages
 paru -S --noconfirm --skipreview --sudoloop --needed \
@@ -51,6 +51,7 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   fd \
   zsh \
   kitty \
+  terminfo-kitty \
   hyfetch \
   btop \
   ttf-victor-mono-nrd \
@@ -72,7 +73,6 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   dysk \
   glow \
   uv \
-  terminfo-kitty \
   grim \
   firefox \
   rofi \
@@ -82,7 +82,9 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   hyprlock \
   hyprpaper \
   hypridle \
-  obsidian
+  obsidian \
+  nemo \
+  nemo-fileroller
 
 
 # make sure permissions are good and docker is enabled and running
