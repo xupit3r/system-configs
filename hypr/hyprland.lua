@@ -15,7 +15,7 @@ hl.monitor({
 	output = "eDP-1",
 	mode = "2256x1504@60.00",
 	position = "3840x0",
-	scale = 1.33,
+	scale = 1.1777,
 })
 
 hl.monitor({
@@ -61,6 +61,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("wl-paste --type text --watch cliphist store")
 	hl.exec_cmd("wl-paste --type image --watch cliphist store")
+	hl.exec_cmd("swayosd-server")
 end)
 
 -------------------------------
@@ -255,6 +256,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(pass_gui))
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("pwvucontrol"))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("killall -SIGUSR1 waybar"))
 hl.bind(
@@ -298,31 +300,56 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- Volume up/down
+-- SwayOSD Volume & Media Controls
 hl.bind(
 	"XF86AudioRaiseVolume",
-	hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
+	hl.dsp.exec_cmd("swayosd-client --output-volume raise"),
 	{ locked = true, repeating = true }
 )
 hl.bind(
 	"XF86AudioLowerVolume",
-	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+	hl.dsp.exec_cmd("swayosd-client --output-volume lower --device alsa_output.pci-0000_11_00.4.analog-stereo.monitor"),
+	{ locked = true, repeating = true }
+)
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), { locked = true })
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"), { locked = true })
+
+-- Volume raise/lower with custom value (Alternatives)
+-- hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume 15"), { locked = true, repeating = true })
+-- hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume -15"), { locked = true, repeating = true })
+
+-- Volume raise/lower with max value (Alternatives)
+-- hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise --max-volume 120"), { locked = true, repeating = true })
+-- hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower --max-volume 120"), { locked = true, repeating = true })
+
+-- Sink volume raise/lower with custom value optionally with --device (Alternatives)
+-- hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume +10 --device alsa_output.pci-0000_11_00.4.analog-stereo.monitor"), { locked = true, repeating = true })
+-- hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume -10 --device alsa_output.pci-0000_11_00.4.analog-stereo.monitor"), { locked = true, repeating = true })
+
+-- Capslock (If you don't want to use the backend)
+hl.bind("Caps_Lock", hl.dsp.exec_cmd("swayosd-client --caps-lock"), { locked = true, release = true })
+-- Capslock but specific LED name (Alternative)
+-- hl.bind("Caps_Lock", hl.dsp.exec_cmd("swayosd-client --caps-lock-led input19::capslock"), { locked = true, release = true })
+
+-- Brightness up/down
+hl.bind(
+	"XF86MonBrightnessUp",
+	hl.dsp.exec_cmd("swayosd-client --brightness raise --device intel_backlight"),
 	{ locked = true, repeating = true }
 )
 hl.bind(
-	"XF86AudioMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioMicMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
+	"XF86MonBrightnessDown",
+	hl.dsp.exec_cmd("swayosd-client --brightness lower --device intel_backlight"),
 	{ locked = true, repeating = true }
 )
 
--- Brightness up/down
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
+-- Brightness raise/lower with custom value (Alternatives)
+-- hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness +10"), { locked = true, repeating = true })
+-- hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness -10"), { locked = true, repeating = true })
+
+-- Media Controls (Play/Pause & Next)
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("swayosd-client --playerctl next"), { locked = true })
 
 -- alter the splits
 hl.bind(mainMod .. "+ U", hl.dsp.layout("togglesplit"))
@@ -423,5 +450,11 @@ hl.window_rule({
 hl.window_rule({
 	name = "blueberry-window",
 	match = { class = "^(blueberry.py)$" },
+	float = true,
+})
+
+hl.window_rule({
+	name = "pwvucontrol-window",
+	match = { class = "^(com.saivert.pwvucontrol)$" },
 	float = true,
 })
