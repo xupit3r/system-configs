@@ -11,11 +11,13 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+
+-- laptop monitor
 hl.monitor({
 	output = "eDP-1",
 	mode = "2256x1504@60.00",
 	position = "3840x0",
-	scale = 1.1777,
+	scale = 1.33,
 })
 
 hl.monitor({
@@ -271,6 +273,7 @@ hl.bind(
 	mainMod .. " + V",
 	hl.dsp.exec_cmd("cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy")
 )
+hl.bind(mainMod .. " + H", hl.dsp.exec_cmd("hyprpicker | wl-copy"))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("hyprctl dismissnotify"))
 

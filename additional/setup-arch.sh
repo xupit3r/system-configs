@@ -82,10 +82,10 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   hyprlock \
   hyprpaper \
   hypridle \
+  hyprpicker \
   obsidian \
   nemo \
   nemo-fileroller
-
 
 # make sure permissions are good and docker is enabled and running
 sudo usermod -aG docker $USER
@@ -102,7 +102,7 @@ sudo archlinux-java set java-25-openjdk
 pushd ..
 mkdir -p ~/.local/bin
 cp scripts/*.clj ~/.local/bin/
-cp -r rofi hypr kitty hyfetch/hyfetch.json btop  ~/.config
+cp -r rofi hypr kitty hyfetch/hyfetch.json btop ~/.config
 popd
 
 # get that sweet sweet zsh going w/ ohmyzsh
