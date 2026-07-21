@@ -1,5 +1,5 @@
 * {
-  font: "Satoshi Medium 13";
+  font: "Ubuntu Nerd Font 14";
 
   background-color: @colorBackground;
   text-color: @colorText;
@@ -8,12 +8,11 @@
   padding: 0px;
   spacing: 0px;
 
-  colorBackground: #000000;
-  colorSelected: #272727;
-  colorText: #ededed;
-  colorTextSubtle: #ededed54;
-
-  colorBorder: #edededb2;
+  colorBackground: #171529;
+  colorSelected: #2A2139;
+  colorText: #72F1B8;
+  colorTextSubtle: #848BBD;
+  colorBorder: #FF7EDB75;
 }
 
 window {
@@ -45,7 +44,7 @@ prompt {
 }
 
 entry {
-  placeholder: "type some 💩";
+  placeholder: "";
   placeholder-color: @colorTextSubtle;
   background-color: transparent;
 }
