@@ -100,8 +100,8 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
 	general = {
-		gaps_in = 3,
-		gaps_out = 2,
+		gaps_in = 1,
+		gaps_out = 1,
 
 		border_size = 0,
 
@@ -273,7 +273,7 @@ hl.bind(
 	mainMod .. " + V",
 	hl.dsp.exec_cmd("cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy")
 )
-hl.bind(mainMod .. " + H", hl.dsp.exec_cmd("hyprpicker | wl-copy"))
+hl.bind(mainMod .. " + H", hl.dsp.exec_cmd("hyprpicker - | wl-copy"))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("hyprctl dismissnotify"))
 
@@ -370,32 +370,21 @@ hl.workspace_rule({
 	workspace = "1",
 	monitor = "eDP-1",
 	default = true,
-	no_border = true,
-	no_rounding = true,
 })
 
 hl.workspace_rule({
 	workspace = "3",
 	monitor = "eDP-1",
-	default = true,
-	no_border = true,
-	no_rounding = true,
 })
 
 hl.workspace_rule({
 	workspace = "2",
 	monitor = "DP-2",
-	default = true,
-	no_border = true,
-	no_rounding = true,
 })
 
 hl.workspace_rule({
 	workspace = "4",
 	monitor = "DP-2",
-	default = true,
-	no_border = true,
-	no_rounding = true,
 })
 
 -- Example window rules that are useful
