@@ -8,11 +8,11 @@
   padding: 0px;
   spacing: 0px;
 
-  colorBackground: #171529;
+  colorBackground: #2A2139;
   colorSelected: #2A2139;
-  colorText: #72F1B8;
-  colorTextSubtle: #848BBD;
-  colorBorder: #FF7EDB75;
+  colorText:  #FF7EDB;
+  colorTextSubtle: #3A2C4D;
+  colorBorder: #72F1B875;
 }
 
 window {
