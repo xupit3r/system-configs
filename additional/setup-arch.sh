@@ -83,6 +83,8 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   hyprpaper \
   hypridle \
   hyprpicker \
+  hyprls \
+  bluberry \
   obsidian \
   nemo \
   nemo-fileroller
