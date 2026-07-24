@@ -450,3 +450,19 @@ hl.window_rule({
 	match = { class = "^(com.saivert.pwvucontrol)$" },
 	float = true,
 })
+
+-- fix pixelated xwayland
+--
+-- change monitor to high resolution, the last argument is the scale factor
+hl.monitor({ output = "", mode = "highres", position = "auto", scale = "2" })
+
+-- unscale XWayland
+hl.config({
+	xwayland = {
+		force_zero_scaling = true,
+	},
+})
+
+-- toolkit-specific scale
+hl.env("GDK_SCALE", "2")
+hl.env("XCURSOR_SIZE", "32")
