@@ -233,7 +233,7 @@ hl.config({
 		follow_mouse = 1,
 		sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
-		natural_scroll = true,
+		natural_scroll = false,
 
 		touchpad = {
 			natural_scroll = true,
