@@ -9,7 +9,7 @@
   spacing: 0px;
 
   colorBackground: #2A2139;
-  colorSelected: #2A2139;
+  colorSelected: #3A2C4D;
   colorText:  #FF7EDB;
   colorTextSubtle: #3A2C4D;
   colorBorder: #72F1B875;
