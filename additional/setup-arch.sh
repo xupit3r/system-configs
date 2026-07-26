@@ -87,7 +87,8 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   bluberry \
   obsidian \
   nemo \
-  nemo-fileroller
+  nemo-fileroller \
+  udsikie
 
 # make sure permissions are good and docker is enabled and running
 sudo usermod -aG docker $USER
