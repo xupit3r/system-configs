@@ -452,6 +452,11 @@ hl.window_rule({
 	float = true,
 })
 
+hl.window_rule({
+	name = "mailspring-window",
+	match = { class = "^(Mailspring)$" },
+	float = true,
+})
 -- fix pixelated xwayland
 --
 -- change monitor to high resolution, the last argument is the scale factor
