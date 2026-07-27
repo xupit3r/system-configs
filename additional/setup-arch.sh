@@ -67,6 +67,7 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   fprintd \
   cava \
   linux-zen-headers \
+  linux-zen-docs \
   docker \
   docker-compose \
   bridge-utils \
@@ -86,9 +87,18 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   hyprls \
   bluberry \
   obsidian \
+  meld \
   nemo \
   nemo-fileroller \
-  udsikie
+  nemo-compare \
+  nemo-preview \
+  nemo-share \
+  udsikie \
+  sioyek-git \
+  tesseract-data-eng \
+  qt6-multimedia-ffmpeg \
+  papirus-icon-theme \
+  dracula-gtk-theme
 
 # make sure permissions are good and docker is enabled and running
 sudo usermod -aG docker $USER
@@ -107,6 +117,16 @@ mkdir -p ~/.local/bin
 cp scripts/*.clj ~/.local/bin/
 cp -r rofi hypr kitty hyfetch/hyfetch.json btop ~/.config
 popd
+
+# some nemo configuration changes
+gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty
+gsettings set org.cinnamon.desktop.interface can-change-accels true
+xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+
+# some theming bits
+gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
+gsettings set org.gnome.desktop.interface icon-theme "candy-icons"
 
 # get that sweet sweet zsh going w/ ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
