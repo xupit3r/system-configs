@@ -98,7 +98,14 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   tesseract-data-eng \
   qt6-multimedia-ffmpeg \
   papirus-icon-theme \
-  dracula-gtk-theme
+  dracula-gtk-theme \
+  eww-git \
+  easyeffects \
+  calf \
+  lsp-plugins-lv2 \
+  mda.lv2 \
+  yelp \
+  zam-plugins-lv2
 
 # make sure permissions are good and docker is enabled and running
 sudo usermod -aG docker $USER
@@ -126,7 +133,7 @@ xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 # some theming bits
 gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
-gsettings set org.gnome.desktop.interface icon-theme "candy-icons"
+gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 
 # get that sweet sweet zsh going w/ ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

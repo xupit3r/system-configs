@@ -457,6 +457,12 @@ hl.window_rule({
 	match = { class = "^(Mailspring)$" },
 	float = true,
 })
+
+hl.window_rule({
+	name = "easyeffects-window",
+	match = { class = "^(com.github.wwmm.easyeffects)$" },
+	float = true,
+})
 -- fix pixelated xwayland
 --
 -- change monitor to high resolution, the last argument is the scale factor
