@@ -105,7 +105,11 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   lsp-plugins-lv2 \
   mda.lv2 \
   yelp \
-  zam-plugins-lv2
+  zam-plugins-lv2 \
+  swayimg \
+  reflector \
+  rsync \
+  durdraw
 
 # make sure permissions are good and docker is enabled and running
 sudo usermod -aG docker $USER

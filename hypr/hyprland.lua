@@ -65,6 +65,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("wl-paste --type image --watch cliphist store")
 	hl.exec_cmd("swayosd-server")
 	hl.exec_cmd("udiskie")
+	hl.exec_cmd("easyeffects")
 end)
 
 -------------------------------
@@ -270,6 +271,7 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("rofi -show combi"))
 hl.bind(mainMod .. " + G", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
+
 hl.bind(
 	mainMod .. " + V",
 	hl.dsp.exec_cmd("cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy")
