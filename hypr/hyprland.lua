@@ -17,7 +17,7 @@ hl.monitor({
 	output = "eDP-1",
 	mode = "2256x1504@60.00",
 	position = "3840x0",
-	scale = 1.33,
+	scale = 1.177,
 })
 
 hl.monitor({
@@ -260,13 +260,10 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(pass_gui))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("sioyek ~/docs/clojure.pdf"))
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("pwvucontrol"))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("killall -SIGUSR1 waybar"))
-hl.bind(
-	mainMod .. " + M",
-	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit")
-)
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("rofi -show combi"))
