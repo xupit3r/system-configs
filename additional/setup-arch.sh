@@ -102,15 +102,10 @@ cp scripts/*.clj ~/.local/bin/
 cp -r kitty hyfetch/hyfetch.json btop ~/.config
 popd
 
-# some nemo configuration changes
-gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty
-gsettings set org.cinnamon.desktop.interface can-change-accels true
-xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+# setup some git config options
+git config --global user.email "joe@thejoeshow.net"
+git config --global user.name "Joe D'Alessandro"
 
-# some theming bits
-gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
-gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
-gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 
 # get that sweet sweet zsh going w/ ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
