@@ -1,5 +1,3 @@
-# this assumes Hyprland + ly installed
-
 # install rust (needed for paru)
 sudo pacman -Syu --noconfirm \
   rustup \
@@ -82,7 +80,8 @@ yay -S --noconfirm --sudoloop --needed \
   easyeffects \
   reflector \
   rsync \
-  wl-clipboard
+  wl-clipboard \
+  extension-manager \
 
 # make sure permissions are good and docker is enabled and running
 sudo usermod -aG docker $USER
