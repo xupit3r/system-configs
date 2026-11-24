@@ -1,10 +1,12 @@
-# install rust (needed for paru)
+# install stuffs for building packages
 sudo pacman -Syu --noconfirm \
   rustup \
   git \
   base-devel \
   curl \
   wget
+
+# install the most recent stable rust release
 rustup install stable
 mkdir -p ~/packages
 
@@ -21,14 +23,12 @@ cd ~/packages/1password
 makepkg -si
 cd ~
 
-# update packages
-yay -Syu
-
-# it sometimes gets installed and then fucks up my audio
+# remove some possibly problematic things
+# - found these to be problematic for setup
 yay -Rns pulseaudio dolphin
 
 # install some necessary packages
-yay -S --noconfirm --sudoloop --needed \
+yay -Syu --noconfirm --sudoloop --needed \
   luarocks \
   ruby \
   go \
@@ -95,11 +95,10 @@ npm install -g neovim
 sudo archlinux-java set java-25-openjdk
 
 # copy over config files
-pushd ..
-mkdir -p ~/.local/bin
-cp scripts/*.clj ~/.local/bin/
-cp -r kitty hyfetch/hyfetch.json btop ~/.config
-popd
+cp -r ../kitty ../hyfetch/hyfetch.json ../btop ~/.config
+
+# install my neovim configuration
+git clone https://github.com/xupit3r/nvim-config.git ~/.config/nvim
 
 # setup some git config options
 git config --global user.email "joe@thejoeshow.net"
