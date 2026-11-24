@@ -10,9 +10,9 @@ sudo pacman -Syu --noconfirm \
 rustup install stable
 mkdir -p ~/packages
 
-# install paru
-git clone https://aur.archlinux.org/paru.git ~/packages/paru
-cd ~/packages/paru
+# install yay
+git clone https://aur.archlinux.org/yay.git ~/packages/yay
+cd ~/packages/yay
 makepkg -si
 cd ~
 
@@ -23,11 +23,14 @@ cd ~/packages/1password
 makepkg -si
 cd ~
 
+# update packages
+yay -Syu
+
 # it sometimes gets installed and then fucks up my audio
-paru -Rns pulseaudio dolphin
+yay -Rns pulseaudio dolphin
 
 # install some necessary packages
-paru -S --noconfirm --skipreview --sudoloop --needed \
+yay -S --noconfirm --sudoloop --needed \
   luarocks \
   ruby \
   go \
@@ -35,6 +38,7 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   python-pip \
   nodejs \
   npm \
+  uv \
   jdk25-openjdk \
   clojure \
   babashka \
@@ -51,65 +55,34 @@ paru -S --noconfirm --skipreview --sudoloop --needed \
   fd \
   zsh \
   kitty \
-  terminfo-kitty \
+  kitty-terminfo \
   hyfetch \
   btop \
-  ttf-victor-mono-nrd \
+  ttf-victor-mono-nerd \
   ttf-meslo-nerd \
   ttf-iosevka-nerd \
   ttf-iosevkaterm-nerd \
   ttf-ubuntu-nerd \
   ttf-ubuntu-mono-nerd \
+  noto-fonts-emoji \
   visual-studio-code-bin \
   1password-cli \
   mpv \
   pipewire-pulse \
   fprintd \
   cava \
-  linux-zen-headers \
-  linux-zen-docs \
+  linux-headers \
+  linux-docs \
   docker \
   docker-compose \
   bridge-utils \
-  dysk \
-  glow \
-  uv \
-  grim \
-  firefox \
-  rofi \
-  rofi-emoji \
-  noto-fonts-emoji \
   trash-cli \
-  hyprlock \
-  hyprpaper \
-  hypridle \
-  hyprpicker \
-  hyprls \
-  bluberry \
   obsidian \
   meld \
-  nemo \
-  nemo-fileroller \
-  nemo-compare \
-  nemo-preview \
-  nemo-share \
-  udsikie \
-  sioyek-git \
-  tesseract-data-eng \
-  qt6-multimedia-ffmpeg \
-  papirus-icon-theme \
-  dracula-gtk-theme \
-  eww-git \
   easyeffects \
-  calf \
-  lsp-plugins-lv2 \
-  mda.lv2 \
-  yelp \
-  zam-plugins-lv2 \
-  swayimg \
   reflector \
   rsync \
-  durdraw
+  wl-clipboard
 
 # make sure permissions are good and docker is enabled and running
 sudo usermod -aG docker $USER
@@ -126,7 +99,7 @@ sudo archlinux-java set java-25-openjdk
 pushd ..
 mkdir -p ~/.local/bin
 cp scripts/*.clj ~/.local/bin/
-cp -r rofi hypr kitty hyfetch/hyfetch.json btop ~/.config
+cp -r kitty hyfetch/hyfetch.json btop ~/.config
 popd
 
 # some nemo configuration changes
