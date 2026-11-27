@@ -25,6 +25,7 @@ cd ~
 
 # remove some possibly problematic things
 # - found these to be problematic for setup
+yay -Syu
 yay -Rns pulseaudio dolphin
 
 # install some necessary packages
@@ -69,19 +70,47 @@ yay -Syu --noconfirm --sudoloop --needed \
   pipewire-pulse \
   fprintd \
   cava \
-  linux-headers \
-  linux-docs \
+  linux-zen-headers \
+  linux-zen-docs \
   docker \
   docker-compose \
   bridge-utils \
+  dysk \
+  glow \
+  grim \
+  firefox \
+  rofi \
+  rofi-emoji \
   trash-cli \
+  hyprlock \
+  hyprpaper \
+  hypridle \
+  hyprpicker \
+  hyprls \
+  noctalia \
+  bluberry \
   obsidian \
   meld \
+  nemo \
+  nemo-fileroller \
+  nemo-compare \
+  nemo-preview \
+  nemo-share \
+  udsikie \
+  qt6-multimedia-ffmpeg \
+  papirus-icon-theme \
+  dracula-gtk-theme \
+  eww-git \
   easyeffects \
+  calf \
+  lsp-plugins-lv2 \
+  mda.lv2 \
+  yelp \
+  zam-plugins-lv2 \
+  swayimg \
   reflector \
   rsync \
-  wl-clipboard \
-  extension-manager \
+  durdraw
 
 # make sure permissions are good and docker is enabled and running
 sudo usermod -aG docker $USER
@@ -94,8 +123,12 @@ npm install -g neovim
 # set the java version to jdk25-openjdk
 sudo archlinux-java set java-25-openjdk
 
-# copy over config files
-cp -r ../kitty ../hyfetch/hyfetch.json ../btop ~/.config
+# copy over some scripts and config files
+pushd ..
+mkdir -p ~/.local/bin
+cp scripts/*.clj ~/.local/bin/
+cp -r rofi hypr kitty hyfetch/hyfetch.json btop ~/.config
+popd
 
 # install my neovim configuration
 git clone https://github.com/xupit3r/nvim-config.git ~/.config/nvim
@@ -104,6 +137,15 @@ git clone https://github.com/xupit3r/nvim-config.git ~/.config/nvim
 git config --global user.email "joe@thejoeshow.net"
 git config --global user.name "Joe D'Alessandro"
 
+# some nemo configuration changes
+gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty
+gsettings set org.cinnamon.desktop.interface can-change-accels true
+xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+
+# some theming bits
+gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
+gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 
 # get that sweet sweet zsh going w/ ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

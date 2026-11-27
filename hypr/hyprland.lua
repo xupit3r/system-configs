@@ -59,6 +59,7 @@ local fileManager = "nemo"
 
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 hl.on("hyprland.start", function()
+	hl.exec_cmd("noctalia")
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("wl-paste --type text --watch cliphist store")
